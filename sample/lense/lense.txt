@@ -1,0 +1,24 @@
+no lenses	young	myope	no	reduced
+soft	young	myope	no	normal
+no lenses	young	myope	yes	reduced
+hard	young	myope	yes	normal
+no lenses	young	hyper	no	reduced
+soft	young	hyper	no	normal
+no lenses	young	hyper	yes	reduced
+hard	young	hyper	yes	normal
+no lenses	pre	myope	no	reduced
+soft	pre	myope	no	normal
+no lenses	pre	myope	yes	reduced
+hard	pre	myope	yes	normal
+no lenses	pre	hyper	no	reduced
+soft	pre	hyper	no	normal
+no lenses	pre	hyper	yes	reduced
+no lenses	pre	hyper	yes	normal
+no lenses	presbyopic	myope	no	reduced
+no lenses	presbyopic	myope	no	normal
+no lenses	presbyopic	myope	yes	reduced
+hard	presbyopic	myope	yes	normal
+no lenses	presbyopic	hyper	no	reduced
+soft	presbyopic	hyper	no	normal
+no lenses	presbyopic	hyper	yes	reduced
+no lenses	presbyopic	hyper	yes	normal
