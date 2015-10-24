@@ -1,5 +1,5 @@
-(ipytrain.dtree.naive_dtree
-naive_dtree
+(ipytrain.dtree.basic_dtree
+basic_dtree
 p0
 (dp1
 S'label_data'

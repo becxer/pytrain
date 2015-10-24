@@ -9,8 +9,8 @@
 from pytrain.ptlib import ptlib
 
 #import from modules
-from pytrain.knn import naive_knn
-from pytrain.dtree import naive_dtree
+from pytrain.knn import basic_knn
+from pytrain.dtree import basic_dtree
 
 #testing ptlib
 ptlib.hello()
@@ -18,7 +18,7 @@ ptlib.hello()
 #testing ptlib.f2mat
 print "-Testing file 2 matrix"
 dmat_train, dlabel_train, dmat_test, dlabel_test \
-	= ptlib.f2mat("sample/dating/date_info.txt", 0.1)
+    = ptlib.f2mat("sample/dating/date_info.txt", 0.1)
 
 print "train mat count : " + str(len(dmat_train))
 print dmat_train[0:10]
@@ -40,40 +40,40 @@ print normed_dmat_train[0:10]
 print "-Testing KNN"
 simple_mat_1 = [[1.0,1.1] , [1.0,1.0], [0,0], [0,0.1]]
 simple_label_1 = ['A','A','B','B']
-knn = naive_knn(simple_mat_1, simple_label_1, 3)
+knn = basic_knn(simple_mat_1, simple_label_1, 3)
 print "knn predict [0.9,0.9] : " + str(knn.predict([0.9,0.9]))
 print "knn predict [0.1,0.4] : " + str(knn.predict([0.1,0.4]))
 
 #eval knn date
-knn_date = naive_knn(normed_dmat_train, dlabel_train, 3)
+knn_date = basic_knn(normed_dmat_train, dlabel_train, 3)
 error_rate = ptlib.eval_predict(knn_date, normed_dmat_test, dlabel_test, False)
-print "<knn> date error rate : " + str(error_rate)
+print "<basic knn> date error rate : " + str(error_rate)
 
 #eval knn digits
 #dg_mat_train, dg_label_train = ptlib.f2mat("sample/digit/digit-train.txt",0)
 #dg_mat_test, dg_label_test = ptlib.f2mat("sample/digit/digit-test.txt",0)
-#knn_digit = naive_knn(dg_mat_train, dg_label_train, 3)
+#knn_digit = basic_knn(dg_mat_train, dg_label_train, 3)
 #error_rate = ptlib.eval_predict(knn_digit, dg_mat_test, dg_label_test)
 
 #testing dtree
 print "-Testing Dtree"
 simple_mat_2 = [[7,8,8],[8,7,8],[8,8,8],[8,8,8],[8,7,7],[7,7,8],[7,7,7],[7,8,7],[8,8,8]]
 simple_label_2 = ['yes',  'yes',  'yes', 'no',  'no',  'yes',   'no',   'no', 'no']
-tree = naive_dtree(simple_mat_2, simple_label_2)
+tree = basic_dtree(simple_mat_2, simple_label_2)
 print "tree fit : " + str(tree.fit())
 print "tree predict : " + str(tree.predict([8,8,8]))
 
 #testing store & restore
 print "-Testing store & restore"
-ptlib.store_module(tree,"tmp/tree_878.dat")
-mod = ptlib.restore_module("tmp/tree_878.dat")
+ptlib.store_module(tree,"tmp/tree_878_store_test.dat")
+mod = ptlib.restore_module("tmp/tree_878_store_test.dat")
 print "restored tree : " + str(mod.tree)
 print "restored tree predict : " + str(mod.predict([8,8,7]))
 
 #eval dtree lense
 lense_mat_train, lense_label_train, lense_mat_test, lense_label_test = \
-							ptlib.f2mat("sample/lense/lense.txt", 0.4)
-dtree_lense = naive_dtree(lense_mat_train,lense_label_train)
+                            ptlib.f2mat("sample/lense/lense.txt", 0.4)
+dtree_lense = basic_dtree(lense_mat_train,lense_label_train)
 dtree_lense.fit()
 error_rate = ptlib.eval_predict(dtree_lense, lense_mat_test, lense_label_test)
 

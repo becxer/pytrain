@@ -1,1 +1,1 @@
-from naive_knn import *
+from basic_knn import *
