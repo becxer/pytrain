@@ -11,6 +11,7 @@ from pytrain.ptlib import ptlib
 #import from modules
 from pytrain.knn import basic_knn
 from pytrain.dtree import basic_dtree
+from pytrain.nbayes import basic_nbayes
 
 #testing ptlib
 ptlib.hello()
@@ -38,9 +39,9 @@ print normed_dmat_train[0:10]
 
 #testing knn
 print "-Testing KNN"
-simple_mat_1 = [[1.0,1.1] , [1.0,1.0], [0,0], [0,0.1]]
-simple_label_1 = ['A','A','B','B']
-knn = basic_knn(simple_mat_1, simple_label_1, 3)
+sample_mat_1 = [[1.0,1.1] , [1.0,1.0], [0,0], [0,0.1]]
+sample_label_1 = ['A','A','B','B']
+knn = basic_knn(sample_mat_1, sample_label_1, 3)
 print "knn predict [0.9,0.9] : " + str(knn.predict([0.9,0.9]))
 print "knn predict [0.1,0.4] : " + str(knn.predict([0.1,0.4]))
 
@@ -57,9 +58,9 @@ print "<basic knn> date error rate : " + str(error_rate)
 
 #testing dtree
 print "-Testing Dtree"
-simple_mat_2 = [[7,8,8],[8,7,8],[8,8,8],[8,8,8],[8,7,7],[7,7,8],[7,7,7],[7,8,7],[8,8,8]]
-simple_label_2 = ['yes',  'yes',  'yes', 'no',  'no',  'yes',   'no',   'no', 'no']
-tree = basic_dtree(simple_mat_2, simple_label_2)
+sample_mat_2 = [[7,8,8],[8,7,8],[8,8,8],[8,8,8],[8,7,7],[7,7,8],[7,7,7],[7,8,7],[8,8,8]]
+sample_label_2 = ['yes',  'yes',  'yes', 'no',  'no',  'yes',   'no',   'no', 'no']
+tree = basic_dtree(sample_mat_2, sample_label_2)
 print "tree fit : " + str(tree.fit())
 print "tree predict : " + str(tree.predict([8,8,8]))
 
@@ -76,4 +77,19 @@ lense_mat_train, lense_label_train, lense_mat_test, lense_label_test = \
 dtree_lense = basic_dtree(lense_mat_train,lense_label_train)
 dtree_lense.fit()
 error_rate = ptlib.eval_predict(dtree_lense, lense_mat_test, lense_label_test)
+
+
+#tesing nbayes
+print "-Tesing Nbayes"
+sample_mat_3 = [[]]
+sample_label_3 = []
+nbayes = basic_nbayes(sample_mat_3,sample_label_2)
+print "nbayes fit : " + str(nbayes.fit())
+print "nbayes predict : " + str(nbayes.predict([]))
+
+#eval nbayes --TODO
+
+
+
+
 
