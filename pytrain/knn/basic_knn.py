@@ -6,13 +6,13 @@
 #
 
 from numpy import *
-from pytrain.ptlib import ptlib_norm
+from pytrain.ptlib import convert
 import operator
 
 class basic_knn:
     def __init__(self, mat_data,label_data,k):
         if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = ptlib_norm.mat2arr(mat_data)
+            mat_data = convert.mat2arr(mat_data)
         self.mat_data = mat_data
         self.label_data = label_data
         self.train_size = mat_data.shape[0]
@@ -24,7 +24,7 @@ class basic_knn:
     # compare distance from all mat_data rows and choose most closer one
     def predict(self, array_input):
         if array_input.__class__.__name__ != 'ndarray':
-            array_input = ptlib_norm.list2arr(array_input)
+            array_input = convert.list2arr(array_input)
         diff_mat = tile(array_input, (self.train_size,1)) - self.mat_data
         pow_diff_mat = diff_mat ** 2
         pow_distances = pow_diff_mat.sum(axis=1)
