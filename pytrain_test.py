@@ -6,20 +6,20 @@
 #
 
 #import from ptlib
-from pytrain.ptlib import ptlib
+from pytrain.ptlib import ptlib_eval
+from pytrain.ptlib import ptlib_norm
+from pytrain.ptlib import ptlib_nlp
+from pytrain.ptlib import ptlib_fs
 
 #import from modules
 from pytrain.knn import basic_knn
 from pytrain.dtree import basic_dtree
 from pytrain.nbayes import basic_nbayes
 
-#testing ptlib
-ptlib.hello()
-
-#testing ptlib.f2mat
+#testing ptlib_fs.f2mat
 print "-Testing file 2 matrix"
 dmat_train, dlabel_train, dmat_test, dlabel_test \
-    = ptlib.f2mat("sample/dating/date_info.txt", 0.1)
+    = ptlib_fs.f2mat("sample/dating/date_info.txt", 0.1)
 
 print "train mat count : " + str(len(dmat_train))
 print dmat_train[0:10]
@@ -31,10 +31,10 @@ print dmat_test[0:10]
 print "test label count : " + str(len(dlabel_test))
 print dlabel_test[0:10]
 
-#testing ptlib.norm
+#testing ptlib_fs.norm
 print "-Testing normalization"
-normed_dmat_train = ptlib.norm(dmat_train)
-normed_dmat_test = ptlib.norm(dmat_test)
+normed_dmat_train = ptlib_norm.norm(dmat_train)
+normed_dmat_test = ptlib_norm.norm(dmat_test)
 print normed_dmat_train[0:10]
 
 #testing knn
@@ -47,14 +47,14 @@ print "knn predict [0.1,0.4] : " + str(knn.predict([0.1,0.4]))
 
 #eval knn date
 knn_date = basic_knn(normed_dmat_train, dlabel_train, 3)
-error_rate = ptlib.eval_predict(knn_date, normed_dmat_test, dlabel_test, False)
+error_rate = ptlib_eval.eval_predict(knn_date, normed_dmat_test, dlabel_test, False)
 print "<basic knn> date error rate : " + str(error_rate)
 
 #eval knn digits
-#dg_mat_train, dg_label_train = ptlib.f2mat("sample/digit/digit-train.txt",0)
-#dg_mat_test, dg_label_test = ptlib.f2mat("sample/digit/digit-test.txt",0)
+#dg_mat_train, dg_label_train = ptlib_fs.f2mat("sample/digit/digit-train.txt",0)
+#dg_mat_test, dg_label_test = ptlib_fs.f2mat("sample/digit/digit-test.txt",0)
 #knn_digit = basic_knn(dg_mat_train, dg_label_train, 3)
-#error_rate = ptlib.eval_predict(knn_digit, dg_mat_test, dg_label_test)
+#error_rate = ptlib_eval.eval_predict(knn_digit, dg_mat_test, dg_label_test)
 
 #testing dtree
 print "-Testing Dtree"
@@ -66,30 +66,34 @@ print "tree predict : " + str(tree.predict([8,8,8]))
 
 #testing store & restore
 print "-Testing store & restore"
-ptlib.store_module(tree,"tmp/tree_878_store_test.dat")
-mod = ptlib.restore_module("tmp/tree_878_store_test.dat")
+ptlib_fs.store_module(tree,"tmp/tree_878_store_test.dat")
+mod = ptlib_fs.restore_module("tmp/tree_878_store_test.dat")
 print "restored tree : " + str(mod.tree)
 print "restored tree predict : " + str(mod.predict([8,8,7]))
 
 #eval dtree lense
 lense_mat_train, lense_label_train, lense_mat_test, lense_label_test = \
-                            ptlib.f2mat("sample/lense/lense.txt", 0.4)
+                            ptlib_fs.f2mat("sample/lense/lense.txt", 0.4)
 dtree_lense = basic_dtree(lense_mat_train,lense_label_train)
 dtree_lense.fit()
-error_rate = ptlib.eval_predict(dtree_lense, lense_mat_test, lense_label_test)
-
+error_rate = ptlib_eval.eval_predict(dtree_lense, lense_mat_test, lense_label_test)
 
 #tesing nbayes
 print "-Tesing Nbayes"
+sample_text_mat = [\
+        ['hello','this','is','virus','mail'],\
+        ['hi','this','is','from', 'friend'],\
+        ['how','about','buy','this','virus'],\
+        ['facebook','friend','contact','to','you'],\
+        ['I','love','you','baby','virus'],\
+        ['what','nice','day','how','about','you']
+        ]
+sample_text_label = ['spam','real','spam','real','spam','real']
 sample_mat_3 = [[]]
 sample_label_3 = []
-nbayes = basic_nbayes(sample_mat_3,sample_label_2)
+nbayes = basic_nbayes(sample_mat_3,sample_label_3)
 print "nbayes fit : " + str(nbayes.fit())
 print "nbayes predict : " + str(nbayes.predict([]))
 
 #eval nbayes --TODO
-
-
-
-
 
