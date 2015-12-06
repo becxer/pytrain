@@ -51,10 +51,10 @@ error_rate = batch.eval_predict(knn_date, normed_dmat_test, dlabel_test, False)
 print "<basic knn> date error rate : " + str(error_rate)
 
 #batch knn digits
-#dg_mat_train, dg_label_train = fs.f2mat("sample/digit/digit-train.txt",0)
-#dg_mat_test, dg_label_test = fs.f2mat("sample/digit/digit-test.txt",0)
-#knn_digit = basic_knn(dg_mat_train, dg_label_train, 3)
-#error_rate = batch.eval_predict(knn_digit, dg_mat_test, dg_label_test)
+dg_mat_train, dg_label_train = fs.f2mat("sample/digit/digit-train.txt",0)
+dg_mat_test, dg_label_test = fs.f2mat("sample/digit/digit-test.txt",0)
+knn_digit = basic_knn(dg_mat_train, dg_label_train, 3)
+error_rate = batch.eval_predict(knn_digit, dg_mat_test, dg_label_test)
 
 #testing dtree
 print "-Testing Dtree"
