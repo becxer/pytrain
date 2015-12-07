@@ -20,4 +20,3 @@ class test_fs(test_suite):
         assert len(dmat_test) == 100
         assert len(dmat_test) == 100
 
-

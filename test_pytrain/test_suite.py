@@ -14,6 +14,8 @@ class test_suite:
         pass
 
     def process(self):
-        print "[start test] " + self.__class__.__name__
+        print "__________________________________________"
+        print "TEST MODULE NAME : " + self.__class__.__name__
+        print "now testing... "
         self.test_process()
-        print "[ end  test] " + self.__class__.__name__
+        print "[Success] " + self.__class__.__name__
