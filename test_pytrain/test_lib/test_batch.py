@@ -21,6 +21,6 @@ class test_batch(test_suite):
 
         knn_date = basic_knn(normed_dmat_train, dlabel_train, 3)
         error_rate = batch.eval_predict(knn_date, normed_dmat_test, dlabel_test, False)
-        self.tlog("<basic knn> date error rate : " + str(error_rate))
+        self.tlog("date predict (with basic knn) error rate : " + str(error_rate))
         
         assert error_rate == 0.05

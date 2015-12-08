@@ -6,6 +6,8 @@
 #
 from test_pytrain import test_suite
 from pytrain.knn import basic_knn
+from pytrain.lib import fs
+from pytrain.lib import batch
 
 class test_basic_knn(test_suite):
 
@@ -26,4 +28,18 @@ class test_basic_knn(test_suite):
 
         assert f1 == 'A'
         assert f2 == 'B'
+
+
+
+class test_basic_knn_digit(test_suite):
+
+    def __init__(self, logging = True):
+        test_suite.__init__(self, logging)
+
+    def test_process(self):
+        dg_mat_train, dg_label_train = fs.f2mat("test_data/digit/digit-train.txt",0)
+        dg_mat_test, dg_label_test = fs.f2mat("test_data/digit/digit-test.txt",0)
+        knn_digit = basic_knn(dg_mat_train, dg_label_train, 3)
+        error_rate = batch.eval_predict(knn_digit, dg_mat_test, dg_label_test, False)
+        self.tlog("digit predict (with basic knn) error rate :" + str(error_rate))
 
