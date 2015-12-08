@@ -6,7 +6,7 @@
 #
 
 from numpy import *
-from pytrain.ptlib import convert
+from pytrain.lib import convert
 import operator
 
 class basic_knn:

@@ -7,8 +7,8 @@
 
 #--------------------------------------------
 # Test for ptlib fs
-from test_ptlib import test_fs
-test_fs().process()
+from test_lib import test_fs
+test_fs(logging = False).process()
 #--------------------------------------------
 
 
