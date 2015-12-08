@@ -1,5 +1,5 @@
 #
-# test ptlib.fs
+# test lib.fs
 #
 # @ author becxer
 # @ email becxer87@gmail.com
@@ -22,5 +22,11 @@ class test_fs(test_suite):
         assert len(dmat_train) == 900
         assert len(dlabel_train) == 900
         assert len(dmat_test) == 100
-        assert len(dmat_test) == 100
+        assert len(dlabel_test) == 100
+
+        self.set_gvalue('dmat_train',dmat_train)
+        self.set_gvalue('dlabel_train',dlabel_train)
+        self.set_gvalue('dmat_test',dmat_test)
+        self.set_gvalue('dlabel_test',dlabel_test)
+
 
