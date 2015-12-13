@@ -1,13 +1,13 @@
 #
-# test lib.convert
+# test lib.normalize
 #
 # @ author becxer
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_suite
-from pytrain.lib import convert
+from pytrain.lib import normalize
 
-class test_convert(test_suite):
+class test_normalize(test_suite):
 
     def __init__(self, logging = True):
         test_suite.__init__(self, logging)
@@ -16,8 +16,8 @@ class test_convert(test_suite):
         dmat_train = self.get_gvalue('dmat_train')
         dmat_test = self.get_gvalue('dmat_test')
         
-        normed_dmat_train = convert.norm(dmat_train)
-        normed_dmat_test = convert.norm(dmat_test)
+        normed_dmat_train = normalize.quantile(dmat_train)
+        normed_dmat_test = normalize.quantile(dmat_test)
 
         self.tlog(normed_dmat_train[0:10])
 

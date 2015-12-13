@@ -14,10 +14,13 @@ from test_nbayes import *
 test_fs(logging = False).process()
 
 # test normalize
-test_convert(logging = False).process()
+test_normalize(logging = False).process()
 
 # test batch test
 test_batch(logging = False).process()
+
+# test nlp test
+test_nlp(logging = True).process()
 
 # test knn
 test_basic_knn(logging = False).process()
@@ -29,5 +32,5 @@ test_basic_dtree_store(logging = False).process()
 test_basic_dtree_lense(logging = False).process()
 
 # test nbayes
-test_basic_nbayes(logging = False).process()
+test_basic_nbayes(logging = True).process()
 

@@ -8,6 +8,7 @@ class basic_nbayes:
     def fit(self):
         pass
 
-    def predict(self, array_input ):
+    def predict(self, array_input):
+
         pass
 
