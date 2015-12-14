@@ -37,14 +37,14 @@ class test_basic_nbayes(test_suite):
         assert len(voca) == 22
 
         nbayes = basic_nbayes(docs_vector,docs_label)
-        nbayes.fit()
 
+        self.tlog("nbayes fit : " + str(nbayes.fit()))
+        
         trg = "this is virus mail"
         trg_vec = nlp.sentence2vector(voca, trg)
         
         self.tlog(trg_vec)
-        result = nbayes.predict(trg_vec)
-        self.tlog("nbayes predict : " + str(result))
 
-        assert result == 'spam'
+        self.tlog("nbayes predict : "\
+                + str(nbayes.predict(trg_vec)))
   
