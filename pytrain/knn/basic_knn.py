@@ -10,7 +10,7 @@ from pytrain.lib import convert
 import operator
 
 class basic_knn:
-    def __init__(self, mat_data,label_data,k):
+    def __init__(self, mat_data, label_data, k):
         if mat_data.__class__.__name__ != 'ndarray':
             mat_data = convert.mat2arr(mat_data)
         self.mat_data = mat_data
@@ -34,7 +34,7 @@ class basic_knn:
         for i in range(self.k):
             kth_label = self.label_data[sorted_distances[i]]
             class_count[kth_label] = class_count.get(kth_label, 0) + 1
-        sorted_class_count = sorted(class_count.iteritems(), 
-            key=operator.itemgetter(1),reverse=True)
+        sorted_class_count = sorted(class_count.iteritems()
+                                 , key=operator.itemgetter(1), reverse=True)
         return sorted_class_count[0][0]
 

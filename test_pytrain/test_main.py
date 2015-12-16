@@ -3,7 +3,7 @@
 #
 # @ author becxer
 # @ email becxer87@gmail.com#
-#--------------------------------------------
+# --------------------------------------------
 
 from test_lib import *
 from test_knn import *
@@ -24,7 +24,7 @@ test_nlp(logging = False).process()
 
 # test knn
 test_basic_knn(logging = False).process()
-#test_basic_knn_digit(logging = False).process()
+# test_basic_knn_digit(logging = False).process()
 
 # test dtree
 test_basic_dtree(logging = False).process()

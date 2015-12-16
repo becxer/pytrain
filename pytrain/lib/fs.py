@@ -9,11 +9,13 @@ import operator
 import math
 import sys
 
-#convert file which format is 
-#[label, feature1, feature2 ... , featureN]
-#to matrix_train, label_train, matrix_test, label_test
-#according to ho_ratio
-#ho_ratio is test_set ratio how you want
+# convert file which format is
+# [label, feature1, feature2 ... , featureN]
+# to matrix_train, label_train, matrix_test, label_test
+# according to ho_ratio
+# ho_ratio is test_set ratio how you want
+
+
 def f2mat(filename, ho_ratio):
     fr = open(filename)
     lines = fr.readlines()
@@ -46,14 +48,14 @@ def f2mat(filename, ho_ratio):
         return mat_train, label_train, mat_test, label_test
 
 
-#saving module to file
+# saving module to file
 def store_module(module, filename):
     import pickle
     module_f = open(filename, 'w')
     pickle.dump(module,module_f)
     module_f.close()
 
-#loading module into object
+# loading module into object
 def restore_module(filename):
     import pickle
     module_f = open(filename)

@@ -11,7 +11,7 @@ import math
 import sys
 from pytrain.lib import convert
 
-#normalize matrix feature with base-min & base-max
+# normalize matrix feature with base-min & base-max
 def quantile(data_mat):
     if data_mat.__class__.__name__ != 'ndarray':
         data_mat = convert.mat2arr(data_mat)

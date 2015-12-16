@@ -14,18 +14,18 @@ class basic_dtree:
         self.mat_data = mat_data
         self.label_data = label_data
 
-    #make tree with matrix_data & label_data    
+    # make tree with matrix_data & label_data
     def fit(self):
         self.tree = self.create_tree(self.mat_data,self.label_data)
         return self.tree
 
-    #search array_input in tree
+    # search array_input in tree
     def predict(self, array_input):
         return self.search_tree(self.tree, array_input)
 
-    #search array_input's feature in tree recursively
-    #if tree node is dictionary recursive
-    #else return label data
+    # search array_input's feature in tree recursively
+    # if tree node is dictionary recursive
+    # else return label data
     def search_tree(self, tree, array_input):
         searched_label = "not found"
         node_col = tree.keys()[0]
@@ -39,21 +39,21 @@ class basic_dtree:
                 else : searched_label = node_dict[node_val]
         return searched_label
 
-    #create tree to lower entropy recursively
-    #when split data, calculate each feature splitted matrix entropy and compare
-    #select most lower entorpy and split
-    #Example)  matrix => label ::  [[A,B] , [A,C], [A,D], [A,E] ,[B,D]] => ['YES','YES','YES','YES',NO' ]
-    #output example tree )   { 0 , { 'A' : 'YES', 'B' : 'No'}}
+    # create tree to lower entropy recursively
+    # when split data, calculate each feature split matrix entropy and compare
+    # select most lower entropy and split
+    # Example)  matrix => label ::  [[A,B] , [A,C], [A,D], [A,E] ,[B,D]] => ['YES','YES','YES','YES',NO' ]
+    # output example tree )   { 0 , { 'A' : 'YES', 'B' : 'No'}}
     #                          |      |      |     |     |
     #                          |      |      |     |     |
     #                       column  value    |    value  |
     #                                      label        label
     #
     def create_tree(self, mat_data, label_data):
-        #if left data has same label, then return label
+        # if left data has same label, then return label
         if label_data.count(label_data[0]) == len(label_data):
             return label_data[0]
-        #if there is no feature to split, then return most major label
+        # if there is no feature to split, then return most major label
         if len(mat_data[0]) == 0 or ( len(mat_data[0]) == 1 and \
                 len(set([row[0] for row in mat_data])) == 1 ) :
             return self.major_label_count(label_data)
@@ -67,7 +67,7 @@ class basic_dtree:
             tree[best_col_index][val] = self.create_tree(splitted_mat, splitted_label)
         return tree
 
-    #split matrix & label data with axis and it's value
+    # split matrix & label data with axis and it's value
     def split_data(self, mat_data, label_data, axis, split_value):
         ret_data = []
         ret_label = []
@@ -79,7 +79,7 @@ class basic_dtree:
                 ret_label.append(label_data[index])
         return ret_data, ret_label
     
-    #choose column to split comparing entropy
+    # choose column to split comparing entropy
     def choose_col_to_split(self, mat_data, label_data):
         num_cols = len(mat_data[0]) 
         base_ent = self.calc_shannon_ent(label_data)

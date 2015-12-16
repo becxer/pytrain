@@ -10,8 +10,8 @@ import operator
 import math
 import sys
 
-#abstracted evaluation logic 
-#p_module is pytrain module that you already trained
+# abstracted evaluation logic
+# p_module is pytrain module that you already trained
 def eval_predict(p_module ,mat_test, label_test, log_on = True):
     rsize_test = len(mat_test)
     error_count = 0.0
