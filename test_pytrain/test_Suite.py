@@ -1,5 +1,5 @@
 #
-# Dev test for pytrain library
+# test_Suite class for unit-test
 #
 # @ author becxer
 # @ email becxer87@gmail.com

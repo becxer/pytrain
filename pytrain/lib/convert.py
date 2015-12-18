@@ -1,5 +1,5 @@
 #
-# library for convert data.
+# library for convert data format
 #
 # @ author becxer
 # @ e-mail becxer87@gmail.com

@@ -1,5 +1,5 @@
 #
-# library for evaluation module
+# library for batch processing module
 #
 # @ author becxer
 # @ e-mail becxer@gmail.com
@@ -10,10 +10,9 @@ import operator
 import math
 import sys
 
+
 # abstracted evaluation logic
 # p_module is pytrain module that you already trained
-
-
 def eval_predict(p_module, mat_test, label_test, log_on = True):
     test_row_size = len(mat_test)
     error_count = 0.0

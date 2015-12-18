@@ -1,4 +1,4 @@
-# library for data manipulation & etc.
+# library for file system processing
 #
 # @ author becxer
 # @ e-mail becxer87@gmail.com

@@ -1,5 +1,5 @@
 #
-# test batch
+# test lib.batch
 #
 # @ author becxer
 # @ email becxer87@gmail.com

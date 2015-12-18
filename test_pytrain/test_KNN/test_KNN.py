@@ -1,5 +1,5 @@
 #
-# test knn.KNN
+# test KNN
 #
 # @ author becxer
 # @ email becxer87@gmail.com

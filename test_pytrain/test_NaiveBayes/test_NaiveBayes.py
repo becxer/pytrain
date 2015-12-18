@@ -1,5 +1,5 @@
 #
-# test NaiveBayes
+# test Naive Bayes
 #
 # @ author becxer
 # @ email becxer87@gmail.com

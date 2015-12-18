@@ -1,5 +1,5 @@
 #
-# library for normalize.
+# library for normalize
 #
 # @ author becxer
 # @ e-mail becxer87@gmail.com
