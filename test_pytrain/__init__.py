@@ -1,1 +1,1 @@
-from test_suite import *
+from test_Suite import *

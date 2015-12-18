@@ -4,14 +4,17 @@
 # @ e-mail becxer87@gmail.com
 #
 
+
 def do_split2word_str(arg):
     return arg.split()
+
 
 def do_split2word_list(arg):
     res = []
     for item in arg:
         res.append(item.split())
     return res
+
 
 def split2word(arg):
     switch = {\
@@ -20,14 +23,17 @@ def split2word(arg):
     }
     return switch[str(type(arg).__name__)](arg)
 
+
 def split2sentence(text):
     return text.split('\n')
+
 
 def extract_vocabulary(documents):
     vocabulary = set([])
     for doc in documents:
         vocabulary = vocabulary | set(split2word(doc))
     return list(vocabulary)
+
 
 def sentence2vector(vocabulary, sentence):
     voca_vector = [0] * len(vocabulary)

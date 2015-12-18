@@ -4,13 +4,13 @@
 # @ author becxer
 # @ email becxer87@gmail.com
 #
-from test_pytrain import test_suite
+from test_pytrain import test_Suite
 from pytrain.lib import nlp
 
-class test_nlp(test_suite):
+class test_nlp(test_Suite):
 
     def __init__(self, logging = True):
-        test_suite.__init__(self, logging)
+        test_Suite.__init__(self, logging)
 
     def test_process(self):
         sentence = "hello this is virus mail"
@@ -18,15 +18,15 @@ class test_nlp(test_suite):
 
         words = nlp.split2word(sentence)
         words_text = nlp.split2word(text)
-        splitted_sentence = nlp.split2sentence(text)
+        split_sentence = nlp.split2sentence(text)
 
         self.tlog(words)
-        self.tlog(splitted_sentence)
+        self.tlog(split_sentence)
 
         assert words[3] == 'virus'
         assert len(words) == 5
-        assert splitted_sentence[1] == "two sentence"
-        assert len(splitted_sentence) == 3
+        assert split_sentence[1] == "two sentence"
+        assert len(split_sentence) == 3
         assert words_text[2] == "two"
         assert len(words_text) == 6
 

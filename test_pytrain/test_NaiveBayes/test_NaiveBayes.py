@@ -1,17 +1,18 @@
 #
-# test basic nbayes
+# test NaiveBayes
 #
 # @ author becxer
 # @ email becxer87@gmail.com
 #
-from test_pytrain import test_suite
-from pytrain.nbayes import basic_nbayes
+from test_pytrain import test_Suite
+from pytrain.NaiveBayes import NaiveBayes
 from pytrain.lib import nlp
 
-class test_basic_nbayes(test_suite):
+
+class test_NaiveBayes(test_Suite):
 
     def __init__(self, logging = True):
-        test_suite.__init__(self, logging)
+        test_Suite.__init__(self, logging)
 
     def test_process(self):
         sample_docs = [\
@@ -36,7 +37,7 @@ class test_basic_nbayes(test_suite):
 
         assert len(voca) == 22
 
-        nbayes = basic_nbayes(docs_vector,docs_label)
+        nbayes = NaiveBayes(docs_vector, docs_label)
         nbayes.fit()
 
         trg = "this is virus mail"
@@ -44,7 +45,7 @@ class test_basic_nbayes(test_suite):
         
         self.tlog(trg_vec)
         result = nbayes.predict(trg_vec)
-        self.tlog("nbayes predict : " + str(result))
+        self.tlog("NaiveBayes predict : " + str(result))
 
         assert result == 'spam'
   

@@ -7,9 +7,10 @@
 import traceback
 import sys
 
-class test_suite:
 
-    gvalue_set = {}
+class test_Suite:
+
+    global_value_set = {}
 
     def __init__(self, logging = True):
         self.logging = logging
@@ -20,11 +21,11 @@ class test_suite:
             print "*Log from '" + self.__class__.__name__ +\
                     "' Module : \n",log_str
 
-    def set_gvalue(self, key, value):
-        self.__class__.gvalue_set[key] = value
+    def set_global_value(self, key, value):
+        self.__class__.global_value_set[key] = value
 
-    def get_gvalue(self, key):
-        return self.__class__.gvalue_set[key]
+    def get_global_value(self, key):
+        return self.__class__.global_value_set[key]
 
     def test_process(self):
         pass

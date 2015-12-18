@@ -6,31 +6,32 @@
 # --------------------------------------------
 
 from test_lib import *
-from test_knn import *
-from test_dtree import *
-from test_nbayes import *
+from test_KNN import *
+from test_Tree import *
+from test_NaiveBayes import *
 
-# test fs
+# test fs lib
 test_fs(logging = False).process()
 
-# test normalize
+# test normalize lib
 test_normalize(logging = False).process()
 
-# test batch test
+# test batch lib
 test_batch(logging = False).process()
 
-# test nlp test
+# test nlp lib
 test_nlp(logging = False).process()
 
-# test knn
-test_basic_knn(logging = False).process()
-# test_basic_knn_digit(logging = False).process()
 
-# test dtree
-test_basic_dtree(logging = False).process()
-test_basic_dtree_store(logging = False).process()
-test_basic_dtree_lense(logging = False).process()
+# test KNN
+test_KNN(logging = False).process()
+# test_KNN_digit(logging = False).process()
 
-# test nbayes
-test_basic_nbayes(logging = True).process()
+# test DecisionTree
+test_DecisionTree(logging = False).process()
+test_DecisionTree_store(logging = False).process()
+test_DecisionTree_lense(logging = False).process()
+
+# Test NaiveBayes
+test_NaiveBayes(logging = True).process()
 

@@ -1,5 +1,5 @@
 #
-# basic decision tree
+# Basic Decision Tree
 #
 # @ author becxer
 # @ e-mail becxer87@gmail.com
@@ -9,10 +9,12 @@ from numpy import *
 from math import log
 import operator
 
-class basic_dtree:
+
+class DecisionTree:
     def __init__(self, mat_data, label_data):
         self.mat_data = mat_data
         self.label_data = label_data
+        self.tree = {}
 
     # make tree with matrix_data & label_data
     def fit(self):
@@ -62,9 +64,9 @@ class basic_dtree:
         best_col = [row[best_col_index] for row in mat_data]
         uniq_val = set(best_col)
         for val in uniq_val:
-            splitted_mat, splitted_label = self.split_data(\
+            split_mat, split_label = self.split_data(\
                                 mat_data, label_data, best_col_index, val)
-            tree[best_col_index][val] = self.create_tree(splitted_mat, splitted_label)
+            tree[best_col_index][val] = self.create_tree(split_mat, split_label)
         return tree
 
     # split matrix & label data with axis and it's value
@@ -90,12 +92,12 @@ class basic_dtree:
             uniq_col = set(col)
             new_ent = 0.0
             for val in uniq_col:
-                splitted_mat_data, splitted_label_data = \
+                split_mat_data, split_label_data = \
                          self.split_data(mat_data, label_data, i ,val)
-                prob = len(splitted_label_data) / float(len(label_data))
-                new_ent += prob * self.calc_shannon_ent(splitted_label_data)
+                prob = len(split_label_data) / float(len(label_data))
+                new_ent += prob * self.calc_shannon_ent(split_label_data)
             info = base_ent - new_ent
-            if (info >= max_info):
+            if info >= max_info:
                 max_info = info
                 best_col = i
         return best_col

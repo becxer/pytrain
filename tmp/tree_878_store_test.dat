@@ -1,5 +1,5 @@
-(ipytrain.dtree.basic_dtree
-basic_dtree
+(ipytrain.Tree.DecisionTree
+DecisionTree
 p0
 (dp1
 S'label_data'

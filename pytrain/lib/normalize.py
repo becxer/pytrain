@@ -11,6 +11,7 @@ import math
 import sys
 from pytrain.lib import convert
 
+
 # normalize matrix feature with base-min & base-max
 def quantile(data_mat):
     if data_mat.__class__.__name__ != 'ndarray':
@@ -19,8 +20,8 @@ def quantile(data_mat):
     max_vals = data_mat.max(0)
     ranges = max_vals - min_vals
     ranges = map(lambda x : x + sys.float_info.epsilon ,ranges)
-    normed_data_mat = zeros(shape(data_mat))
+    normalized_data_mat = zeros(shape(data_mat))
     rowsize = data_mat.shape[0]
-    normed_data_mat = data_mat - tile(min_vals, (rowsize,1))
-    normed_data_mat = normed_data_mat / tile(ranges,(rowsize,1))
-    return normed_data_mat
+    normalized_data_mat = data_mat - tile(min_vals, (rowsize,1))
+    normalized_data_mat = normalized_data_mat / tile(ranges,(rowsize,1))
+    return normalized_data_mat

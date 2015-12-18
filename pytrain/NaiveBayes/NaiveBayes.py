@@ -1,6 +1,14 @@
+#
+# Basic Naive Bayes
+#
+# @ author becxer
+# @ e-mail becxer87@gmail.com
+#
+
 from numpy import *
 
-class basic_nbayes:
+
+class NaiveBayes:
 
     def __init__(self, mat_data, label_data):
         self.word_data = mat_data
@@ -16,7 +24,7 @@ class basic_nbayes:
     def fit(self):
         self.num_word = len(self.word_data[0])
         for i, cate in enumerate(self.cate_data):
-            self.cate_word[cate] = self.cate_word.get(cate, \
+            self.cate_word[cate] = self.cate_word.get(cate,\
                     zeros(self.num_word)) + self.word_data[i]
             self.cate_set[cate] = self.cate_set.get(cate, 0) + 1
         for cate in self.cate_word:
