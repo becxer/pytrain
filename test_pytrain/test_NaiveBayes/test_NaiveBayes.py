@@ -41,11 +41,26 @@ class test_NaiveBayes(test_Suite):
         nbayes.fit()
 
         trg = "this is virus mail"
+        self.tlog(trg)
         trg_vec = nlp.sentence2vector(voca, trg)
-        
         self.tlog(trg_vec)
+        
         result = nbayes.predict(trg_vec)
         self.tlog("NaiveBayes predict : " + str(result))
 
         assert result == 'spam'
+
+        trg2 = "I love you"
+        self.tlog(trg2)
+        trg2_vec = nlp.sentence2vector(voca, trg2)
+        self.tlog(trg2_vec)
+
+        result2 = nbayes.predict(trg2_vec)
+        self.tlog("NaiveBayes predict : " + str(result2))
+
+        assert result2 == 'spam'
+
+
+
+
   
