@@ -33,5 +33,5 @@ test_DecisionTree_store(logging = False).process()
 test_DecisionTree_lense(logging = False).process()
 
 # Test NaiveBayes
-test_NaiveBayes(logging = True).process()
+test_NaiveBayes(logging = False).process()
 
