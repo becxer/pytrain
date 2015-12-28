@@ -16,8 +16,8 @@ class test_nlp(test_Suite):
         sentence = "hello this is virus mail"
         text = "one sentence\ntwo sentence\nthree sentence"
 
-        words = nlp.split2word(sentence)
-        words_text = nlp.split2word(text)
+        words = nlp.split2words(sentence)
+        words_text = nlp.split2words(text)
         split_sentence = nlp.split2sentence(text)
 
         self.tlog(words)
@@ -31,17 +31,27 @@ class test_nlp(test_Suite):
         assert len(words_text) == 6
 
         docs = [\
-            "a b c d e f g e f g",\
-            "e1 23 f asdf 1a dd adsf f g d aa",\
+            "a b c d e f g h i j",\
+            "a1 b1 c1 a b abcd a b c a2",\
             "1 2 3 4 5 6 a b c d e f g"\
         ]
 
         voca = nlp.extract_vocabulary(docs)
         self.tlog(voca)
-        assert len(voca) == 20
+        assert len(voca) == 21
 
-        input_txt = "a 1 g e f aa"
-        voca_vector = nlp.sentence2vector(voca, input_txt)
-        self.tlog(voca_vector)
-        assert voca_vector[0] == 1
+        # testing set of words2vector
+
+        input_txt = "a1 g e f aa"
+        set_vector = nlp.set_of_words2vector(voca, input_txt)
+        self.tlog(set_vector)
+        assert set_vector[1] == 1
+
+        # testing bag of words2vector
+
+        input_txt2 = "a1 g e f aa a1"
+        bag_vector = nlp.bag_of_words2vector(voca, input_txt2)
+        self.tlog(bag_vector)
+        assert bag_vector[1] == 2
+
 

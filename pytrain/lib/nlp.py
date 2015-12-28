@@ -5,21 +5,21 @@
 #
 
 
-def do_split2word_str(arg):
+def switch_split2words_str(arg):
     return arg.split()
 
 
-def do_split2word_list(arg):
+def switch_split2words_list(arg):
     res = []
     for item in arg:
         res.append(item.split())
     return res
 
 
-def split2word(arg):
+def split2words(arg):
     switch = {\
-        'str':do_split2word_str,\
-        'list':do_split2word_list\
+        'str':switch_split2words_str,\
+        'list':switch_split2words_list\
     }
     return switch[str(type(arg).__name__)](arg)
 
@@ -27,17 +27,22 @@ def split2word(arg):
 def split2sentence(text):
     return text.split('\n')
 
-
 def extract_vocabulary(documents):
     vocabulary = set([])
     for doc in documents:
-        vocabulary = vocabulary | set(split2word(doc))
+        vocabulary = vocabulary | set(split2words(doc))
     return list(vocabulary)
 
-
-def sentence2vector(vocabulary, sentence):
+def set_of_words2vector(vocabulary, sentence):
     voca_vector = [0] * len(vocabulary)
-    for word in split2word(sentence):
+    for word in split2words(sentence):
         if word in vocabulary:
             voca_vector[vocabulary.index(word)] = 1
+    return voca_vector
+
+def bag_of_words2vector(vocabulary, sentence):
+    voca_vector = [0] * len(vocabulary)
+    for word in split2words(sentence):
+        if word in vocabulary:
+            voca_vector[vocabulary.index(word)] += 1
     return voca_vector

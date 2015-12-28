@@ -34,4 +34,5 @@ test_DecisionTree_lense(logging = False).process()
 
 # Test NaiveBayes
 test_NaiveBayes(logging = False).process()
+test_NaiveBayes_email(logging = True).process()
 

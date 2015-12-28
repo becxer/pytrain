@@ -30,7 +30,7 @@ class test_NaiveBayes(test_Suite):
         voca = nlp.extract_vocabulary(sample_docs)
         docs_vector = []
         for doc in sample_docs:
-            docs_vector.append(nlp.sentence2vector(voca, doc))
+            docs_vector.append(nlp.set_of_words2vector(voca, doc))
 
         self.tlog(voca)
         self.tlog(docs_vector)
@@ -42,7 +42,7 @@ class test_NaiveBayes(test_Suite):
 
         trg = "this is virus mail"
         self.tlog(trg)
-        trg_vec = nlp.sentence2vector(voca, trg)
+        trg_vec = nlp.set_of_words2vector(voca, trg)
         self.tlog(trg_vec)
         
         result = nbayes.predict(trg_vec)
@@ -50,9 +50,9 @@ class test_NaiveBayes(test_Suite):
 
         assert result == 'spam'
 
-        trg2 = "I love you"
+        trg2 = "I love you love"
         self.tlog(trg2)
-        trg2_vec = nlp.sentence2vector(voca, trg2)
+        trg2_vec = nlp.bag_of_words2vector(voca, trg2)
         self.tlog(trg2_vec)
 
         result2 = nbayes.predict(trg2_vec)
@@ -61,6 +61,19 @@ class test_NaiveBayes(test_Suite):
         assert result2 == 'spam'
 
 
+class test_NaiveBayes_email(test_Suite):
+
+    def __init__(self, logging =  True):
+        test_Suite.__init__(self,logging)
+
+    def test_process(self):
 
 
-  
+
+        assert 1 == 0
+
+        pass
+
+
+
+
