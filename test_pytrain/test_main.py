@@ -11,7 +11,7 @@ from test_Tree import *
 from test_NaiveBayes import *
 
 # test fs lib
-test_fs(logging = False).process()
+test_fs(logging = True).process()
 
 # test normalize lib
 test_normalize(logging = False).process()

@@ -30,7 +30,9 @@ def split2sentence(text):
 def extract_vocabulary(documents):
     vocabulary = set([])
     for doc in documents:
-        vocabulary = vocabulary | set(split2words(doc))
+        if str(type(doc).__name__) == 'str':
+            doc = split2words(doc)
+        vocabulary = vocabulary | set(doc)
     return list(vocabulary)
 
 def set_of_words2vector(vocabulary, sentence):

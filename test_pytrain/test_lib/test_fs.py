@@ -15,7 +15,7 @@ class test_fs(test_Suite):
     def test_process(self):
         sample_data = "sample_data/dating/date_info.txt"
 
-        self.tlog("loading => " + sample_data)
+        self.tlog("loading matrix => " + sample_data)
 
         dmat_train, dlabel_train, dmat_test, dlabel_test \
             = fs.f2mat(sample_data, 0.1)
@@ -28,5 +28,21 @@ class test_fs(test_Suite):
         self.set_global_value('dlabel_train',dlabel_train)
         self.set_global_value('dmat_test',dmat_test)
         self.set_global_value('dlabel_test',dlabel_test)
+
+        sample_words = "sample_data/email/email_word.txt"
+        
+        self.tlog("loading words => " + sample_words)
+
+        wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
+                = fs.f2wordmat(sample_words, 0.1)
+
+        print "vocabulary"
+        print voca[:4]
+        print "wordmat"
+        print wordmat_train[:2]
+        print "wordlabel"
+        print wordlabel_train[:2]
+
+        print "This Matrix should be wordvector"
 
 

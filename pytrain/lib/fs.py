@@ -8,6 +8,7 @@ from numpy import *
 import operator
 import math
 import sys
+from pytrain.lib import nlp
 
 
 # convert file which format is
@@ -44,6 +45,37 @@ def f2mat(filename, ho_ratio):
     else :
         return mat_train, label_train, mat_test, label_test
 
+def f2wordmat(filename, ho_ratio):
+    fr = open(filename)
+    lines = fr.readlines()
+    print lines
+    mat_train = []
+    mat_test = [] 
+    label_train = []
+    label_test = []
+
+    train_index = 0
+    test_index = 0
+    split_index = 0
+    if ho_ratio != 0:
+        split_index = 1.0 / ho_ratio
+    for line in lines:
+        line = line.strip()
+        list_from_line = line.split('\t')
+        if ho_ratio == 0 or (train_index + test_index) % split_index != 0 :
+            mat_train.append(list_from_line[1:])
+            label_train.append(list_from_line[0])
+            train_index += 1
+        else :
+            mat_test.append(list_from_line[1:])
+            label_test.append(list_from_line[0])
+            test_index += 1
+
+    vocabulary = nlp.extract_vocabulary(mat_train)
+    if ho_ratio == 0:
+        return mat_train,label_train, vocabulary
+    else :
+        return mat_train, label_train, vocabulary, mat_test, label_test
 
 # saving module to file
 def store_module(module, filename):

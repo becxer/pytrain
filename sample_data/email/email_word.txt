@@ -1,0 +1,4 @@
+spam	hello	this	is	spam
+ham	did	you	eat	ham	it's	very	nice
+spam	what	the	hell	out	there
+ham	where	do	you	come	from
