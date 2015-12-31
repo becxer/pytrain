@@ -34,15 +34,9 @@ class test_fs(test_Suite):
         self.tlog("loading words => " + sample_words)
 
         wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
-                = fs.f2set_of_wordmat(sample_words, 0.1)
+                = fs.f2bag_of_wordmat(sample_words, 0.1)
 
-        print "vocabulary"
-        print voca
-        print "wordmat"
-        print wordmat_train
-        print "wordlabel"
-        print wordlabel_train
-
-        print "This Matrix should be wordvector"
-
+        assert len(voca) == 20
+        assert len(wordmat_train) == 4
+        assert len(wordlabel_train) == 4
 

@@ -66,6 +66,30 @@ def f2set_of_wordmat(filename, ho_ratio):
     else :
         return mat_train, label_train, vocabulary, mat_test, label_test
 
+
+def f2bag_of_wordmat(filename, ho_ratio):
+    wmat = f2mat(filename, ho_ratio)
+    wmat_train, label_train  = wmat[:2]
+
+    mat_train = []
+    mat_test = []
+
+    vocabulary = nlp.extract_vocabulary(wmat_train)
+
+    for row in wmat_train:
+        mat_train.append(nlp.bag_of_words2vector(vocabulary, row))
+
+    if len(wmat) > 2 and ho_ratio != 0:
+        wmat_test, label_test = wmat[2:4]
+        for row in wmat_test:
+            mat_test.append(nlp.bag_of_words2vector(vocabulary, row))
+
+    if ho_ratio == 0:
+        return mat_train,label_train, vocabulary
+    else :
+        return mat_train, label_train, vocabulary, mat_test, label_test
+
+
 # saving module to file
 def store_module(module, filename):
     import pickle

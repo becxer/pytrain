@@ -7,6 +7,8 @@
 from test_pytrain import test_Suite
 from pytrain.NaiveBayes import NaiveBayes
 from pytrain.lib import nlp
+from pytrain.lib import fs
+from pytrain.lib import batch
 
 
 class test_NaiveBayes(test_Suite):
@@ -67,13 +69,21 @@ class test_NaiveBayes_email(test_Suite):
         test_Suite.__init__(self,logging)
 
     def test_process(self):
+        email_data_file = "sample_data/email/email_word.txt"
 
+        emailmat_train, emaillabel_train, voca, emailmat_test, emaillabel_test \
+                = fs.f2bag_of_wordmat(email_data_file, 0.1)
 
+        print voca
+        print emailmat_train
+        print emaillabel_train
 
-        assert 1 == 0
+        print emailmat_test
+        print emaillabel_test
+        
+        email_nbayes = NaiveBayes(emailmat_train, emaillabel_train)
+        email_nbayes.fit()
 
-        pass
-
-
+        error_rate = batch.eval_predict(email_nbayes, emailmat_test, emaillabel_test, True)
 
 
