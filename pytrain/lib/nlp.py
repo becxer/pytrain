@@ -37,14 +37,18 @@ def extract_vocabulary(documents):
 
 def set_of_words2vector(vocabulary, sentence):
     voca_vector = [0] * len(vocabulary)
-    for word in split2words(sentence):
+    if str(type(sentence).__name__) == 'str':
+        sentence = split2words(sentence)
+    for word in sentence:
         if word in vocabulary:
             voca_vector[vocabulary.index(word)] = 1
     return voca_vector
 
 def bag_of_words2vector(vocabulary, sentence):
     voca_vector = [0] * len(vocabulary)
-    for word in split2words(sentence):
+    if str(type(sentence).__name__) == 'str':
+        sentence = split2words(sentence)
+    for word in sentence:
         if word in vocabulary:
             voca_vector[vocabulary.index(word)] += 1
     return voca_vector

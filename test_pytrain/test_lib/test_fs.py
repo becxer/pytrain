@@ -34,14 +34,14 @@ class test_fs(test_Suite):
         self.tlog("loading words => " + sample_words)
 
         wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
-                = fs.f2wordmat(sample_words, 0.1)
+                = fs.f2set_of_wordmat(sample_words, 0.1)
 
         print "vocabulary"
-        print voca[:4]
+        print voca
         print "wordmat"
-        print wordmat_train[:2]
+        print wordmat_train
         print "wordlabel"
-        print wordlabel_train[:2]
+        print wordlabel_train
 
         print "This Matrix should be wordvector"
 

@@ -19,7 +19,6 @@ from pytrain.lib import nlp
 def f2mat(filename, ho_ratio):
     fr = open(filename)
     lines = fr.readlines()
-    col_max = len(lines[0].strip().split('\t'))
     mat_train = []
     mat_test = [] 
     label_train = []
@@ -33,36 +32,6 @@ def f2mat(filename, ho_ratio):
         line = line.strip()
         list_from_line = line.split('\t')
         if ho_ratio == 0 or (train_index + test_index) % split_index != 0 :
-            mat_train.append(list_from_line[1:col_max])
-            label_train.append(list_from_line[0])
-            train_index += 1
-        else :
-            mat_test.append(list_from_line[1:col_max])
-            label_test.append(list_from_line[0])
-            test_index += 1
-    if ho_ratio == 0:
-        return mat_train,label_train
-    else :
-        return mat_train, label_train, mat_test, label_test
-
-def f2wordmat(filename, ho_ratio):
-    fr = open(filename)
-    lines = fr.readlines()
-    print lines
-    mat_train = []
-    mat_test = [] 
-    label_train = []
-    label_test = []
-
-    train_index = 0
-    test_index = 0
-    split_index = 0
-    if ho_ratio != 0:
-        split_index = 1.0 / ho_ratio
-    for line in lines:
-        line = line.strip()
-        list_from_line = line.split('\t')
-        if ho_ratio == 0 or (train_index + test_index) % split_index != 0 :
             mat_train.append(list_from_line[1:])
             label_train.append(list_from_line[0])
             train_index += 1
@@ -70,8 +39,28 @@ def f2wordmat(filename, ho_ratio):
             mat_test.append(list_from_line[1:])
             label_test.append(list_from_line[0])
             test_index += 1
+    if ho_ratio == 0:
+        return mat_train,label_train
+    else :
+        return mat_train, label_train, mat_test, label_test
 
-    vocabulary = nlp.extract_vocabulary(mat_train)
+def f2set_of_wordmat(filename, ho_ratio):
+    wmat = f2mat(filename, ho_ratio)
+    wmat_train, label_train  = wmat[:2]
+
+    mat_train = []
+    mat_test = []
+    
+    vocabulary = nlp.extract_vocabulary(wmat_train)
+    
+    for row in wmat_train:
+        mat_train.append(nlp.set_of_words2vector(vocabulary, row))
+
+    if len(wmat) > 2 and ho_ratio != 0:
+        wmat_test, label_test = wmat[2:4]
+        for row in wmat_test:
+            mat_test.append(nlp.set_of_words2vector(vocabulary, row))
+
     if ho_ratio == 0:
         return mat_train,label_train, vocabulary
     else :
