@@ -7,9 +7,11 @@ import re
 
 ENG_STOPWORDS = ["a","the","this"]
 
+
 def switch_split2words_str(arg, stopwords):
     res = re.compile("([\w][\w]*'?\w?)").findall(arg)
     return res
+
 
 def switch_split2words_list(arg, stopwords):
     res = []
@@ -18,6 +20,7 @@ def switch_split2words_list(arg, stopwords):
             res.append(split2words(item, stopwords))
     return res
 
+
 def split2words(arg, stopwords):
     switch = {\
         'str':switch_split2words_str,\
@@ -25,9 +28,11 @@ def split2words(arg, stopwords):
     }
     return switch[str(type(arg).__name__)](arg, stopwords)
 
+
 def split2sentence(text):
     # Need to improve sentence split algorithm
     return text.split('\n')
+
 
 def extract_vocabulary(documents, stopwords):
     vocabulary = set([])
@@ -37,6 +42,7 @@ def extract_vocabulary(documents, stopwords):
         vocabulary = vocabulary | set(doc)
     return list(vocabulary)
 
+
 def set_of_words2vector(vocabulary, sentence, stopwords):
     voca_vector = [0] * len(vocabulary)
     if str(type(sentence).__name__) == 'str':
@@ -45,6 +51,7 @@ def set_of_words2vector(vocabulary, sentence, stopwords):
         if word in vocabulary:
             voca_vector[vocabulary.index(word)] = 1
     return voca_vector
+
 
 def bag_of_words2vector(vocabulary, sentence, stopwords):
     voca_vector = [0] * len(vocabulary)

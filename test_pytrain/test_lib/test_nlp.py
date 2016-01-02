@@ -17,7 +17,7 @@ class test_nlp(test_Suite):
     def test_nlp_split(self):
         sentence = "hello this is virus mail"
         text = "one sentence\ntwo sentence\nthree sentence"
-        stopwords = ["this","is","a","the"]
+        stopwords = ["this", "is", "a", "the"]
 
         words = nlp.split2words(sentence, stopwords)
         words_text = nlp.split2words(text, stopwords)
@@ -33,7 +33,6 @@ class test_nlp(test_Suite):
         assert words_text[2] == "two"
         assert len(words_text) == 6
 
-
     def test_nlp_extract_vocabulary(self):
         docs = [\
             "Just try to enjoy it :).",\
@@ -41,25 +40,18 @@ class test_nlp(test_Suite):
             "What is your problem? you look so bad."\
         ]
 
-        stopwords = ["It's","you","your","me","to"]
-
-        self.voca = nlp.extract_vocabulary(docs,stopwords)
+        self.voca = nlp.extract_vocabulary(docs, nlp.ENG_STOPWORDS)
         self.tlog(self.voca)
-        assert len(self.voca) == 21
-
+        assert len(self.voca) == 18
 
     def test_words2vector(self):
-        
-        input_txt = "a1 g e f aa"
-        set_vector = nlp.set_of_words2vector(self.voca, input_txt)
+        input_txt = "try to do this one"
+        set_vector = nlp.set_of_words2vector(self.voca, input_txt, nlp.ENG_STOPWORDS)
         self.tlog(set_vector)
-        assert set_vector[1] == 1
         
-        input_txt2 = "a1 g e f aa a1"
-        bag_vector = nlp.bag_of_words2vector(self.voca, input_txt2)
-        
+        input_txt2 = "It's your problem"
+        bag_vector = nlp.bag_of_words2vector(self.voca, input_txt2, nlp.ENG_STOPWORDS)
         self.tlog(bag_vector)
-        assert bag_vector[1] == 2
 
     def test_process(self):
         self.test_nlp_split()

@@ -39,9 +39,7 @@ class NaiveBayes:
         self.cate_map = array(self.cate_count.keys())
         self.cate_count = array(self.cate_count.values())
 
-
     def predict(self, array_input):
-        
         inprod_cate_word = self.cate_word_vector * tile(array_input,(self.num_cate,1))
         logged_inprod_cate_word = array(map(lambda words : \
                 map( lambda wc: log(wc+1) , words) , inprod_cate_word))
