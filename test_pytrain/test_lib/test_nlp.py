@@ -17,9 +17,10 @@ class test_nlp(test_Suite):
     def test_nlp_split(self):
         sentence = "hello this is virus mail"
         text = "one sentence\ntwo sentence\nthree sentence"
+        stopwords = ["this","is","a","the"]
 
-        words = nlp.split2words(sentence)
-        words_text = nlp.split2words(text)
+        words = nlp.split2words(sentence, stopwords)
+        words_text = nlp.split2words(text, stopwords)
         split_sentence = nlp.split2sentence(text)
 
         self.tlog(words)
@@ -40,7 +41,9 @@ class test_nlp(test_Suite):
             "What is your problem? you look so bad."\
         ]
 
-        self.voca = nlp.extract_vocabulary(docs)
+        stopwords = ["It's","you","your","me","to"]
+
+        self.voca = nlp.extract_vocabulary(docs,stopwords)
         self.tlog(self.voca)
         assert len(self.voca) == 21
 
@@ -54,6 +57,7 @@ class test_nlp(test_Suite):
         
         input_txt2 = "a1 g e f aa a1"
         bag_vector = nlp.bag_of_words2vector(self.voca, input_txt2)
+        
         self.tlog(bag_vector)
         assert bag_vector[1] == 2
 

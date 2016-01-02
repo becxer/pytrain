@@ -6,6 +6,7 @@
 #
 from test_pytrain import test_Suite
 from pytrain.lib import fs
+from pytrain.lib import nlp
 
 class test_fs(test_Suite):
 
@@ -34,7 +35,7 @@ class test_fs(test_Suite):
         self.tlog("loading words => " + sample_words)
 
         wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
-                = fs.f2bag_of_wordmat(sample_words, 0.1)
+                = fs.f2wordmat(sample_words, 0.1, nlp.bag_of_words2vector,nlp.ENG_STOPWORDS)
 
         assert len(voca) == 20
         assert len(wordmat_train) == 4

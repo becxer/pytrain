@@ -29,10 +29,10 @@ class test_NaiveBayes(test_Suite):
         docs_label =\
                 ['spam','real','spam','real','spam','real']
 
-        voca = nlp.extract_vocabulary(sample_docs)
+        voca = nlp.extract_vocabulary(sample_docs,nlp.ENG_STOPWORDS)
         docs_vector = []
         for doc in sample_docs:
-            docs_vector.append(nlp.set_of_words2vector(voca, doc))
+            docs_vector.append(nlp.set_of_words2vector(voca, doc, nlp.ENG_STOPWORDS))
 
         self.tlog(voca)
         self.tlog(docs_vector)
@@ -44,7 +44,7 @@ class test_NaiveBayes(test_Suite):
 
         trg = "this is virus mail"
         self.tlog(trg)
-        trg_vec = nlp.set_of_words2vector(voca, trg)
+        trg_vec = nlp.set_of_words2vector(voca, trg, nlp.ENG_STOPWORDS)
         self.tlog(trg_vec)
         
         result = nbayes.predict(trg_vec)
@@ -54,7 +54,7 @@ class test_NaiveBayes(test_Suite):
 
         trg2 = "I love you love"
         self.tlog(trg2)
-        trg2_vec = nlp.bag_of_words2vector(voca, trg2)
+        trg2_vec = nlp.bag_of_words2vector(voca, trg2, nlp.ENG_STOPWORDS)
         self.tlog(trg2_vec)
 
         result2 = nbayes.predict(trg2_vec)
@@ -72,7 +72,7 @@ class test_NaiveBayes_email(test_Suite):
         email_data_file = "sample_data/email/email_word.txt"
 
         emailmat_train, emaillabel_train, voca, emailmat_test, emaillabel_test \
-                = fs.f2bag_of_wordmat(email_data_file, 0.1)
+                = fs.f2wordmat(email_data_file, 0.1, nlp.bag_of_words2vector, nlp.ENG_STOPWORDS)
 
         print voca
         print emailmat_train
@@ -84,6 +84,6 @@ class test_NaiveBayes_email(test_Suite):
         email_nbayes = NaiveBayes(emailmat_train, emaillabel_train)
         email_nbayes.fit()
 
-        error_rate = batch.eval_predict(email_nbayes, emailmat_test, emaillabel_test, True)
+        error_rate = batch.eval_predict(email_nbayes, emailmat_test, emaillabel_test, False)
 
 
