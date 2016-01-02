@@ -12,9 +12,8 @@ class test_fs(test_Suite):
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
 
-    def test_process(self):
+    def test_fs_f2mat(self):
         sample_data = "sample_data/dating/date_info.txt"
-
         self.tlog("loading matrix => " + sample_data)
 
         dmat_train, dlabel_train, dmat_test, dlabel_test \
@@ -29,8 +28,9 @@ class test_fs(test_Suite):
         self.set_global_value('dmat_test',dmat_test)
         self.set_global_value('dlabel_test',dlabel_test)
 
+
+    def test_fs_f2wordmat(self):
         sample_words = "sample_data/email/email_word.txt"
-        
         self.tlog("loading words => " + sample_words)
 
         wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
@@ -39,4 +39,11 @@ class test_fs(test_Suite):
         assert len(voca) == 20
         assert len(wordmat_train) == 4
         assert len(wordlabel_train) == 4
+
+
+    def test_process(self):
+        self.test_fs_f2mat()
+        self.test_fs_f2wordmat()
+
+        # To see test of storing module, check test_decision_tree
 

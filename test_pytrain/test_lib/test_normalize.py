@@ -12,7 +12,7 @@ class test_normalize(test_Suite):
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
 
-    def test_process(self):
+    def test_normalize_quantile(self):
         dmat_train = self.get_global_value('dmat_train')
         dmat_test = self.get_global_value('dmat_test')
         
@@ -24,5 +24,11 @@ class test_normalize(test_Suite):
         assert len(normed_dmat_train) == 900
         assert len(normed_dmat_test) == 100
 
+        assert normed_dmat_train[0][0] <= 1.0 and \
+                normed_dmat_train[0][0] >= 0.0
+
         self.set_global_value('normed_dmat_train',normed_dmat_train)
         self.set_global_value('normed_dmat_test',normed_dmat_test)
+
+    def test_process(self):
+        self.test_normalize_quantile()

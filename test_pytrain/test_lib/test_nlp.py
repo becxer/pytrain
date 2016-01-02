@@ -9,10 +9,12 @@ from pytrain.lib import nlp
 
 class test_nlp(test_Suite):
 
+    voca = []
+
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
 
-    def test_process(self):
+    def test_nlp_split(self):
         sentence = "hello this is virus mail"
         text = "one sentence\ntwo sentence\nthree sentence"
 
@@ -30,28 +32,32 @@ class test_nlp(test_Suite):
         assert words_text[2] == "two"
         assert len(words_text) == 6
 
+
+    def test_nlp_extract_vocabulary(self):
         docs = [\
-            "a b c d e f g h i j",\
-            "a1 b1 c1 a b abcd a b c a2",\
-            "1 2 3 4 5 6 a b c d e f g"\
+            "Just try to enjoy it :).",\
+            "It's very important for me!",\
+            "What is your problem? you look so bad."\
         ]
 
-        voca = nlp.extract_vocabulary(docs)
-        self.tlog(voca)
-        assert len(voca) == 21
+        self.voca = nlp.extract_vocabulary(docs)
+        self.tlog(self.voca)
+        assert len(self.voca) == 21
 
-        # testing set of words2vector
 
+    def test_words2vector(self):
+        
         input_txt = "a1 g e f aa"
-        set_vector = nlp.set_of_words2vector(voca, input_txt)
+        set_vector = nlp.set_of_words2vector(self.voca, input_txt)
         self.tlog(set_vector)
         assert set_vector[1] == 1
-
-        # testing bag of words2vector
-
+        
         input_txt2 = "a1 g e f aa a1"
-        bag_vector = nlp.bag_of_words2vector(voca, input_txt2)
+        bag_vector = nlp.bag_of_words2vector(self.voca, input_txt2)
         self.tlog(bag_vector)
         assert bag_vector[1] == 2
 
-
+    def test_process(self):
+        self.test_nlp_split()
+        self.test_nlp_extract_vocabulary()
+        self.test_words2vector()

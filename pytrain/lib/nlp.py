@@ -5,6 +5,7 @@
 #
 
 
+
 def switch_split2words_str(arg):
     return arg.split()
 
