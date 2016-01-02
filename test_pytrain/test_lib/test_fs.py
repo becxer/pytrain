@@ -34,10 +34,12 @@ class test_fs(test_Suite):
         sample_words = "sample_data/email/email_word.txt"
         self.tlog("loading words => " + sample_words)
 
-        wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
-                = fs.f2wordmat(sample_words, 0.1, nlp.bag_of_words2vector,nlp.ENG_STOPWORDS)
 
-        assert len(voca) == 20
+        nlp_eng = nlp("eng")
+        wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
+                = fs.f2wordmat(sample_words, 0.1, nlp_eng)
+
+        assert len(voca) == 7
         assert len(wordmat_train) == 4
         assert len(wordlabel_train) == 4
 

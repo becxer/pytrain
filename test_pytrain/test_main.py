@@ -20,8 +20,7 @@ test_normalize(logging = False).process()
 test_batch(logging = False).process()
 
 # test nlp lib
-test_nlp(logging = True).process()
-
+test_nlp(logging = False).process()
 
 # test KNN
 test_KNN(logging = False).process()
