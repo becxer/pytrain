@@ -47,6 +47,5 @@ class test_fs(test_Suite):
     def test_process(self):
         self.test_fs_f2mat()
         self.test_fs_f2wordmat()
-
         # To see test of storing module, check test_decision_tree
 

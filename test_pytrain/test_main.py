@@ -9,6 +9,7 @@ from test_lib import *
 from test_KNN import *
 from test_DecisionTree import *
 from test_NaiveBayes import *
+from test_LogisticRegression import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -34,4 +35,10 @@ test_DecisionTree_lense(logging = False).process()
 # Test NaiveBayes
 test_NaiveBayes(logging = False).process()
 test_NaiveBayes_email(logging = False).process()
+
+# Test GaussianNaiveBayes
+test_GaussianNaiveBayes(logging = True).process()
+
+# Test LogisticRegression
+test_LogisticRegression(logging = True).process()
 

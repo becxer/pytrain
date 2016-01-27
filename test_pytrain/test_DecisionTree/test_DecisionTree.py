@@ -16,16 +16,20 @@ class test_DecisionTree(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        sample_mat = [[7,8,8],[8,7,8],[8,8,8],[8,8,8],[8,7,7],[7,7,8],[7,7,7],[7,8,7],[8,8,8]]
-        sample_label = ['yes',  'yes',  'yes', 'no',  'no',  'yes',   'no',   'no', 'no']
+        
+        sample_mat = [['a','b','b'],['b','a','b'],['b','b','b'],\
+                ['b','b','b'],['b','a','a'],['a','a','b'],\
+                ['a','a','a'],['a','b','a'],['b','b','b']]
+        
+        sample_label = ['yes',  'yes',  'yes',\
+                'no',  'no',  'yes',\
+                'no',   'no', 'no']
         
         tree = DecisionTree(sample_mat, sample_label)
         self.tlog("tree fit : " + str(tree.fit()))
         
-        f1 = tree.predict([8,8,8])
-        self.tlog("tree predict : " + str(f1))
-
-        assert f1 == 'no' 
+        r1 = batch.eval_predict_one(tree, ['b','b','b'], 'no', self.logging)
+        assert r1 == True 
 
         self.set_global_value('DecisionTree', tree)
 
@@ -37,17 +41,16 @@ class test_DecisionTree_store(test_Suite):
 
     def test_process(self):
         tree = self.get_global_value("DecisionTree")
-        tmp_store_name = "tmp/tree_878_store_test.dat"
+        tmp_store_name = "tmp/tree_aba_store_test.dat"
 
         self.tlog("store tree to " + tmp_store_name)
         fs.store_module(tree,tmp_store_name)
         mod = fs.restore_module(tmp_store_name)
         
         self.tlog("restored tree : " + str(mod.tree))
-        mod_res = mod.predict([8,8,7])
-        self.tlog("restored tree predict : " + str(mod_res))
+        mod_r1 = batch.eval_predict_one(mod, ['b','b','a'], 'no', self.logging)
         
-        assert mod_res == 'no'
+        assert mod_r1 == True
 
 
 class test_DecisionTree_lense(test_Suite):
@@ -60,8 +63,6 @@ class test_DecisionTree_lense(test_Suite):
                                     fs.f2mat("sample_data/lense/lense.txt", 0.3)
         dtree_lense = DecisionTree(lense_mat_train,lense_label_train)
         dtree_lense.fit()
-        error_rate = batch.eval_predict(dtree_lense, lense_mat_test, lense_label_test, False)
+        error_rate = batch.eval_predict(dtree_lense, lense_mat_test, lense_label_test, self.logging)
         self.tlog("lense predict (with decision tree) error rate : " +str(error_rate))
-        
-        assert error_rate <= 0.3
         
