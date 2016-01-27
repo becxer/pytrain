@@ -9,6 +9,8 @@ from numpy import *
 
 class NaiveBayes:
 
+    # cate (category) : label
+    # word : mat (matrix)
     def __init__(self, mat_data, label_data):
         self.word_data = mat_data
         self.num_word = 0
@@ -21,7 +23,8 @@ class NaiveBayes:
         
         self.cate_word_vector = {}
         self.cate_word_vector_sum = {}
-
+    
+    # prepare matrix of category word count
     def fit(self):
         self.num_word = len(self.word_data[0])
         for i, cate in enumerate(self.cate_data):
@@ -39,6 +42,8 @@ class NaiveBayes:
         self.cate_map = array(self.cate_count.keys())
         self.cate_count = array(self.cate_count.values())
 
+
+    # array_input is possibilities of words
     def predict(self, array_input):
         inprod_cate_word = self.cate_word_vector * tile(array_input,(self.num_cate,1))
         logged_inprod_cate_word = array(map(lambda words : \

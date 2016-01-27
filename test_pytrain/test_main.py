@@ -7,7 +7,7 @@
 
 from test_lib import *
 from test_KNN import *
-from test_Tree import *
+from test_DecisionTree import *
 from test_NaiveBayes import *
 
 # test fs lib

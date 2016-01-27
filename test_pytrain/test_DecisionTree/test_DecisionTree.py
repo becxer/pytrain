@@ -5,7 +5,7 @@
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_Suite
-from pytrain.Tree import DecisionTree
+from pytrain.DecisionTree import DecisionTree
 from pytrain.lib import fs
 from pytrain.lib import batch
 

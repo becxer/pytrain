@@ -34,7 +34,7 @@ class test_NaiveBayes(test_Suite):
         voca = nlp_eng.extract_vocabulary(sample_docs)
         docs_vector = []
         for doc in sample_docs:
-            docs_vector.append(nlp_eng.set_of_words2vector(voca, doc))
+            docs_vector.append(nlp_eng.bag_of_words2vector(voca, doc))
 
         self.tlog(voca)
         self.tlog(docs_vector)
