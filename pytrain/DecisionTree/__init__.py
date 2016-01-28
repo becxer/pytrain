@@ -1,1 +1,1 @@
-from DecisionTree import *
+from DecisionTreeID3 import *

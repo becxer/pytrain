@@ -10,7 +10,7 @@ from math import log
 import operator
 
 
-class DecisionTree:
+class DecisionTreeID3:
     def __init__(self, mat_data, label_data):
         self.mat_data = mat_data
         self.label_data = label_data
@@ -62,7 +62,7 @@ class DecisionTree:
         best_col_index = self.choose_col_to_split(mat_data, label_data)
         tree = {best_col_index:{}}
         best_col = [row[best_col_index] for row in mat_data]
-        uniq_val = set(best_col)
+        uniq_val = list(set(best_col)) + [None]
         for val in uniq_val:
             split_mat, split_label = self.split_data(\
                                 mat_data, label_data, best_col_index, val)
@@ -74,7 +74,7 @@ class DecisionTree:
         ret_data = []
         ret_label = []
         for index, row in enumerate(mat_data):
-            if row[axis] == split_value:
+            if row[axis] == split_value or split_value == None:
                 temp = row[:axis]
                 temp.extend(row[axis+1:])
                 ret_data.append(temp)

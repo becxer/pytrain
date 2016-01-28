@@ -5,7 +5,7 @@
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_Suite
-from pytrain.LogisticRegression import LogisticRegression
+from pytrain.Regression import LogisticRegression
 from pytrain.lib import fs
 from pytrain.lib import batch
 

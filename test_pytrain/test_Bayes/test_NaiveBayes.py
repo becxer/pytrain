@@ -5,7 +5,7 @@
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_Suite
-from pytrain.NaiveBayes import NaiveBayes
+from pytrain.Bayes import NaiveBayes
 from pytrain.lib import nlp
 from pytrain.lib import fs
 from pytrain.lib import batch

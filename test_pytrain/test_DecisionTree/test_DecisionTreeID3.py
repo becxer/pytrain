@@ -5,12 +5,12 @@
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_Suite
-from pytrain.DecisionTree import DecisionTree
+from pytrain.DecisionTree import DecisionTreeID3
 from pytrain.lib import fs
 from pytrain.lib import batch
 
 
-class test_DecisionTree(test_Suite):
+class test_DecisionTreeID3(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
@@ -25,7 +25,7 @@ class test_DecisionTree(test_Suite):
                 'no',  'no',  'yes',\
                 'no',   'no', 'no']
         
-        tree = DecisionTree(sample_mat, sample_label)
+        tree = DecisionTreeID3(sample_mat, sample_label)
         self.tlog("tree fit : " + str(tree.fit()))
         
         r1 = batch.eval_predict_one(tree, ['b','b','b'], 'no', self.logging)
@@ -34,7 +34,7 @@ class test_DecisionTree(test_Suite):
         self.set_global_value('DecisionTree', tree)
 
 
-class test_DecisionTree_store(test_Suite):
+class test_DecisionTreeID3_store(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
@@ -53,7 +53,7 @@ class test_DecisionTree_store(test_Suite):
         assert mod_r1 == True
 
 
-class test_DecisionTree_lense(test_Suite):
+class test_DecisionTreeID3_lense(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
@@ -61,8 +61,9 @@ class test_DecisionTree_lense(test_Suite):
     def test_process(self):
         lense_mat_train, lense_label_train, lense_mat_test, lense_label_test=\
                                     fs.f2mat("sample_data/lense/lense.txt", 0.3)
-        dtree_lense = DecisionTree(lense_mat_train,lense_label_train)
-        dtree_lense.fit()
+        dtree_lense = DecisionTreeID3(lense_mat_train,lense_label_train)
+        tree = dtree_lense.fit()
+        self.tlog(tree)
         error_rate = batch.eval_predict(dtree_lense, lense_mat_test, lense_label_test, self.logging)
         self.tlog("lense predict (with decision tree) error rate : " +str(error_rate))
         
