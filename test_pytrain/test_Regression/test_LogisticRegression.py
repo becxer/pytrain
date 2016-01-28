@@ -15,4 +15,5 @@ class test_LogisticRegression(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
+        assert False
         pass

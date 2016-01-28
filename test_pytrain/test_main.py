@@ -37,7 +37,7 @@ test_NaiveBayes(logging = False).process()
 test_NaiveBayes_email(logging = False).process()
 
 # Test GaussianNaiveBayes
-test_GaussianNaiveBayes(logging = True).process()
+test_GaussianNaiveBayes(logging = False).process()
 
 # Test LogisticRegression
 test_LogisticRegression(logging = False).process()
