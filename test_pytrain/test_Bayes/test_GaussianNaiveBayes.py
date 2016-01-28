@@ -35,4 +35,12 @@ class test_GaussianNaiveBayes(test_Suite):
         error_rate = batch.eval_predict(gnb, test_mat, test_label, self.logging)
         self.tlog("strength of signal predict error rate : " + str(error_rate))
 
+class test_GaussianNaiveBayes_rssi(test_Suite):
 
+    def __init__(self, logging = True):
+        test_Suite.__init__(self, logging)
+
+    def test_process(self):
+        assert False
+        pass
+ 
