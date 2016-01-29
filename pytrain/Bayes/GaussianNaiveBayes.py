@@ -36,7 +36,8 @@ class GaussianNaiveBayes:
         self.label_count_arr = array([self.label_count.values()])
 
         self.mat_mean_arr = array(self.mat_mean.values()) /\
-                tile(self.label_count_arr.T,(1,self.num_label))
+                tile(self.label_count_arr.T,(1,self.col_size))
+        self.mat_mean_arr += finfo(float).eps
 
         for i, label in enumerate(self.label_data):
             self.mat_variance[label] = \
@@ -45,7 +46,8 @@ class GaussianNaiveBayes:
                     - self.mat_mean_arr[self.label_map.index(label)]) ** 2)
 
         self.mat_variance_arr = (array(self.mat_variance.values())\
-                / tile(self.label_count_arr.T,(1,self.num_label))) ** 0.5
+                / tile(self.label_count_arr.T,(1,self.col_size))) ** 0.5
+        self.mat_variance_arr += finfo(float).eps
 
     # Calculate gaussian probability
     #
