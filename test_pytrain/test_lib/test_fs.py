@@ -31,7 +31,7 @@ class test_fs(test_Suite):
 
 
     def test_fs_f2wordmat(self):
-        sample_words = "sample_data/email/email_word.txt"
+        sample_words = "sample_data/email/email_word_small.txt"
         self.tlog("loading words => " + sample_words)
 
 

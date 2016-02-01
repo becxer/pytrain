@@ -10,11 +10,11 @@ from numpy import *
 class LogisticRegression:
 
     def __init__(self, mat_data, label_data):
-        
-        pass
+        self.mat_data = mat_data
+        self.label_data = label_data
     
     def fit(self, lr, epoch):
-
+        
         pass
 
 
