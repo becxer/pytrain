@@ -21,6 +21,9 @@ class DecisionTreeID3:
         self.tree = self.create_tree(self.mat_data,self.label_data)
         return self.tree
 
+    def build(self):
+        return self.fit()
+
     # search array_input in tree
     def predict(self, array_input):
         return self.search_tree(self.tree, array_input)

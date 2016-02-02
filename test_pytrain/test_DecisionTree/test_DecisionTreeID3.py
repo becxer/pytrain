@@ -26,7 +26,7 @@ class test_DecisionTreeID3(test_Suite):
                 'no',   'no', 'no']
         
         tree = DecisionTreeID3(sample_mat, sample_label)
-        self.tlog("tree fit : " + str(tree.fit()))
+        self.tlog("tree build : " + str(tree.build()))
         
         r1 = batch.eval_predict_one(tree, ['b','b','b'], 'no', self.logging)
         assert r1 == True 
@@ -62,7 +62,7 @@ class test_DecisionTreeID3_lense(test_Suite):
         lense_mat_train, lense_label_train, lense_mat_test, lense_label_test=\
                                     fs.f2mat("sample_data/lense/lense.txt", 0.3)
         dtree_lense = DecisionTreeID3(lense_mat_train,lense_label_train)
-        tree = dtree_lense.fit()
+        tree = dtree_lense.build()
         self.tlog(tree)
         error_rate = batch.eval_predict(dtree_lense, lense_mat_test, lense_label_test, self.logging)
         self.tlog("lense predict (with decision tree) error rate : " +str(error_rate))

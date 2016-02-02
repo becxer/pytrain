@@ -1,5 +1,9 @@
 
 ## TODO for developing pytrain ##
 
-+ Add Test of Logistic Regression Module
++ Implement Logistic Regression Module
+
++ Implement Linear Regression Module
+
++ Implement Apriori Module
 
