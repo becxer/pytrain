@@ -10,6 +10,7 @@ from test_KNN import *
 from test_DecisionTree import *
 from test_Bayes import *
 from test_Regression import *
+from test_Apriori import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -42,4 +43,7 @@ test_GaussianNaiveBayes_rssi(logging = False).process()
 
 # Test LogisticRegression
 test_LogisticRegression(logging = True).process()
+
+# Test Apriori
+test_Apriori(logging = True).process()
 
