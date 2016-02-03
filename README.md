@@ -13,6 +13,4 @@ Machine learning library for python
 
     + Logistic regression implement
     + Linear regression implement
-    + Apriori mushroom testcase update
-    
 

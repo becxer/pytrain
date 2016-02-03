@@ -85,14 +85,14 @@ class Apriori:
                 while len(new_itemsets) > 0 :
                     now_itemsets = new_itemsets
                     new_itemsets = []
-                    if len(now_itemsets[0]) < len(itemset):
-                        for toset in now_itemsets:
+                    for toset in now_itemsets:
+                        if len(toset) < len(itemset):
                             fromset = itemset - toset
                             conf = self.support_data[itemset] / self.support_data[fromset]
                             if conf > min_confidence:
                                 res_rules.append((fromset,toset,conf))
                                 new_itemsets.append(toset)
-                        new_itemsets = self.gen_next_itemsets(new_itemsets)
+                    new_itemsets = self.gen_next_itemsets(new_itemsets)
         return res_rules
 
     def get_itemsets(self):

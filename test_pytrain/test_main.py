@@ -41,9 +41,9 @@ test_NaiveBayes_email(logging = False).process()
 test_GaussianNaiveBayes(logging = False).process()
 test_GaussianNaiveBayes_rssi(logging = False).process()
 
+# Test Apriori
+test_Apriori(logging = False).process()
+test_Apriori_mushroom(logging = False).process()
+
 # Test LogisticRegression
 test_LogisticRegression(logging = True).process()
-
-# Test Apriori
-test_Apriori(logging = True).process()
-
