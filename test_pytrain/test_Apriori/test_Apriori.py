@@ -17,13 +17,13 @@ class test_Apriori(test_Suite):
                 [1,2,3,5], [2,5]]
 
         ap = Apriori(data)
-        ap.fit(min_support = 0.5 , min_confidence = 0.5)
+        ap.fit(min_support = 0.5 , min_confidence = 0.7)
         
-        itemsets = ap.get_itemsets()
+        itemsets_list = ap.get_itemsets()
         support_data = ap.get_support_data()
         rules = ap.get_rules()
         
-        self.tlog("itemsets : "+str(itemsets))
+        self.tlog("itemsets list: "+str(itemsets_list))
         self.tlog("support data : " + str(support_data))
         self.tlog("rules : "+str(rules))
 
