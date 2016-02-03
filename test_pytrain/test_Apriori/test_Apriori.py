@@ -17,7 +17,16 @@ class test_Apriori(test_Suite):
                 [1,2,3,5], [2,5]]
 
         ap = Apriori(data)
-        cl,spd = ap.cluster(0.7)
-        self.tlog("cluster :: "+str(cl))
-        self.tlog("support data :: " + str(spd))
+        ap.fit(min_support = 0.5 , min_confidence = 0.5)
+        
+        itemsets = ap.get_itemsets()
+        support_data = ap.get_support_data()
+        rules = ap.get_rules()
+        
+        self.tlog("itemsets : "+str(itemsets))
+        self.tlog("support data : " + str(support_data))
+        self.tlog("rules : "+str(rules))
+
+        rec = ap.recommend([2])
+        self.tlog("recommend with 2 : " + str(rec))
 
