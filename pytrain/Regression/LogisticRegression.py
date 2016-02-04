@@ -6,15 +6,16 @@
 #
 
 from numpy import *
+from pytrain.lib import convert
 import math
 
 class LogisticRegression:
 
     def __init__(self, mat_data, label_data):
         if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = array(mat_data)
+            mat_data = convert.mat2arr(mat_data)
         if label_data.__class__.__name__ != 'ndarray':
-            label_data = array(label_data)
+            label_data = convert.mat2arr(label_data)
         self.mat_data = mat_data
         self.label_data = label_data
         self.out_bit = len(label_data[0])
@@ -77,7 +78,7 @@ class LogisticRegression:
 
     def predict(self, array_input):
         if array_input.__class__.__name__ != 'ndarray':
-            array_input = array(array_input)
+            array_input = convert.list2arr(array_input)
         return map(\
                 lambda x : round(self.sigmoid(x)),\
                 (tile(array_input, (self.out_bit,1)) * self.mat_w).sum(axis=1) \
