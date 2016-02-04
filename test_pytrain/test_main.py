@@ -47,3 +47,4 @@ test_Apriori(logging = False).process()
 
 # Test LogisticRegression
 test_LogisticRegression(logging = True).process()
+test_LogisticRegression_horse(logging = True).process()

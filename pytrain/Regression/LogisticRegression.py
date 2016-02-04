@@ -19,9 +19,9 @@ class LogisticRegression:
         self.mat_data = mat_data
         self.label_data = label_data
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [0.5 for i in range(len(mat_data[0]))] \
+        self.mat_w =  [ [0.8 for i in range(len(mat_data[0]))] \
                         for j in range(self.out_bit) ]
-        self.mat_w0 = [ 0.5 for i in range(self.out_bit) ]
+        self.mat_w0 = [ 0.8 for i in range(self.out_bit) ]
 
     def sigmoid(self, x):
         return 1 / (1 + math.exp(-x)) 

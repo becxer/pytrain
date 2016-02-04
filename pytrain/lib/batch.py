@@ -25,7 +25,8 @@ def eval_predict(p_module, mat_test, label_test, log_on = True):
 
 def eval_predict_one(p_module, input_array_test, label_one_test, log_on = True):
     res = p_module.predict(input_array_test)
-    if log_on : print "predicted : '" + str(res) + "' --- origin : '" \
+    if log_on : print "input : '" + str(input_array_test[:2]) + \
+            "' --> predicted : '" + str(res) + "' --? origin : '" \
                     + str(label_one_test) + "'"
     if res != label_one_test :
         return False

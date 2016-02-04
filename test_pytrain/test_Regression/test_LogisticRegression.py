@@ -33,3 +33,20 @@ class test_LogisticRegression(test_Suite):
         assert r1 == True
         assert r2 == True
         
+class test_LogisticRegression_horse(test_Suite):
+
+    def __init__(self, logging = True):
+        test_Suite.__init__(self, logging)
+
+    def test_process(self):
+        horse_mat_train, horse_label_train = fs.f2mat("sample_data/horse/horseColicTraining_1.txt",0)
+        horse_label_train = [[float(x)] for x in horse_label_train]
+        horse_mat_test, horse_label_test = fs.f2mat("sample_data/horse/horseColicTest_1.txt",0)
+        horse_label_test = [[float(x)] for x in horse_label_test]
+        logis_reg =\
+            LogisticRegression(horse_mat_train, horse_label_train)
+        logis_reg.fit(lr = 0.004, epoch = 100)
+        error_rate = batch.eval_predict(logis_reg,horse_mat_test,horse_label_test,self.logging)
+        self.tlog("horse predict (with logistic regression) error rate :" + str(error_rate))
+        assert False
+        
