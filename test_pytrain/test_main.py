@@ -45,6 +45,6 @@ test_GaussianNaiveBayes_rssi(logging = False).process()
 test_Apriori(logging = False).process()
 # test_Apriori_mushroom(logging = False).process()
 
-# Test LogisticRegression
-test_LogisticRegression(logging = True).process()
-test_LogisticRegression_horse(logging = True).process()
+# Test LinearRegression
+test_LinearRegression(logging = False).process()
+test_LinearRegression_horse(logging = True).process()

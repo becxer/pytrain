@@ -1,1 +1,1 @@
-from LogisticRegression import *
+from LinearRegression import *
