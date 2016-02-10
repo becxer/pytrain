@@ -8,8 +8,3 @@ Machine learning library for python
 
     python test.py
 
-
-### TODO
-
-    + Logistic regression implement
-
