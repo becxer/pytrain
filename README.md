@@ -12,5 +12,4 @@ Machine learning library for python
 ### TODO
 
     + Logistic regression implement
-    + Linear regression implement
 
