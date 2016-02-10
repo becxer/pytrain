@@ -47,4 +47,4 @@ test_Apriori(logging = False).process()
 
 # Test LinearRegression
 test_LinearRegression(logging = False).process()
-test_LinearRegression_horse(logging = True).process()
+test_LinearRegression_horse(logging = False).process()

@@ -6,9 +6,11 @@
 #
 
 from numpy import *
+seterr(all='raise')
 from pytrain.lib import convert
 import math
 import time
+import random
 
 class LinearRegression:
 
@@ -20,9 +22,9 @@ class LinearRegression:
         self.mat_data = mat_data
         self.label_data = label_data
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [0.5 for i in range(len(mat_data[0]))] \
+        self.mat_w =  [ [random.random() for i in range(len(mat_data[0]))] \
                         for j in range(self.out_bit) ]
-        self.mat_w0 = [ 0.5 for i in range(self.out_bit) ]
+        self.mat_w0 = [ random.random() for i in range(self.out_bit) ]
 
     #
     # Description of differential equation
@@ -61,12 +63,19 @@ class LinearRegression:
         self.mat_w[out_bit_index] = w
         self.mat_w0[out_bit_index] = w0
 
-    def fit(self, lr, epoch):
+    def fit(self, lr, epoch, stoc):
         self.lr = lr
         self.epoch = epoch
-        for ep in range(epoch):
-            for i in range(self.out_bit):
-                self.batch_update_w(i, self.mat_data, self.label_data)
+        start = 0
+        end = stoc
+        datalen = len(self.mat_data)
+        while start < datalen :
+            for ep in range(epoch):
+                for i in range(self.out_bit):
+                    self.batch_update_w(i, self.mat_data[start:end],\
+                        self.label_data[start:end])
+            start = end
+            end += stoc
 
     def predict(self, array_input):
         if array_input.__class__.__name__ != 'ndarray':
