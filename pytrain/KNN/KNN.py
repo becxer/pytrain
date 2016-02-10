@@ -2,6 +2,7 @@
 # Basic K-Nearest Neighbors
 #
 # @ author becxer
+# @ reference Machine Learning in Action by Peter Harrington
 # @ e-mail becxer87@gmail.com
 #
 
