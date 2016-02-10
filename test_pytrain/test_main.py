@@ -50,5 +50,5 @@ test_LinearRegression(logging = False).process()
 test_LinearRegression_horse(logging = False).process()
 
 # Test LogicticRegression
-test_LogisticRegression(logging = True).process()
-test_LogisticRegression_horse(logging = True).process()
+test_LogisticRegression(logging = False).process()
+test_LogisticRegression_horse(logging = False).process()

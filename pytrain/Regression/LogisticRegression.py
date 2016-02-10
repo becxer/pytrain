@@ -22,9 +22,9 @@ class LogisticRegression:
         self.mat_data = mat_data
         self.label_data = label_data
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [0.0 for i in range(len(mat_data[0]))] \
+        self.mat_w =  [ [random.random() for i in range(len(mat_data[0]))] \
                         for j in range(self.out_bit) ]
-        self.mat_w0 = [0.0 for i in range(self.out_bit) ]
+        self.mat_w0 = [random.random() for i in range(self.out_bit) ]
 
     def sigmoid(self,k):
         return 1.0 / ( 1.0 + math.exp(-k))
@@ -41,8 +41,8 @@ class LogisticRegression:
     # dsigmoid(k)/dk = (1 - sigmoid(k)) * sigmoid(k)
     # dJ/dw1 = dJ/dsigmoid(k) * dsigmoid(k)/dk * dk/dw1 = 
     #                    - 2 * (y - sigmoid(k1)) * (1 - sigmoid(k1)) * sigmoid(k1) * x1_1
-    #                    - 2 * (y - sigmoid(k2)) * (1 - sigmoid(k2)) * sigmoid(k2) * x1_1
-    #                    - 2 * (y - sigmoid(k3)) * (1 - sigmoid(k3)) * sigmoid(k3) * x1_1
+    #                    - 2 * (y - sigmoid(k2)) * (1 - sigmoid(k2)) * sigmoid(k2) * x1_2
+    #                    - 2 * (y - sigmoid(k3)) * (1 - sigmoid(k3)) * sigmoid(k3) * x1_3
     #                    ...
     # 
     # UPDATE w1 with gradient
@@ -82,7 +82,6 @@ class LogisticRegression:
         datalen = len(self.mat_data)
         while start < datalen :
             for ep in range(epoch):
-                print ep,".",epoch
                 for i in range(self.out_bit):
                     self.batch_update_w(i, self.mat_data[start:end],\
                         self.label_data[start:end])
@@ -92,8 +91,6 @@ class LogisticRegression:
     def predict(self, array_input):
         if array_input.__class__.__name__ != 'ndarray':
             array_input = convert.list2arr(array_input)
-        return map(self.sigmoid,(array_input * self.mat_w).sum(axis=1) \
-                + self.mat_w0)
-        #return map(round,map(self.sigmoid,(array_input * self.mat_w).sum(axis=1) \
-        #        + self.mat_w0))
+        return map(round,map(self.sigmoid,(array_input * self.mat_w).sum(axis=1) \
+                + self.mat_w0))
 
