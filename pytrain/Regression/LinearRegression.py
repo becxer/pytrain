@@ -11,6 +11,7 @@ from pytrain.lib import convert
 import math
 import time
 import random
+import sys
 
 class LinearRegression:
 
@@ -22,9 +23,11 @@ class LinearRegression:
         self.mat_data = mat_data
         self.label_data = label_data
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [random.random() for i in range(len(mat_data[0]))] \
-                        for j in range(self.out_bit) ]
-        self.mat_w0 = [ random.random() for i in range(self.out_bit) ]
+        self.mat_w =  [ [ (random.random() * 0.0000001 + sys.float_info.epsilon)\
+                            for i in range(len(mat_data[0]))] \
+                                for j in range(self.out_bit) ]
+        self.mat_w0 = [ random.random() * 0.0000001 + sys.float_info.epsilon\
+                            for i in range(self.out_bit) ]
 
     #
     # Description of differential equation
