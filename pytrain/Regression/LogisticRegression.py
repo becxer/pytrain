@@ -32,48 +32,17 @@ class LogisticRegression:
     def sigmoid(self,k):
         return 1.0 / ( 1.0 + math.exp(-k))
 
-    def dsigmoid(self,k):
-        return (1.0 - self.sigmoid(k)) * self.sigmoid(k)
-
-    #
-    # Description of differential equation
-    #
-    # k = w0 + w1 x1 + w2 x2 + w3 x3 + .. + wn xn
-    # sigmoid(k) = 1 / ( 1 + e^(-1 * k))
-    # J(k) = (y - sigmoid(k1))^2 + (y - sigmoid(k2))^2 + .. + (y - sigmoid(kn))^2
-    # dsigmoid(k)/dk = (1 - sigmoid(k)) * sigmoid(k)
-    # dJ/dw1 = dJ/dsigmoid(k) * dsigmoid(k)/dk * dk/dw1 = 
-    #                    - 2 * (y - sigmoid(k1)) * (1 - sigmoid(k1)) * sigmoid(k1) * x1_1
-    #                    - 2 * (y - sigmoid(k2)) * (1 - sigmoid(k2)) * sigmoid(k2) * x1_2
-    #                    - 2 * (y - sigmoid(k3)) * (1 - sigmoid(k3)) * sigmoid(k3) * x1_3
-    #                    ...
-    # 
-    # UPDATE w1 with gradient
-    # w1 = w1 - lr * dJ/dw1
-    #
-    # dJ/dw0 = dJ/dk0 * dk0/dw0 = 
-    #                    - 2 * (y - sigmoid(k1)) * (1 - sigmoid(k1)) * sigmoid(k1) * 1
-    #                    - 2 * (y - sigmoid(k2)) * (1 - sigmoid(k2)) * sigmoid(k2) * 1
-    #                    - 2 * (y - sigmoid(k3)) * (1 - sigmoid(k3)) * sigmoid(k3) * 1
-    #                   ...
-    #
-    # w0 = w0 - lr * dJ/w0
-    #
-
     def batch_update_w(self, out_bit_index, data, label):
         w = self.mat_w[out_bit_index]
         w0 = self.mat_w0[out_bit_index]
         tiled_w0 = tile(w0,(len(data)))
         k = (w * data).sum(axis=1) + tiled_w0
         sig_k = map(self.sigmoid,k)
-        dsig_k = map(self.dsigmoid,k)
-        gd = (label.T[out_bit_index] - sig_k) * dsig_k
-        
-        # dJ_dw is gradient of J(w) function
-        dJ_dw = (gd * data.T).sum(axis=1) * -2
-        dJ_dw0  = gd.sum(axis=0) * -2
-        w = w - (dJ_dw * self.lr)
-        w0 = w0 - (dJ_dw0 * self.lr)
+        gd = (label.T[out_bit_index] - sig_k)
+        dw = (gd * data.T).sum(axis=1) * -1
+        dw0  = gd.sum(axis=0) * -1
+        w = w - (dw * self.lr)
+        w0 = w0 - (dw0 * self.lr)
         self.mat_w[out_bit_index] = w
         self.mat_w0[out_bit_index] = w0
 

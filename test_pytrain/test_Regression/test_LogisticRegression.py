@@ -43,7 +43,7 @@ class test_LogisticRegression_horse(test_Suite):
         horse_label_test = [[float(x)] for x in horse_label_test]
         logistic_reg =\
             LogisticRegression(horse_mat_train, horse_label_train)
-        logistic_reg.fit(lr = 0.01, epoch = 1000, stoc = 400)
+        logistic_reg.fit(lr = 0.0001, epoch = 1000, stoc = 400)
         error_rate = batch.eval_predict(logistic_reg,horse_mat_test,horse_label_test,self.logging)
         self.tlog("horse predict (with logistic regression) error rate :" + str(error_rate))
         
