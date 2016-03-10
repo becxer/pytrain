@@ -11,6 +11,7 @@ from test_DecisionTree import *
 from test_Bayes import *
 from test_Regression import *
 from test_Apriori import *
+from test_SVM import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -53,3 +54,5 @@ test_LinearRegression_horse(logging = False).process()
 test_LogisticRegression(logging = False).process()
 test_LogisticRegression_horse(logging = False).process()
 
+# Test HardSVM
+test_HardSVM(logging = True).process()

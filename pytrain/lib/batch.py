@@ -28,7 +28,7 @@ def eval_predict_one(p_module, input_array_test, label_one_test, log_on = True):
     if log_on : print "input : '" + str(input_array_test[:2]) + \
             "' --> predicted : '" + str(res) + "' --? origin : '" \
                     + str(label_one_test) + "'"
-    if list(res) != list(label_one_test) :
+    if list(str(res)) != list(str(label_one_test)) :
         return False
     else :
         return True
