@@ -12,6 +12,7 @@ from test_Bayes import *
 from test_Regression import *
 from test_Apriori import *
 from test_SVM import *
+from test_Kmeans import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -54,5 +55,9 @@ test_LinearRegression_horse(logging = False).process()
 test_LogisticRegression(logging = False).process()
 test_LogisticRegression_horse(logging = False).process()
 
+# Test Kmeans
+test_Kmeans(logging = False).process()
+
 # Test HardSVM
 test_HardSVM(logging = True).process()
+
