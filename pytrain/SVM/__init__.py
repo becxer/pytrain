@@ -1,1 +1,1 @@
-from HardSVM import *
+from SimpleSVM import *

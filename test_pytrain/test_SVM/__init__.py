@@ -1,1 +1,1 @@
-from test_HardSVM import *
+from test_SimpleSVM import *

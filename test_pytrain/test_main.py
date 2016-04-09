@@ -58,6 +58,6 @@ test_LogisticRegression_horse(logging = False).process()
 # Test Kmeans
 test_Kmeans(logging = False).process()
 
-# Test HardSVM
-test_HardSVM(logging = True).process()
+# Test SimpleSVM
+test_SimpleSVM(logging = False).process()
 
