@@ -10,115 +10,112 @@ from pytrain.lib import convert
 import math
 
 class Kmeans:
+    
+    # DIST FUNCITON SET START----------------------
+    def euclidean (vx, vy):
+        return linalg.norm(vx - vy)
 
-    def __init__(self, mat_data):
+    func_set = {'euclidean' : euclidean}
+    # DIST FUNCTION SET END------------------------
+    
+    def __init__(self, mat_data, dist_func):
         if mat_data.__class__.__name__ != 'ndarray':
             mat_data = convert.mat2arr(mat_data)
         self.mat_data = mat_data
         self.col_len = float(len(mat_data[0]))
         self.row_len = float(len(mat_data))
-
-    def extract_minmax(self, mat_data):
         self.min_col = mat_data.min(axis=0)
         self.max_col = mat_data.max(axis=0)
 
-    def dist_func_set(self, dist_func):
-        #
-        # dist_func must to be form like
-        # def dist_func(vector_x, vector_y):
-        #     return distance(vector_x,vector_y)
-        #
-        def euclidean (vx,vy):
-            return linalg.norm(vx - vy)
+        if type(dist_func).__name__ == 'str':
+            if dist_func in self.func_set:
+                self.dist_func = self.func_set[dist_func]
+        elif type(dist_func).__name__ == 'function':
+            self.dist_func = dist_func
 
-        func_set = {'euclidean' : euclidean}
-
-        if type(dist_func).__name__ != 'function':
-            if dist_func in func_set:
-                dist_func = func_set[dist_func]
-        return dist_func
+    # assign input array to cluster
+    def predict(self, input_array):
+        return self.assign_row(self.cluster_points, input_array)
+        
+    def assign_row(self, cluster_points, row):
+        min_idx = -1
+        min_dist = None
+        for i, cp in enumerate(cluster_points):
+            cp_dist = self.dist_func(row, cp)
+            if min_dist == None or min_dist > cp_dist:
+                min_dist = cp_dist
+                min_idx = i
+        return min_idx
             
-
-    def assign_data(self, cluster_points, mat_data, dist_func):
+    def assign_mat_data(self, cluster_points):
         cluster_set = {}
         # assign class for every data
-        for i, row in enumerate(mat_data):
-            min_j = -1
-            min_dist = inf
-            for j, cp in enumerate(cluster_points):
-                row_cp_dist = dist_func(row,cp)
-                if min_dist > row_cp_dist:
-                    min_dist = row_cp_dist
-                    min_j = j
-            cluster_set[min_j] = cluster_set.get(min_j, [])
-            cluster_set[min_j].append(row)
+        for i, row in enumerate(self.mat_data):
+            min_idx = self.assign_row(cluster_points, row)
+            cluster_set[min_idx] = cluster_set.get(min_idx, [])
+            cluster_set[min_idx].append(row)
         return cluster_set
 
     
-    def cluster(self, K, epoch, dist_func):
-        dist_func = self.dist_func_set(dist_func)
-        # extract min,max for each column
-        # randomly assign for K class
-        self.extract_minmax(self.mat_data)
-        cluster_points = random.random_sample((K,self.col_len))
+    # silhouette cluster metric
+    #
+    # s(i) = 1 - a(i)/b(i), if a(i) < b(i)
+    # s(i) = 0, if a(i) = b(i)
+    # s(i) = b(i)/a(i) - 1, if a(i) > b(i)
+    def metric(self, cluster_points):
+        cluster_set = self.assign_mat_data(cluster_points)
+        sil_res = 0
+        for idx in cluster_set:
+            cl = cluster_set[idx]
+            for i_data in cl:
+                a_i = 0.
+                for oth_data in cl:
+                    a_i += self.dist_func(i_data, oth_data)
+                if len(cl) > 0 :
+                    a_i /= float(len(cl))
+                b_i = inf
+                for jdx in cluster_set:
+                    if jdx != idx:
+                        for oth_data in cluster_set[jdx]:
+                            dist = self.dist_func(i_data, oth_data)
+                            if b_i == None or dist < b_i:
+                                b_i = dist
+                sil_res += float((b_i - a_i) / max(b_i,a_i))
+        sil_res /= float(self.row_len)
+        return sil_res
+    
+    def cluster(self, K, epoch):
+        # set random point for K class
+        cluster_points = random.random_sample((K, self.col_len))
         cluster_points = (cluster_points * (self.max_col - self.min_col))\
           + self.min_col
 
         # Lloyd algorithm  
         for ep in range(epoch):
-            cluster_set = self.assign_data(cluster_points, self.mat_data, dist_func)
+            cluster_set = self.assign_mat_data(cluster_points)
             # reassign K class with average of class items
             for idx in cluster_set:
                 new_k_row = array(cluster_set[idx])
-                cluster_points[idx] = new_k_row.sum(axis=0)/len(new_k_row)
+                cluster_points[idx] = new_k_row.sum(axis=0) / len(new_k_row)
+
+        self.cluster_points = cluster_points
         return cluster_points
 
-
-    def metric(self, cluster_points, dist_func):
-        # assign class for every data
-        cluster_set = self.assign_data(cluster_points, self.mat_data, dist_func)
-
-        #
-        # silhouette cluster metric
-        #
-        # s(i) = 1 - a(i)/b(i), if a(i) < b(i)
-        # s(i) = 0, if a(i) = b(i)
-        # s(i) = b(i)/a(i) - 1, if a(i) > b(i)
-        #
-
-        sil_res = 0
-        for idx in cluster_set:
-            cl = cluster_set[idx]
-            for i in cl:
-                a_i = 0
-                for oth in cl:
-                    a_i += dist_func(i,oth)
-                a_i /= float(len(cl))
-                b_i = inf
-                for jdx in cluster_set:
-                    if jdx != idx:
-                        for oth in cluster_set[jdx]:
-                            dist = dist_func(i,oth)
-                            if dist < b_i:
-                                b_i = dist
-                sil_res += ((b_i - a_i) / max(b_i,a_i))
-        sil_res /= self.row_len
-        return sil_res
                 
-
     # Good clustering finding method
-    def fit(self, max_K ,random_iter, epoch, dist_func):
-        dist_func = self.dist_func_set(dist_func)        
-        self.cluster_points_good = None
-        self.cluster_points_good_metric = -inf
+    def fit(self, max_K ,random_try_count, epoch):
+
+        cluster_points_good = None
+        cluster_points_good_metric = None
 
         for K in range(2,max_K+1):
-            for i in range(random_iter):
-                cluster_points = self.cluster(K, epoch, dist_func)
-                metric_val = self.metric(cluster_points, dist_func)
-                if metric_val > self.cluster_points_good_metric:
-                    self.cluster_points_good_metric = metric_val
-                    self.cluster_points_good = cluster_points
-                
-        return self.cluster_points_good
+            for i in range(random_try_count):
+                cluster_points = self.cluster(K, epoch)
+                metric_val = self.metric(cluster_points)
+                if cluster_points_good_metric == None \
+                  or metric_val > cluster_points_good_metric:
+                    cluster_points_good_metric = metric_val
+                    cluster_points_good = cluster_points
+        self.cluster_points = cluster_points_good        
+        return self.cluster_points
 

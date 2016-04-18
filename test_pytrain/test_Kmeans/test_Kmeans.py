@@ -30,17 +30,17 @@ class test_Kmeans(test_Suite):
                           [11.74,2.4],[12.11,2.32]
                       ]
             
-        kmeans = Kmeans(sample_mat)
+        kmeans = Kmeans(sample_mat, dist_func = 'euclidean')
 
         # finding cluster (Fixed K)
         cluster_point_fixed = \
-                kmeans.cluster(K = 6, epoch = 30, dist_func = 'euclidean')
+                kmeans.cluster(K = 6, epoch = 30)
         self.tlog("fixed point count : " + str(len(cluster_point_fixed)))
         self.tlog("cluster point : \n" + str(cluster_point_fixed))
 
         # Auto finding good cluster (Flexible K)
         cluster_point_flexible = \
-          kmeans.fit(max_K = 7, random_iter = 10, epoch = 30, dist_func = 'euclidean')
+          kmeans.fit(max_K = 7, random_try_count = 10, epoch = 30)
         self.tlog("flexible point count : " + str(len(cluster_point_flexible)))
         self.tlog("cluster point : \n" + str(cluster_point_flexible))
 
