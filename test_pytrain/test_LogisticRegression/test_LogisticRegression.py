@@ -1,15 +1,15 @@
 #
-# test Linear Regression
+# test Logistic Regression
 #
 # @ author becxer
 # @ email becxer87@gmail.com
 #
 from test_pytrain import test_Suite
-from pytrain.Regression import LinearRegression
+from pytrain.LogisticRegression import LogisticRegression
 from pytrain.lib import fs
 from pytrain.lib import batch
 
-class test_LinearRegression(test_Suite):
+class test_LogisticRegression(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
@@ -24,14 +24,14 @@ class test_LinearRegression(test_Suite):
                      ]
         train_label = [[0,1],[1,0],[0,1],[1,0]] # out bit is 1
         
-        linear_reg =\
-            LinearRegression(train_mat, train_label)
-        linear_reg.fit(lr = 0.001, epoch = 1000, stoc = 4)
+        logistic_reg =\
+            LogisticRegression(train_mat, train_label)
+        logistic_reg.fit(lr = 0.001, epoch = 2000, stoc = 4)
         
-        r1 = batch.eval_predict_one(linear_reg,[0.10,0.33],[0, 1],self.logging)
-        r2 = batch.eval_predict_one(linear_reg,[4.40,4.37],[1, 0],self.logging)
+        r1 = batch.eval_predict_one(logistic_reg,[0.10,0.33],[0, 1],self.logging)
+        r2 = batch.eval_predict_one(logistic_reg,[4.40,4.37],[1, 0],self.logging)
         
-class test_LinearRegression_horse(test_Suite):
+class test_LogisticRegression_horse(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
@@ -41,9 +41,9 @@ class test_LinearRegression_horse(test_Suite):
         horse_label_train = [[float(x)] for x in horse_label_train]
         horse_mat_test, horse_label_test = fs.f2mat("sample_data/horse/horseColicTest_1.txt",0)
         horse_label_test = [[float(x)] for x in horse_label_test]
-        linear_reg =\
-            LinearRegression(horse_mat_train, horse_label_train)
-        linear_reg.fit(lr = 0.0000001, epoch = 1000, stoc = 400)
-        error_rate = batch.eval_predict(linear_reg,horse_mat_test,horse_label_test,self.logging)
-        self.tlog("horse predict (with linear regression) error rate :" + str(error_rate))
+        logistic_reg =\
+            LogisticRegression(horse_mat_train, horse_label_train)
+        logistic_reg.fit(lr = 0.0001, epoch = 1000, stoc = 400)
+        error_rate = batch.eval_predict(logistic_reg,horse_mat_test,horse_label_test,self.logging)
+        self.tlog("horse predict (with logistic regression) error rate :" + str(error_rate))
         

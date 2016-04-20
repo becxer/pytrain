@@ -7,11 +7,13 @@
 
 from test_lib import *
 from test_KNN import *
-from test_DecisionTree import *
-from test_Bayes import *
-from test_Regression import *
-from test_Apriori import *
+from test_DecisionTreeID3 import *
+from test_NaiveBayes import *
+from test_GaussianNaiveBayes import *
+from test_LinearRegression import *
+from test_LogisticRegression import *
 from test_SVM import *
+from test_Apriori import *
 from test_Kmeans import *
 from test_DBSCAN import *
 
