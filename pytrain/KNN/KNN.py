@@ -8,12 +8,14 @@
 
 from numpy import *
 from pytrain.lib import convert
+from pytrain.lib import ptmath
 import operator
 
 
 class KNN:
-    def __init__(self, mat_data, label_data, k):
+    def __init__(self, mat_data, label_data, k, dist_func):
         self.mat_data = convert.list2npfloat(mat_data)
+        self.dist_func = ptmath.distfunc(dist_func)
         self.label_data = label_data
         self.train_size = self.mat_data.shape[0]
         self.k = k
@@ -24,10 +26,12 @@ class KNN:
     # compare distance from all mat_data rows and choose most closer one
     def predict(self, array_input):
         array_input = convert.list2npfloat(array_input)
-        diff_mat = tile(array_input, (self.train_size,1)) - self.mat_data
-        pow_diff_mat = diff_mat ** 2
-        pow_distances = pow_diff_mat.sum(axis=1)
-        distances = pow_distances ** 0.5
+
+        distances = []
+        for trg in self.mat_data:
+            distances.append(self.dist_func(array_input, trg))
+        distances = array(distances)
+        
         sorted_distances = distances.argsort()
         class_count = {}
         for i in range(self.k):

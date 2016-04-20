@@ -10,9 +10,18 @@ from numpy import *
 def euclidean (vx, vy):
     return linalg.norm(vx - vy)
 
+def manhattan (vx, vy):
+    return array(map(abs, vx - vy)).sum(axis = 0)
+
+def cosine_similarity (vx, vy):
+    return dot(vx, vy) / (linalg.norm(vx) * linalg.norm(vy))
+
+
 dfunc_set = {\
                  'euclidean' : euclidean,\
-                 'default' : euclidean\
+                 'default' : euclidean,\
+                 'manhattan' : manhattan,\
+                 'cosine_similarity' : cosine_similarity\
             }
 
 def distfunc(dfunc_keyword):

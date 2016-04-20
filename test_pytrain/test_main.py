@@ -16,6 +16,7 @@ from test_SVM import *
 from test_Apriori import *
 from test_Kmeans import *
 from test_DBSCAN import *
+from test_HierarchicalClustering import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -69,3 +70,5 @@ test_Kmeans(logging = False).process()
 # Test DBSCAN
 test_DBSCAN(logging = False).process()
 
+# Test HierarchicalClustering
+test_HierarchicalClustering(logging = True).process()
