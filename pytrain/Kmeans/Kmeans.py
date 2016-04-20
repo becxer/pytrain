@@ -7,34 +7,22 @@
 
 from numpy import *
 from pytrain.lib import convert
+from pytrain.lib import ptmath
 import math
 
 class Kmeans:
     
-    # DIST FUNCITON SET START----------------------
-    def euclidean (vx, vy):
-        return linalg.norm(vx - vy)
-
-    func_set = {'euclidean' : euclidean}
-    # DIST FUNCTION SET END------------------------
-    
     def __init__(self, mat_data, dist_func):
-        if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = convert.mat2arr(mat_data)
-        self.mat_data = mat_data
-        self.col_len = float(len(mat_data[0]))
-        self.row_len = float(len(mat_data))
-        self.min_col = mat_data.min(axis=0)
-        self.max_col = mat_data.max(axis=0)
-
-        if type(dist_func).__name__ == 'str':
-            if dist_func in self.func_set:
-                self.dist_func = self.func_set[dist_func]
-        elif type(dist_func).__name__ == 'function':
-            self.dist_func = dist_func
+        self.mat_data = convert.list2npfloat(mat_data)
+        self.dist_func = ptmath.distfunc(dist_func)
+        self.col_len = float(len(self.mat_data[0]))
+        self.row_len = float(len(self.mat_data))
+        self.min_col = self.mat_data.min(axis=0)
+        self.max_col = self.mat_data.max(axis=0)
 
     # assign input array to cluster
     def predict(self, input_array):
+        input_array = convert.list2npfloat(input_array)
         return self.assign_row(self.cluster_points, input_array)
         
     def assign_row(self, cluster_points, row):
@@ -80,7 +68,10 @@ class Kmeans:
                             dist = self.dist_func(i_data, oth_data)
                             if b_i == None or dist < b_i:
                                 b_i = dist
-                sil_res += float((b_i - a_i) / max(b_i,a_i))
+                sil_i = 0
+                if max(b_i,a_i) != 0 :
+                    sil_i = float((b_i - a_i) / max(b_i,a_i))
+                sil_res += sil_i
         sil_res /= float(self.row_len)
         return sil_res
     

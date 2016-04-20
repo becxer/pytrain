@@ -16,12 +16,9 @@ import sys
 class LinearRegression:
 
     def __init__(self, mat_data, label_data):
-        if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = convert.mat2arr(mat_data)
-        if label_data.__class__.__name__ != 'ndarray':
-            label_data = convert.mat2arr(label_data)
-        self.mat_data = mat_data
-        self.label_data = label_data
+        self.mat_data = convert.list2npfloat(mat_data)
+        self.label_data = convert.list2npfloat(label_data)
+
         self.out_bit = len(label_data[0])
         self.mat_w =  [ [ (random.random() * 0.0000001 + sys.float_info.epsilon)\
                             for i in range(len(mat_data[0]))] \
@@ -81,8 +78,7 @@ class LinearRegression:
             end += stoc
 
     def predict(self, array_input):
-        if array_input.__class__.__name__ != 'ndarray':
-            array_input = convert.list2arr(array_input)
+        array_input = convert.list2npfloat(array_input)
         return (array_input * self.mat_w).sum(axis=1) \
                 + self.mat_w0
 

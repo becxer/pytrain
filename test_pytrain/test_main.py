@@ -13,6 +13,7 @@ from test_Regression import *
 from test_Apriori import *
 from test_SVM import *
 from test_Kmeans import *
+from test_DBSCAN import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -28,6 +29,8 @@ test_nlp(logging = False).process()
 
 # test KNN
 test_KNN(logging = False).process()
+
+# <Take too much time>
 # test_KNN_digit(logging = False).process()
 
 # test DecisionTree
@@ -55,10 +58,12 @@ test_LinearRegression_horse(logging = False).process()
 test_LogisticRegression(logging = False).process()
 test_LogisticRegression_horse(logging = False).process()
 
+# Test SimpleSVM
+test_SimpleSVM(logging = False).process()
 
 # Test Kmeans
-test_Kmeans(logging = True).process()
+test_Kmeans(logging = False).process()
 
-# Test SimpleSVM
-test_SimpleSVM(logging = True).process()
+# Test DBSCAN
+test_DBSCAN(logging = False).process()
 

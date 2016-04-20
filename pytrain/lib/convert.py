@@ -7,11 +7,10 @@
 
 from numpy import *
 
-
-def mat2arr(data_mat):
-    return array(map(lambda x:map(float,x),data_mat))
-
-
-def list2arr(data_list):
-    return array(map(float,data_list))
-
+def list2npfloat(list_data):
+    ldtype = type(list_data).__name__
+    if ldtype == 'str' or ldtype == 'long' or ldtype == 'int' or ldtype == 'int32' or\
+      ldtype == 'int64' or ldtype == 'float' or ldtype == 'float32' or ldtype == 'float64':
+        return float(list_data)
+    elif ldtype == 'list' or ldtype == 'ndarray':
+        return array(map(list2npfloat, list_data))

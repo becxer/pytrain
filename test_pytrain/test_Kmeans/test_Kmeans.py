@@ -6,6 +6,7 @@
 #
 from test_pytrain import test_Suite
 from pytrain.Kmeans import Kmeans
+from pytrain.lib import batch
 from numpy import *
 
 class test_Kmeans(test_Suite):
@@ -44,6 +45,12 @@ class test_Kmeans(test_Suite):
         self.tlog("flexible point count : " + str(len(cluster_point_flexible)))
         self.tlog("cluster point : \n" + str(cluster_point_flexible))
 
-        
-        assert len(cluster_point_flexible) < 8
-        
+        # clustering test with unknown data
+        r1 = batch.eval_predict_one(kmeans, [11.70, 3.0], \
+                                        kmeans.predict([11.74, 2.4]), self.logging)
+        r2 = batch.eval_predict_one(kmeans, [8.40, 5.8], \
+                                        kmeans.predict([8.73, 6.0]), self.logging)
+        r3 = batch.eval_predict_one(kmeans, [0.7, 0.1], \
+                                        kmeans.predict([1.08, 0.7]), self.logging)
+                                        
+        assert (r1 and r2 and r3)

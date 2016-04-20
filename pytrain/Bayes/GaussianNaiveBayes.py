@@ -12,9 +12,7 @@ import operator
 class GaussianNaiveBayes:
 
     def __init__(self, mat_data, label_data):
-        if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = convert.mat2arr(mat_data)
-        self.mat_data = mat_data
+        self.mat_data = convert.list2npfloat(mat_data)
         self.label_data = label_data
 
         self.mat_mean = {}
@@ -58,8 +56,7 @@ class GaussianNaiveBayes:
     #          + log ( Count_Label_i ) - log ( Count_Label_all )
     #
     def predict(self, array_input):
-        if array_input.__class__.__name__ != 'ndarray':
-            array_input = convert.list2arr(array_input)
+        array_input = convert.list2npfloat(array_input)
         deviate_arr = self.mat_mean_arr - tile(array_input,(self.num_label,1))
         gaussian_bayes = (deviate_arr ** 2 / ((self.mat_variance_arr ** 2) * 2)) * -1 \
                 - log(self.mat_variance_arr)

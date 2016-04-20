@@ -13,11 +13,9 @@ import operator
 
 class KNN:
     def __init__(self, mat_data, label_data, k):
-        if mat_data.__class__.__name__ != 'ndarray':
-            mat_data = convert.mat2arr(mat_data)
-        self.mat_data = mat_data
+        self.mat_data = convert.list2npfloat(mat_data)
         self.label_data = label_data
-        self.train_size = mat_data.shape[0]
+        self.train_size = self.mat_data.shape[0]
         self.k = k
 
     def fit(self):
@@ -25,8 +23,7 @@ class KNN:
 
     # compare distance from all mat_data rows and choose most closer one
     def predict(self, array_input):
-        if array_input.__class__.__name__ != 'ndarray':
-            array_input = convert.list2arr(array_input)
+        array_input = convert.list2npfloat(array_input)
         diff_mat = tile(array_input, (self.train_size,1)) - self.mat_data
         pow_diff_mat = diff_mat ** 2
         pow_distances = pow_diff_mat.sum(axis=1)

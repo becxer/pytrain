@@ -1,4 +1,4 @@
 #!/bin/bash
 cat README.md
-sleep 3
+sleep 1
 pydemon 'python test.py'
