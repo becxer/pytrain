@@ -23,6 +23,28 @@ class HierarchicalClustering:
         return self.cluster()
     
     def cluster(self):
+
+        class line :
+            def __init__(self, src, trg, distance):
+                self.src = src
+                self.trg = trg
+                self.distance = distance
+
+        class closest :
+            def __init__(self, ):
+                self.data_idxs = []
+                
+            def merge(self, other):
+                self.data_idxs.append(idx)
+             
+                
+        # 0.create cluster which 
+                
+        # 1.create line instance each pair of mat_data
+
+        # 
+        
+        
         label_of_data = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5]
         self.label_of_data = label_of_data
         return label_of_data
