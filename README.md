@@ -12,15 +12,17 @@ Machine learning library for python
 
 ### TODO feature
 
+    + MLP (MultiLayer Perceptron)
+    + HMM (Hidden Markov Model)
     + CRF (Conditional Random Field)
-    + SVM original
-    + Hierarchical Clustering
+    + Kernel SVM
+    + Multi SVM
+
     + Genetic Algorithm
     + Hill Climbing
     + Simulate Annealing
-    + MLP (MultiLayer Perceptron)
-    + HMM (Hidden Markov Model)
 
+    + Hierarchical Clustering
 
 ### Future
 
