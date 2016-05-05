@@ -35,8 +35,8 @@ class test_HierarchicalClustering(test_Suite):
         hac = HierarchicalClustering(sample_mat, K = 6, dist_func = "euclidean")
         label_data =  hac.cluster() # hac.fit() also same
 
-        for idx, row in enumerate(sample_mat):
-            self.tlog(str(row) + " -> " + str(label_data[idx]))
+        # for idx, row in enumerate(sample_mat):
+        #     self.tlog(str(row) + " -> " + str(label_data[idx]))
         self.tlog("labels are " + str(list(set(label_data))))
 
         # clustering test with unknown data
