@@ -51,27 +51,35 @@ class HierarchicalClustering:
               self.dist_list.remove(dist_obj)
 
     def remove_from_group_list(self, grp_idx):
-        grp = self.group_map[grp_idx]
-        self.group_list.remove(grp)
+        for grp in self.group_list:
+            if grp.unique_idx == grp_idx:
+                self.group_list.remove(grp)
+                break
         
     def insert_new_group(self, grp):
-        # TODO
-        
-        # insert into group_list
-        # calculate all distance with other group and insert into dist_list
-
-        pass
-            
+        for oth in self.group_list:
+            new_dis = self.Dist(grp, oth, self.dist_func)
+            for idx, old_dis in enumerate(self.dist_list):
+                if new_dis.distance <= old_dis.distance:
+                    self.dist_list.insert(idx, new_dis)
+                    break
+                    
+        self.group_list.append(grp)
+    
     def merge_group(self, grp_1_idx, grp_2_idx):
         grp_1 = self.group_map[grp_1_idx]
         grp_2 = self.group_map[grp_2_idx]
-
-        # TODO
-        mgd_grp = self.Group()
+        
+        mgd_vt = ( (grp_1.vector * len(grp_1.data_idx)) \
+                       + (grp_2.vector + len(grp_2.data_idx)) ) \
+                           / (len(grp_1.data_idx) + len(grp_2.data_idx))
+        mgd_didx = []
+        mgd_didx.extend(grp_1.data_idx)
+        mgd_didx.extend(grp_2.data_idx)
+        mgd_grp = self.Group(mgd_vt, mgd_didx)
         return mgd_grp
     
     def cluster(self):
-        
         # make initial groups
         self.group_list = [ self.Group(vt,[idx]) for idx, vt in enumerate(self.mat_data)]
         # make dist_list
@@ -103,6 +111,5 @@ class HierarchicalClustering:
     # default predictor using KNN
     def predict(self, input_array):
         # TODO
-
         input_array = convert.list2npfloat(input_array)
         pass
