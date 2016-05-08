@@ -110,7 +110,17 @@ class HierarchicalClustering:
                 self.label_data[idx] = grp_idx
         return self.label_data
 
-    # default predictor using KNN
+    # assign input array to cluster
     def predict(self, input_array):
-        print self.cluster_points
-        pass
+        input_array = convert.list2npfloat(input_array)
+        return self.assign_row(self.cluster_points, input_array)
+        
+    def assign_row(self, cluster_points, row):
+        min_idx = -1
+        min_dist = None
+        for i, cp in enumerate(cluster_points):
+            cp_dist = self.dist_func(row, cp)
+            if min_dist == None or min_dist > cp_dist:
+                min_dist = cp_dist
+                min_idx = i
+        return min_idx

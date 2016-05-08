@@ -71,4 +71,5 @@ test_Kmeans(logging = False).process()
 test_DBSCAN(logging = False).process()
 
 # Test HierarchicalClustering
-test_HierarchicalClustering(logging = True).process()
+test_HierarchicalClustering(logging = False).process()
+
