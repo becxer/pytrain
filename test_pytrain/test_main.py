@@ -17,6 +17,7 @@ from test_Apriori import *
 from test_Kmeans import *
 from test_DBSCAN import *
 from test_HierarchicalClustering import *
+from test_HMM import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -61,9 +62,6 @@ test_LinearRegression_horse(logging = False).process()
 test_LogisticRegression(logging = False).process()
 test_LogisticRegression_horse(logging = False).process()
 
-# Test SimpleSVM
-test_SimpleSVM(logging = False).process()
-
 # Test Kmeans
 test_Kmeans(logging = False).process()
 
@@ -72,4 +70,10 @@ test_DBSCAN(logging = False).process()
 
 # Test HierarchicalClustering
 test_HierarchicalClustering(logging = False).process()
+
+# Test SimpleSVM
+test_SimpleSVM(logging = False).process()
+
+# Test HMM
+test_HMM(logging = False).process()
 
