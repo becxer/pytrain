@@ -21,8 +21,7 @@ Machine learning library for python
     + Genetic Algorithm
     + Hill Climbing
     + Simulate Annealing
-
-    + Hierarchical Clustering
+    
 
 ### Future
 
