@@ -17,6 +17,8 @@ class test_HMM(test_Suite):
 
     def test_process(self):
 
+        # TODO : redefine test cases
+
         train_mat = [\
                      [0.12, 0.25],\
                      [3.24, 4.33],\

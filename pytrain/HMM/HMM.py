@@ -15,6 +15,9 @@ class HMM:
         self.label_data = convert.list2npfloat(label_data)
 
     def fit(self, lr, epoch, stoc):
+
+        # TODO : Implement HMM code
+        
         pass
     
     def predict(self, array_input):
