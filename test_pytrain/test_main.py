@@ -18,6 +18,7 @@ from test_Kmeans import *
 from test_DBSCAN import *
 from test_HierarchicalClustering import *
 from test_HMM import *
+from test_NeuralNetwork import *
 
 # test fs lib
 test_fs(logging = False).process()
@@ -77,3 +78,5 @@ test_SimpleSVM(logging = False).process()
 # Test HMM
 test_HMM(logging = False).process()
 
+# Test FNN
+test_FNN(logging = True).process()
