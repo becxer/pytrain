@@ -34,6 +34,15 @@ Machine learning library for python
 ## Requirements
 
  - Numpy
+ - Python2.*
+
+## Installation
+
+    sudo pip install --upgrade pytrain
+    
+## Basic Usage
+
+    [Not yet]
 
 ## You can test code with below
 
