@@ -1,6 +1,6 @@
 # pytrain
 
-Machine learning library for python
+Machine Learning library for python
 
 ## Contents
     
