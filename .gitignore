@@ -1,6 +1,9 @@
 #ctags
 tags
 
+#tmps
+tmp/*.dat
+
 #pydemon log
 .pydemon.*
 
