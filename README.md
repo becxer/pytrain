@@ -30,7 +30,7 @@ Machine learning library for python
 
 ## Requirements
 
-    Numpy
+ - Numpy
 
 ## You can test code with below
 
