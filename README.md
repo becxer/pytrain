@@ -9,10 +9,8 @@ Machine learning library for python
     python test.py
 
 
-
 ### TODO feature
 
-    + MLP (MultiLayer Perceptron)
     + HMM (Hidden Markov Model)
     + CRF (Conditional Random Field)
     + Kernel SVM
@@ -21,9 +19,4 @@ Machine learning library for python
     + Genetic Algorithm
     + Hill Climbing
     + Simulate Annealing
-    
-
-### Future
-
-    + Make pytrain-dnn 
 
