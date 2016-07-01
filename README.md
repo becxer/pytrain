@@ -4,29 +4,32 @@ Machine learning library for python
 
 ## Contents
     
-1. Supervised learning
-    + Decision Tree(ID3)
-    + Gaussian NaiveBayes
-    + NaiveBayes
-    + KNN
-    + Neural Network(FNN)
-    + Logistic Regression
-    + Linear Regression
-    + SVM
-    + HMM [Not yet]
-    + CRF [Not yet]
+####1. Supervised learning
 
-2. Unsupervised learning
-    + DBSCAN
-    + Apriori
-    + Kmeans
-    + HierarchicalClustering
-    + FPgrowth [Not yet]
++ Decision Tree(ID3)
++ Gaussian NaiveBayes
++ NaiveBayes
++ KNN
++ Neural Network(FNN)
++ Logistic Regression
++ Linear Regression
++ SVM
++ HMM [Not yet]
++ CRF [Not yet]
 
-3. Optimization
-    + Genetic Algorithm [Not yet]
-    + Hill Climbing [Not yet]
-    + Simulate Annealing [Not yet]
+####2. Unsupervised learning
+
++ DBSCAN
++ Apriori
++ Kmeans
++ HierarchicalClustering
++ FPgrowth [Not yet]
+
+####3. Optimization
+
++ Genetic Algorithm [Not yet]
++ Hill Climbing [Not yet]
++ Simulate Annealing [Not yet]
 
 ## Requirements
 
