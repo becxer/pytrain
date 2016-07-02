@@ -46,4 +46,5 @@ Machine Learning library for python
 
 ## You can test code with below
 
+    sudo pip install --upgrade pydemon
     python test.py
