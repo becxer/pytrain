@@ -8,6 +8,7 @@
 from numpy import *
 seterr(all='raise')
 from pytrain.lib import convert
+from pytrain.lib import ptmath
 import math
 import time
 import random
@@ -26,15 +27,12 @@ class LogisticRegression:
         self.mat_w0 = [random.random() * 0.0000001 + sys.float_info.epsilon\
                             for i in range(self.out_bit) ]
 
-    def sigmoid(self,k):
-        return 1.0 / ( 1.0 + math.exp(-k))
-
     def batch_update_w(self, out_bit_index, data, label):
         w = self.mat_w[out_bit_index]
         w0 = self.mat_w0[out_bit_index]
         tiled_w0 = tile(w0,(len(data)))
         k = (w * data).sum(axis=1) + tiled_w0
-        sig_k = map(self.sigmoid,k)
+        sig_k = map(ptmath.sigmoid,k)
         gd = (label.T[out_bit_index] - sig_k)
         dw = (gd * data.T).sum(axis=1) * -1
         dw0  = gd.sum(axis=0) * -1
@@ -59,6 +57,6 @@ class LogisticRegression:
 
     def predict(self, array_input):
         array_input = convert.list2npfloat(array_input)
-        return map(round,map(self.sigmoid,(array_input * self.mat_w).sum(axis=1) \
+        return map(round,map(ptmath.sigmoid,(array_input * self.mat_w).sum(axis=1) \
                 + self.mat_w0))
 

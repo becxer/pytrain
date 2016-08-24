@@ -16,6 +16,11 @@ def manhattan (vx, vy):
 def cosine_similarity (vx, vy):
     return dot(vx, vy) / (linalg.norm(vx) * linalg.norm(vy))
 
+def sigmoid(k):
+    return 1.0 / ( 1.0 + exp(-k))
+
+def sigmoid_delta(k):
+    return sigmoid(k) * (1.0 - sigmoid(k))
 
 dfunc_set = {\
                  'euclidean' : euclidean,\
