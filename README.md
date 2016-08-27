@@ -17,24 +17,19 @@ Machine Learning library for python
 + HMM [Not yet]
 + CRF [Not yet]
 
+
 ####2. Unsupervised learning
 
 + DBSCAN
 + Apriori
 + Kmeans
 + HierarchicalClustering
-+ FPgrowth [Not yet]
 
-####3. Optimization
-
-+ Genetic Algorithm [Not yet]
-+ Hill Climbing [Not yet]
-+ Simulate Annealing [Not yet]
 
 ## Requirements
 
  - Numpy
- - Python2.*
+ - Python 2 or 3
 
 ## Installation
 
@@ -47,4 +42,4 @@ Machine Learning library for python
 ## You can test code with below
 
     sudo pip install --upgrade pydemon
-    python test.py
+    ./run_dev.sh
