@@ -72,11 +72,12 @@ test_DBSCAN(logging = False).process()
 # Test HierarchicalClustering
 test_HierarchicalClustering(logging = False).process()
 
+# Test FNN
+test_FNN(logging = False).process()
+
 # Test SimpleSVM
-test_SimpleSVM(logging = False).process()
+test_SimpleSVM(logging = True).process()
 
 # Test HMM
-test_HMM(logging = False).process()
+test_HMM(logging = True).process()
 
-# Test FNN
-test_FNN(logging = True).process()

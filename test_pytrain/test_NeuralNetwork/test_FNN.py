@@ -26,7 +26,7 @@ class test_FNN(test_Suite):
         train_label = ['zero','one','zero','one']
         
         fn = FNN(train_mat, train_label, [3,2])
-        fn.fit(0.1, 1000, 0.001)
+        fn.fit(0.1, 5000, 0.001)
         r1 = batch.eval_predict_one(fn, [4.40,4.37], 'one', self.logging)
         r2 = batch.eval_predict_one(fn, [0.40,0.37], 'zero', self.logging)
         
