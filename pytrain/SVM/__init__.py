@@ -1,1 +1,2 @@
-from SimpleSVM import *
+from BinarySVM import *
+from SVM import *

@@ -1,5 +1,5 @@
 #
-# Simple SVM
+# Binary SVM
 #
 # @ author becxer
 # @ reference Machine Learning in Action by Peter Harrington
@@ -8,7 +8,7 @@
 
 from numpy import *
 
-class SimpleSVM:
+class BinarySVM:
 
     def __init__(self, mat_data, label_data):
         self.mat_data = mat_data
@@ -28,7 +28,7 @@ class SimpleSVM:
         return aj
 
     def fit(self, C, toler, epoch):
-        b, alphas = self.smoSimple(C, toler, epoch)
+        b, alphas = self.smo(C, toler, epoch)
         self.b = b
         self.alphas = alphas
 
@@ -40,7 +40,7 @@ class SimpleSVM:
                    (dataMatrix * array_input.T)) + self.b
         return sign(fXinput[0,0])
     
-    def smoSimple(self, C, toler, maxIter):
+    def smo(self, C, toler, maxIter):
         dataMatrix = mat(self.mat_data)
         labelMat = mat(self.label_data).transpose()
         b = 0;

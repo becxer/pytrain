@@ -20,6 +20,7 @@ from test_HierarchicalClustering import *
 from test_HMM import *
 from test_NeuralNetwork import *
 
+'''
 # test fs lib
 test_fs(logging = False).process()
 
@@ -75,8 +76,11 @@ test_HierarchicalClustering(logging = False).process()
 # Test FNN
 test_FNN(logging = False).process()
 
-# Test SimpleSVM
-test_SimpleSVM(logging = True).process()
+# Test SVM
+test_BinarySVM(logging = False).process()
+'''
+
+test_SVM(logging = True).process()
 
 # Test HMM
 test_HMM(logging = True).process()
