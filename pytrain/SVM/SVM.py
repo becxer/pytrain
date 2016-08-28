@@ -59,7 +59,7 @@ class SVM:
         while (iter < maxIter):
             alphaPairsChanged = 0
             for i in range(m):
-                print 'alpha * mat' ,alphas.dot(labelMat).shape
+                print 'label * alpha' , labelMat.dot(alphas).shape
                 print 'dm * dm ', dataMatrix.dot(dataMatrix[i,:])
                 fXi =  alphas.dot(labelMat).dot((dataMatrix.dot(
                     array([dataMatrix[i,:]])))) + b
