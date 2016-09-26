@@ -2,7 +2,7 @@
 
 Machine Learning library for python
 
-## Contents
+## Algorithms
     
 ####1. Supervised learning
 
@@ -25,6 +25,11 @@ Machine Learning library for python
 + Kmeans
 + HierarchicalClustering
 
+## Comparison algorithm
+
+####1. IRIS
+
+####2. MNIST
 
 ## Requirements
 
