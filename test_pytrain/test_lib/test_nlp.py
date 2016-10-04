@@ -38,29 +38,27 @@ class test_nlp(test_Suite):
     def test_nlp_extract_vocabulary(self):
 
         nlp_eng = nlp("eng")
-
         docs = [\
             "Just try to enjoy it :).",\
             "It's very important for me!",\
             "What is your problem? you look so bad."\
         ]
-
         self.voca = nlp_eng.extract_vocabulary(docs)
         self.tlog(self.voca)
         assert len(self.voca) == 7
 
-    def test_words2vector(self):
+    def test_word2vector(self):
         nlp_eng = nlp("eng")
 
         input_txt = "try to do this one"
-        set_vector = nlp_eng.set_of_words2vector(self.voca, input_txt)
+        set_vector = nlp_eng.set_of_word2vector(self.voca, input_txt)
         self.tlog(set_vector)
         
-        input_txt2 = "It's your problem"
-        bag_vector = nlp_eng.bag_of_words2vector(self.voca, input_txt2)
+        input_txt2 = "It's your problem. big problem. let's try"
+        bag_vector = nlp_eng.bag_of_word2vector(self.voca, input_txt2)
         self.tlog(bag_vector)
 
     def test_process(self):
         self.test_nlp_split()
         self.test_nlp_extract_vocabulary()
-        self.test_words2vector()
+        self.test_word2vector()

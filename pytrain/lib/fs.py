@@ -16,7 +16,7 @@ from pytrain.lib import nlp
 # to matrix_train, label_train, matrix_test, label_test
 # according to ho_ratio
 # ho_ratio is test_set ratio how you want
-def f2mat(filename, ho_ratio):
+def csv_loader(filename, ho_ratio):
     fr = open(filename)
     lines = fr.readlines()
     mat_train = []
@@ -45,8 +45,8 @@ def f2mat(filename, ho_ratio):
         return mat_train, label_train, mat_test, label_test
 
 
-def f2wordmat(filename, ho_ratio, nlp_lib):
-    wmat = f2mat(filename, ho_ratio)
+def csv_loader_with_nlp(filename, ho_ratio, nlp_lib):
+    wmat = csv_loader(filename, ho_ratio)
     wmat_train, label_train  = wmat[:2]
 
     mat_train = []
@@ -56,12 +56,12 @@ def f2wordmat(filename, ho_ratio, nlp_lib):
     vocabulary = nlp_lib.extract_vocabulary(wmat_train)
     
     for row in wmat_train:
-        mat_train.append(nlp_lib.bag_of_words2vector(vocabulary, row))
+        mat_train.append(nlp_lib.bag_of_word2vector(vocabulary, row))
 
     if len(wmat) > 2 and ho_ratio != 0:
         wmat_test, label_test = wmat[2:4]
         for row in wmat_test:
-            mat_test.append(nlp_lib.bag_of_words2vector(vocabulary, row))
+            mat_test.append(nlp_lib.bag_of_word2vector(vocabulary, row))
 
     if ho_ratio == 0:
         return mat_train,label_train, vocabulary

@@ -69,7 +69,7 @@ class nlp:
             vocabulary = vocabulary | set(ndoc)
         return list(vocabulary)
 
-    def set_of_words2vector(self, vocabulary, sentence):
+    def set_of_word2vector(self, vocabulary, sentence):
         voca_vector = [0] * len(vocabulary)
         if str(type(sentence).__name__) == 'str':
             sentence = self.split2words(sentence)
@@ -78,7 +78,7 @@ class nlp:
                 voca_vector[vocabulary.index(word)] = 1
         return voca_vector
 
-    def bag_of_words2vector(self, vocabulary, sentence):
+    def bag_of_word2vector(self, vocabulary, sentence):
         voca_vector = [0] * len(vocabulary)
         if str(type(sentence).__name__) == 'str':
             sentence = self.split2words(sentence)

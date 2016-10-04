@@ -13,22 +13,20 @@ class test_normalize(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_normalize_quantile(self):
-        dmat_train = self.get_global_value('dmat_train')
-        dmat_test = self.get_global_value('dmat_test')
+        iris_mat_train = self.get_global_value('iris_mat_train')
+        iris_mat_test = self.get_global_value('iris_mat_test')
         
-        normed_dmat_train = normalize.quantile(dmat_train)
-        normed_dmat_test = normalize.quantile(dmat_test)
+        normed_imat_train = normalize.quantile(iris_mat_train)
+        normed_imat_test = normalize.quantile(iris_mat_test)
 
-        self.tlog(normed_dmat_train[0:10])
+        self.tlog("before normalized : \n" + str(iris_mat_train[:3]))
+        self.tlog("normalized sample : \n" + str(normed_imat_train[:3]))
 
-        assert len(normed_dmat_train) == 900
-        assert len(normed_dmat_test) == 100
+        assert normed_imat_train[0][0] <= 1.0 and \
+                normed_imat_train[0][0] >= 0.0
 
-        assert normed_dmat_train[0][0] <= 1.0 and \
-                normed_dmat_train[0][0] >= 0.0
-
-        self.set_global_value('normed_dmat_train',normed_dmat_train)
-        self.set_global_value('normed_dmat_test',normed_dmat_test)
+        self.set_global_value('normed_iris_mat_train',normed_imat_train)
+        self.set_global_value('normed_iris_mat_test',normed_imat_test)
 
     def test_process(self):
         self.test_normalize_quantile()

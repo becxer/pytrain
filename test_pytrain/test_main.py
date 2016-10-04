@@ -7,35 +7,30 @@
 
 from test_lib import *
 from test_KNN import *
-from test_DecisionTreeID3 import *
-from test_NaiveBayes import *
-from test_GaussianNaiveBayes import *
-from test_LinearRegression import *
-from test_LogisticRegression import *
-from test_SVM import *
-from test_Apriori import *
-from test_Kmeans import *
-from test_DBSCAN import *
-from test_HierarchicalClustering import *
-from test_HMM import *
-from test_NeuralNetwork import *
+#from test_DecisionTreeID3 import *
+#from test_NaiveBayes import *
+#from test_GaussianNaiveBayes import *
+#from test_LinearRegression import *
+#from test_LogisticRegression import *
+#from test_SVM import *
+#from test_Apriori import *
+#from test_Kmeans import *
+#from test_DBSCAN import *
+#from test_HierarchicalClustering import *
+#from test_HMM import *
+#from test_NeuralNetwork import *
 
-'''
-# test fs lib
+# test lib modules
 test_fs(logging = False).process()
-
-# test normalize lib
 test_normalize(logging = False).process()
-
-# test batch lib
-test_batch(logging = False).process()
-
-# test nlp lib
+test_autotest(logging = False).process()
 test_nlp(logging = False).process()
+test_dataset(logging = False).process()
 
 # test KNN
-test_KNN(logging = False).process()
+#test_KNN(logging = False).process()
 
+'''
 # <Take too much time>
 # test_KNN_digit(logging = False).process()
 
@@ -78,10 +73,9 @@ test_FNN(logging = False).process()
 
 # Test SVM
 test_BinarySVM(logging = False).process()
-'''
 
 test_SVM(logging = True).process()
 
 # Test HMM
 test_HMM(logging = True).process()
-
+'''

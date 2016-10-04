@@ -13,39 +13,34 @@ class test_fs(test_Suite):
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
 
-    def test_fs_f2mat(self):
-        sample_data = "sample_data/dating/date_info.txt"
+    def test_fs_csv_loader(self):
+        sample_data = "sample_data/iris/iris.csv"
         self.tlog("loading matrix => " + sample_data)
 
         dmat_train, dlabel_train, dmat_test, dlabel_test \
-            = fs.f2mat(sample_data, 0.1)
-        assert len(dmat_train) == 900
-        assert len(dlabel_train) == 900
-        assert len(dmat_test) == 100
-        assert len(dlabel_test) == 100
+            = fs.csv_loader(sample_data, 0.2)
 
-        self.set_global_value('dmat_train',dmat_train)
-        self.set_global_value('dlabel_train',dlabel_train)
-        self.set_global_value('dmat_test',dmat_test)
-        self.set_global_value('dlabel_test',dlabel_test)
+        self.tlog('iris train data size : ' + str(len(dmat_train)))
+        self.tlog('iris test data size : ' + str(len(dmat_test)))
 
+        self.set_global_value('iris_mat_train',dmat_train)
+        self.set_global_value('iris_label_train',dlabel_train)
+        self.set_global_value('iris_mat_test',dmat_test)
+        self.set_global_value('iris_label_test',dlabel_test)
 
-    def test_fs_f2wordmat(self):
-        sample_words = "sample_data/email/email_word_small.txt"
+    def test_fs_csv_loader_with_nlp(self):
+        sample_words = "sample_data/email/email.csv"
         self.tlog("loading words => " + sample_words)
-
 
         nlp_eng = nlp("eng")
         wordmat_train, wordlabel_train, voca, wordmat_test, wordlabel_test \
-                = fs.f2wordmat(sample_words, 0.1, nlp_eng)
+          = fs.csv_loader_with_nlp(sample_words, 0.1, nlp_eng)
 
-        assert len(voca) == 7
-        assert len(wordmat_train) == 4
-        assert len(wordlabel_train) == 4
-
+        self.tlog('email data voca size : ' + str(len(voca)))
+        self.tlog('voca sample : ' + str(voca[:5]))
 
     def test_process(self):
-        self.test_fs_f2mat()
-        self.test_fs_f2wordmat()
+        self.test_fs_csv_loader()
+        self.test_fs_csv_loader_with_nlp()
         # To see test of storing module, check test_decision_tree
 

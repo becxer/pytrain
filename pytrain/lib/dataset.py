@@ -1,6 +1,8 @@
 import os, struct
 from array import array as pyarray
 from numpy import append, array, int8, uint8, zeros
+import numpy as np
+from pytrain.lib import fs
 
 def load_mnist(path=".", dataset="training", digits=np.arange(10)):
 
@@ -32,10 +34,17 @@ def load_mnist(path=".", dataset="training", digits=np.arange(10)):
         images[i] = array(img[ ind[i]*rows*cols : (ind[i]+1)*rows*cols ]).reshape((rows, cols))
         labels[i] = lbl[ind[i]]
 
-    return images, labels:
+    return images, labels
 
 def load_iris(path=".", dataset="training"):
-    pass
-
-
-
+    
+    sample_data = os.path.join(path, "iris.csv")    
+    dmat_train, dlabel_train, dmat_test, dlabel_test \
+      = fs.csv_loader(sample_data, 0.2)
+      
+    if dataset == "training":
+        return dmat_train, dlabel_train
+    elif dataset == "testing":
+        return dmat_test, dlabel_test
+    else:
+        raise ValueError("dataset must be 'testing' or 'training'")
