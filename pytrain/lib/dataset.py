@@ -4,7 +4,7 @@ from numpy import append, array, int8, uint8, zeros
 import numpy as np
 from pytrain.lib import fs
 
-def load_mnist(path=".", dataset="training", digits=np.arange(10)):
+def load_mnist(path=".", dataset="training", one_hot = False, digits=np.arange(10)):
 
     if dataset == "training":
         fname_img = os.path.join(path, 'train-images-idx3-ubyte')

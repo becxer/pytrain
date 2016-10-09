@@ -28,12 +28,10 @@ test_nlp(logging = False).process()
 test_dataset(logging = False).process()
 
 # test KNN
-#test_KNN(logging = False).process()
+test_KNN(logging = True).process()
+test_KNN_digit(logging = True).process()
 
 '''
-# <Take too much time>
-# test_KNN_digit(logging = False).process()
-
 # test DecisionTree
 test_DecisionTreeID3(logging = False).process()
 test_DecisionTreeID3_store(logging = False).process()
