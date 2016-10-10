@@ -6,6 +6,7 @@ Machine Learning library for python
     
 ####1. Supervised learning
 
++ Version Space [Not yet]
 + Decision Tree(ID3)
 + Gaussian NaiveBayes
 + NaiveBayes
@@ -25,11 +26,14 @@ Machine Learning library for python
 + Kmeans
 + HierarchicalClustering
 
-## Comparison algorithm
+## Test dataset
 
-####1. IRIS
-
-####2. MNIST
++ IRIS
++ MNIST
++ Lense
++ Spam email
++ Mushroom
++ WRM
 
 ## Requirements
 
@@ -47,4 +51,4 @@ Machine Learning library for python
 ## You can test code with below
 
     sudo pip install --upgrade pydemon
-    ./run_dev.sh
+    pydemon test.py
