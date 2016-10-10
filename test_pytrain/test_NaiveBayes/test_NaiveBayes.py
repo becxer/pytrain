@@ -8,8 +8,7 @@ from test_pytrain import test_Suite
 from pytrain.NaiveBayes import NaiveBayes
 from pytrain.lib import nlp
 from pytrain.lib import fs
-from pytrain.lib import batch
-
+from pytrain.lib import autotest
 
 class test_NaiveBayes(test_Suite):
 
@@ -39,7 +38,7 @@ class test_NaiveBayes(test_Suite):
         # convert docs to bag of word vector using vocabulary
         docs_vector = []
         for doc in sample_docs:
-            docs_vector.append(nlp_eng.bag_of_words2vector(voca, doc))
+            docs_vector.append(nlp_eng.bag_of_word2vector(voca, doc))
         self.tlog(docs_vector)
 
         # training NaiveBayes
@@ -48,22 +47,22 @@ class test_NaiveBayes(test_Suite):
 
         # test case 1
         tc1 = "this is virus mail"
-        tc1_vec = nlp_eng.bag_of_words2vector(voca, tc1)
+        tc1_vec = nlp_eng.bag_of_word2vector(voca, tc1)
         
         self.tlog(tc1)
         self.tlog(tc1_vec)
         
-        r1 = batch.eval_predict_one(nbayes,tc1_vec,'spam',self.logging)
+        r1 = autotest.eval_predict_one(nbayes,tc1_vec,'spam',self.logging)
         assert r1 == True
 
         # test case 2
         tc2 = "I love you love"
-        tc2_vec = nlp_eng.bag_of_words2vector(voca, tc2)
+        tc2_vec = nlp_eng.bag_of_word2vector(voca, tc2)
         
         self.tlog(tc2)
         self.tlog(tc2_vec)
 
-        r2 = batch.eval_predict_one(nbayes,tc2_vec,'spam',self.logging)
+        r2 = autotest.eval_predict_one(nbayes,tc2_vec,'spam',self.logging)
         assert r2 == True
 
 
@@ -76,15 +75,15 @@ class test_NaiveBayes_email(test_Suite):
 
         nlp_eng = nlp("eng")
 
-        email_data_file = "sample_data/email/email_word_real.txt"
+        email_data_file = "sample_data/email/email.csv"
         emailmat_train, emaillabel_train, voca, emailmat_test, emaillabel_test \
-                = fs.f2wordmat(email_data_file, 0.3, nlp_eng)
+                = fs.csv_loader_with_nlp(email_data_file, 0.3, nlp_eng)
         self.tlog(voca)
         
         email_nbayes = NaiveBayes(emailmat_train, emaillabel_train)
         email_nbayes.fit()
 
-        error_rate = batch.eval_predict(email_nbayes, emailmat_test, emaillabel_test, self.logging)
+        error_rate = autotest.eval_predict(email_nbayes, emailmat_test, emaillabel_test, self.logging)
         self.tlog("spam-mail predict (with NaiveBayes) error rate : " +str(error_rate))
 
         assert error_rate <= 0.1

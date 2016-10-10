@@ -6,8 +6,8 @@
 #
 from test_pytrain import test_Suite
 from pytrain.LinearRegression import LinearRegression
-from pytrain.lib import fs
-from pytrain.lib import batch
+from pytrain.lib import dataset
+from pytrain.lib import autotest
 
 class test_LinearRegression(test_Suite):
 
@@ -22,28 +22,37 @@ class test_LinearRegression(test_Suite):
                      [0.14, 0.45],\
                      [7.30, 4.23],\
                      ]
-        train_label = [[0,1],[1,0],[0,1],[1,0]] # out bit is 1
+        train_label = [[0,1],[1,0],[0,1],[1,0]]
         
         linear_reg =\
             LinearRegression(train_mat, train_label)
-        linear_reg.fit(lr = 0.001, epoch = 1000, stoc = 4)
+        linear_reg.fit(lr = 0.001, epoch = 1000, batch_size = 4)
         
-        r1 = batch.eval_predict_one(linear_reg,[0.10,0.33],[0, 1],self.logging)
-        r2 = batch.eval_predict_one(linear_reg,[4.40,4.37],[1, 0],self.logging)
+        r1 = autotest.eval_predict_one(linear_reg,[0.10,0.33],[0, 1],self.logging, one_hot = True)
+        r2 = autotest.eval_predict_one(linear_reg,[4.40,4.37],[1, 0],self.logging, one_hot = True)
         
-class test_LinearRegression_horse(test_Suite):
+class test_LinearRegression_iris(test_Suite):
 
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        horse_mat_train, horse_label_train = fs.f2mat("sample_data/horse/horseColicTraining_1.txt",0)
-        horse_label_train = [[float(x)] for x in horse_label_train]
-        horse_mat_test, horse_label_test = fs.f2mat("sample_data/horse/horseColicTest_1.txt",0)
-        horse_label_test = [[float(x)] for x in horse_label_test]
-        linear_reg =\
-            LinearRegression(horse_mat_train, horse_label_train)
-        linear_reg.fit(lr = 0.0000001, epoch = 1000, stoc = 400)
-        error_rate = batch.eval_predict(linear_reg,horse_mat_test,horse_label_test,self.logging)
-        self.tlog("horse predict (with linear regression) error rate :" + str(error_rate))
-        
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot=True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot=True)
+
+        linear_reg = LinearRegression(iris_mat_train, iris_label_train)
+        linear_reg.fit(lr = 0.0001, epoch = 1000, batch_size = 20)
+        error_rate = autotest.eval_predict(linear_reg, iris_mat_test, iris_label_test, self.logging, one_hot=True)
+        self.tlog("iris predict (with linear regression) error rate :" + str(error_rate))
+
+class test_LinearRegression_mnist(test_Suite):
+
+    def __init__(self, logging = True):
+        test_Suite.__init__(self, logging)
+
+    def test_process(self):
+        print "######"
+        print "mnist - linear regression"
+        print "######"
+        pass
+    

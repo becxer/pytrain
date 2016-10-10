@@ -10,7 +10,6 @@ from numpy import *
 from math import log
 import operator
 
-
 class DecisionTreeID3:
     def __init__(self, mat_data, label_data):
         self.mat_data = mat_data

@@ -13,8 +13,7 @@ class test_Apriori(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        data = [[1,3,4], [2,3,5],\
-                [1,2,3,5], [2,5]]
+        data = [[1,3,4], [2,3,5],[1,2,3,5], [2,5]]
 
         ap = Apriori(data)
         ap.fit(min_support = 0.5 , min_confidence = 0.7)
@@ -22,10 +21,10 @@ class test_Apriori(test_Suite):
         itemsets_list = ap.get_itemsets()
         support_data = ap.get_support_data()
         rules = ap.get_rules()
-       
-        for itemsets in itemsets_list:
-            for itemset in itemsets:
-                self.tlog(itemset)
+
+        self.tlog("itemsets list : " + str(itemsets_list))
+        self.tlog("support_data : " + str(support_data))
+        self.tlog("rules : " + str(rules))
         
         rec = ap.recommend([2])
         self.tlog("recommend with 2 : " + str(rec))
@@ -37,7 +36,7 @@ class test_Apriori_mushroom(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        mushroom_file = open("sample_data/mushroom/mushroom.dat")
+        mushroom_file = open("sample_data/mushroom/mushroom.csv")
         data = map(lambda x : x.strip().split(), mushroom_file.read().split("\n"))[:-1]
         ap = Apriori(data)
         ap.fit(min_support = 0.9, min_confidence = 0.8)
@@ -45,9 +44,6 @@ class test_Apriori_mushroom(test_Suite):
         support_data = ap.get_support_data()
         rules = ap.get_rules()  
 
-        for itemsets in itemsets_list:
-            for itemset in itemsets:
-                self.tlog(itemset)
-
-        for rule in rules:
-            self.tlog(rule)
+        self.tlog("itemsets list : " + str(itemsets_list))
+        self.tlog("support_data : " + str(support_data))
+        self.tlog("rules : " + str(rules))

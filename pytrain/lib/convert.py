@@ -12,5 +12,7 @@ def list2npfloat(list_data):
     if ldtype == 'str' or ldtype == 'long' or ldtype == 'int' or ldtype == 'int32' or\
       ldtype == 'int64' or ldtype == 'float' or ldtype == 'float32' or ldtype == 'float64':
         return float(list_data)
-    elif ldtype == 'list' or ldtype == 'ndarray':
+    elif ldtype == 'list':
         return array(map(list2npfloat, list_data))
+    else :
+        return list_data

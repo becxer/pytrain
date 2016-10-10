@@ -20,10 +20,10 @@ class LinearRegression:
         self.label_data = convert.list2npfloat(label_data)
 
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [ (random.random() * 0.0000001 + sys.float_info.epsilon)\
+        self.mat_w =  [ [ (random.random() * 0.0001 + sys.float_info.epsilon)\
                             for i in range(len(mat_data[0]))] \
                                 for j in range(self.out_bit) ]
-        self.mat_w0 = [ random.random() * 0.0000001 + sys.float_info.epsilon\
+        self.mat_w0 = [ random.random() * 0.0001 + sys.float_info.epsilon\
                             for i in range(self.out_bit) ]
 
     #
@@ -56,18 +56,18 @@ class LinearRegression:
         k = (w * data).sum(axis=1) + tiled_w0
         gd = (label.T[out_bit_index] - k)
         # dJ_dw is gradient of J(w) function
-        dJ_dw = (gd * data.T).sum(axis=1) * -2
-        dJ_dw0  = gd.sum(axis=0) * -2
+        dJ_dw = (gd * data.T).sum(axis=1)/len(data) * -1
+        dJ_dw0  = gd.sum(axis=0)/len(data) * -1
         w = w - (dJ_dw * self.lr)
         w0 = w0 - (dJ_dw0 * self.lr)
         self.mat_w[out_bit_index] = w
         self.mat_w0[out_bit_index] = w0
 
-    def fit(self, lr, epoch, stoc):
+    def fit(self, lr, epoch, batch_size):
         self.lr = lr
         self.epoch = epoch
         start = 0
-        end = stoc
+        end = batch_size
         datalen = len(self.mat_data)
         while start < datalen :
             for ep in range(epoch):
@@ -75,7 +75,7 @@ class LinearRegression:
                     self.batch_update_w(i, self.mat_data[start:end],\
                         self.label_data[start:end])
             start = end
-            end += stoc
+            end += batch_size
 
     def predict(self, array_input):
         array_input = convert.list2npfloat(array_input)

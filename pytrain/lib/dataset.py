@@ -36,11 +36,22 @@ def load_mnist(path=".", dataset="training", one_hot = False, digits=np.arange(1
 
     return images, labels
 
-def load_iris(path=".", dataset="training"):
+def load_iris(path=".", dataset="training", one_hot = False):
     
     sample_data = os.path.join(path, "iris.csv")    
     dmat_train, dlabel_train, dmat_test, dlabel_test \
       = fs.csv_loader(sample_data, 0.2)
+
+    if one_hot:
+        one_hot_label = [[1,0,0], [0,1,0], [0,0,1]]
+        temp_dlabel_train = []
+        temp_dlabel_test = []
+        for l in dlabel_train:
+            temp_dlabel_train.append(one_hot_label[int(l)])
+        for l in dlabel_test:
+            temp_dlabel_test.append(one_hot_label[int(l)])
+        dlabel_train = temp_dlabel_train
+        dlabel_test = temp_dlabel_test
       
     if dataset == "training":
         return dmat_train, dlabel_train

@@ -35,7 +35,7 @@ class KNN:
         sorted_distances = distances.argsort()
         class_count = {}
         for i in range(self.k):
-            kth_label = self.label_data[sorted_distances[i]]
+            kth_label = str(self.label_data[sorted_distances[i]])
             class_count[kth_label] = class_count.get(kth_label, 0) + 1
         sorted_class_count = sorted(class_count.iteritems()
             , key=operator.itemgetter(1), reverse=True)

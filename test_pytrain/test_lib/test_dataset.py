@@ -17,6 +17,12 @@ class test_dataset(test_Suite):
         iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing")
         self.tlog("iris train data size : " + str(len(iris_mat_train)))
         self.tlog("iris test data size : " + str(len(iris_mat_test)))
+
+    def test_load_iris_one_hot(self):
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot = True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot = True)
+        self.tlog("iris train data size : " + str(len(iris_mat_train)))
+        self.tlog("iris test data size : " + str(len(iris_mat_test)))
         
     def test_load_mnist(self):
         mnist_mat_train, mnist_label_train \
@@ -28,4 +34,6 @@ class test_dataset(test_Suite):
         
     def test_process(self):
         self.test_load_iris()
+        self.test_load_iris_one_hot()
         self.test_load_mnist()
+

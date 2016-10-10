@@ -8,7 +8,7 @@ from test_pytrain import test_Suite
 from pytrain.GaussianNaiveBayes import GaussianNaiveBayes
 from pytrain.lib import nlp
 from pytrain.lib import fs
-from pytrain.lib import batch
+from pytrain.lib import autotest
 
 import json
 from numpy import *
@@ -35,7 +35,7 @@ class test_GaussianNaiveBayes(test_Suite):
 
         gnb = GaussianNaiveBayes(train_mat,train_label)
         gnb.fit()
-        error_rate = batch.eval_predict(gnb, test_mat, test_label, self.logging)
+        error_rate = autotest.eval_predict(gnb, test_mat, test_label, self.logging)
         self.tlog("strength of signal predict error rate : " + str(error_rate))
 
 class test_GaussianNaiveBayes_rssi(test_Suite):
@@ -47,7 +47,7 @@ class test_GaussianNaiveBayes_rssi(test_Suite):
         MAJOR_AP_COUNT = 17
         BAD_SIGNAL = -100
         
-        areaf = open("sample_data/rssi/rssi.dat")
+        areaf = open("sample_data/wrm/wrm.json.dat")
         area_json_list = areaf.readlines()
         areaf.close()
         area_set = {}
@@ -96,6 +96,6 @@ class test_GaussianNaiveBayes_rssi(test_Suite):
 
         gnb = GaussianNaiveBayes(train_mat,train_label)
         gnb.fit()
-        error_rate = batch.eval_predict(gnb, test_mat, test_label, self.logging)
+        error_rate = autotest.eval_predict(gnb, test_mat, test_label, self.logging)
         self.tlog("rssi predict (with GaussianNaiveBayes) error rate : " + str(error_rate))
 
