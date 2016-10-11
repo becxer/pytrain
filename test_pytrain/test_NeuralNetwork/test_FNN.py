@@ -7,7 +7,8 @@
 
 from test_pytrain import test_Suite
 from pytrain.NeuralNetwork import FNN
-from pytrain.lib import batch
+from pytrain.lib import autotest
+from pytrain.lib import dataset
 from numpy import *
 
 class test_FNN(test_Suite):
@@ -23,10 +24,33 @@ class test_FNN(test_Suite):
                      [0.14, 0.45],\
                      [7.30, 4.23],\
                      ]
-        train_label = ['zero','one','zero','one']
+        train_label = [[0,1],[1,0],[0,1],[1,0]] # out bit is 1
         
-        fn = FNN(train_mat, train_label, [3,2])
-        fn.fit(0.1, 5000, 0.001)
-        r1 = batch.eval_predict_one(fn, [4.40,4.37], 'one', self.logging)
-        r2 = batch.eval_predict_one(fn, [0.40,0.37], 'zero', self.logging)
+        fnn = FNN(train_mat, train_label, [3])
+        fnn.fit(lr = 0.01, epoch = 2000, err_th = 0.001, batch_size = 4)
         
+        r1 = autotest.eval_predict_one(fnn,[0.10,0.33],[0, 1],self.logging, one_hot=True)
+        r2 = autotest.eval_predict_one(fnn,[4.40,4.37],[1, 0],self.logging, one_hot=True)
+        
+class test_FNN_iris(test_Suite):
+
+    def __init__(self, logging = True):
+        test_Suite.__init__(self, logging)
+
+    def test_process(self):
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot=True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot=True)
+
+        fnn = FNN(iris_mat_train, iris_label_train, [2])
+        fnn.fit(lr = 0.001, epoch = 4000, err_th = 0.00001, batch_size = 30)
+        error_rate = autotest.eval_predict(fnn, iris_mat_test, iris_label_test, self.logging, one_hot=True)
+        self.tlog("iris predict (with fnn) error rate :" + str(error_rate))
+
+class test_FNN_mnist(test_Suite):
+
+    def __init__(self, logging = True):
+        test_Suite.__init__(self, logging)
+    
+    def test_process(self):
+        print "__TODO__ : MNIST test to be implement"
+        pass

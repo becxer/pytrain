@@ -10,40 +10,23 @@ from pytrain.lib import convert
 from pytrain.lib import ptmath
 import sys
 
-
-
 class FNN:
 
     def __init__(self, mat_data, label_data, hl_list):
         self.mat_data = convert.list2npfloat(mat_data)
-        self.label_data = label_data
+        self.y = convert.list2npfloat(label_data)
         self.il_size = self.mat_data.shape[1]
+        self.ol_size = self.y.shape[1]
         self.hl_list = hl_list
-        self.idx_label_map = list(set(self.label_data))
         self.W = {}
         self.B = {}
-        self.hl_list.append(len(self.idx_label_map))
+        self.hl_list.append(self.ol_size)
         last_layer_num = self.il_size
         for idx, hl_num in enumerate(hl_list):
             self.W['WD_' + str(idx)] = 0.1 * random.randn(hl_num, last_layer_num)
             self.B['BD_' + str(idx)] = 0.1 * random.randn(hl_num)
             last_layer_num = hl_num
-        self.makelabelmap()
-
-    def makelabelmap(self):
-        self.label_onehot_map = {}
-        for i, label in enumerate(self.idx_label_map):
-            onehot = zeros(self.hl_list[-1])
-            onehot[i] = 1
-            self.label_onehot_map[label] = onehot
-        self.y = []
-        for each_label in self.label_data:
-            self.y.append(self.label_onehot_map[each_label])
-        self.y = array(self.y)
             
-    def match_label(self, output):
-        return self.idx_label_map[argmax(output)]
-
     def feedforward(self, x):
         last_input = x
         layer = {}
@@ -62,7 +45,7 @@ class FNN:
         now_dW = array([now_delta]).transpose().dot(array([now_x]))
         return now_delta, now_dW
         
-    def fit(self, lr, epoch, err_th):
+    def fit(self, lr, epoch, err_th, batch_size):
         err = 9999.0
         npoch = 0
         while err > err_th and npoch < epoch :
@@ -94,4 +77,4 @@ class FNN:
     def predict(self, array_input):
         array_input = convert.list2npfloat(array_input)
         out, layer = self.feedforward(array_input)
-        return self.match_label(out)
+        return out

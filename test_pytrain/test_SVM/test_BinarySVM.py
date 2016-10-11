@@ -6,7 +6,7 @@
 #
 from test_pytrain import test_Suite
 from pytrain.SVM import BinarySVM
-from pytrain.lib import batch 
+from pytrain.lib import autotest
 
 class test_BinarySVM(test_Suite):
 
@@ -25,8 +25,8 @@ class test_BinarySVM(test_Suite):
         svm = BinarySVM(train_mat, train_label)
         svm.fit(C = 0.1, toler = 0.001, epoch = 40)
         
-        r1 = batch.eval_predict_one(svm,[0.10,0.33], -1.0, self.logging)
-        r2 = batch.eval_predict_one(svm,[4.40,4.37], 1.0, self.logging)
+        r1 = autotest.eval_predict_one(svm,[0.10,0.33], -1.0, self.logging)
+        r2 = autotest.eval_predict_one(svm,[4.40,4.37], 1.0, self.logging)
 
         assert r1
         assert r2

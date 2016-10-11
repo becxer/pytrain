@@ -15,13 +15,11 @@ from test_GaussianNaiveBayes import *
 from test_Apriori import *
 from test_LinearRegression import *
 from test_LogisticRegression import *
-#from test_NeuralNetwork import *
-
-#from test_SVM import *
-#from test_Kmeans import *
-#from test_DBSCAN import *
-#from test_HierarchicalClustering import *
-#from test_HMM import *
+from test_NeuralNetwork import *
+from test_Kmeans import *
+from test_DBSCAN import *
+from test_HierarchicalClustering import *
+from test_SVM import *
 
 # test lib modules
 test_fs(logging = False).process()
@@ -64,15 +62,20 @@ test_LinearRegression_mnist(logging = True).process()
 
 # Test LogicticRegression
 test_LogisticRegression(logging = False).process()
-test_LogisticRegression_iris(logging = False).process()
+
+if FULL_TEST:
+    test_LogisticRegression_iris(logging = False).process()
+
 test_LogisticRegression_mnist(logging = True).process()
 
 # Test FNN
-# test_FNN(logging = True).process()
-# test_FNN_iris(logging = True).process()
-# test_FNN_mnist(logging = True).process()
+test_FNN(logging = False).process()
 
-'''
+if FULL_TEST:
+    test_FNN_iris(logging = False).process()
+
+test_FNN_mnist(logging = True).process()
+
 # Test Kmeans
 test_Kmeans(logging = False).process()
 
@@ -83,9 +86,16 @@ test_DBSCAN(logging = False).process()
 test_HierarchicalClustering(logging = False).process()
 
 # Test SVM
-test_BinarySVM(logging = False).process()
+test_BinarySVM(logging = True).process()
+
+'''
+# TODO --
 
 test_SVM(logging = True).process()
+
+#from test_HMM import *
+#from test_VersionSpace import *
+#from test_CRF import *
 
 # Test HMM
 test_HMM(logging = True).process()

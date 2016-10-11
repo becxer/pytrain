@@ -51,8 +51,6 @@ class test_LinearRegression_mnist(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        print "######"
-        print "mnist - linear regression"
-        print "######"
+        print "__TODO__ : MNIST test to be implement"
         pass
     
