@@ -39,7 +39,7 @@ class FNN:
     def backprop_dw(self, now_x, now_W, now_B, top_delta, top_W = None):
         err_toss = top_delta
         now_out = now_W.dot(now_x) + now_B
-        if top_W != None:
+        if top_W is not None:
             err_toss = err_toss.dot(top_W)
         now_delta = ptmath.sigmoid_delta(now_out) * err_toss
         now_dW = array([now_delta]).transpose().dot(array([now_x]))

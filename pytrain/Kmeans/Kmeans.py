@@ -77,7 +77,7 @@ class Kmeans:
     
     def cluster(self, K, epoch):
         # set random point for K class
-        cluster_points = random.random_sample((K, self.col_len))
+        cluster_points = random.random_sample((K, int(self.col_len)))
         cluster_points = (cluster_points * (self.max_col - self.min_col))\
           + self.min_col
 
