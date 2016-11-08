@@ -3,10 +3,7 @@
 Machine Learning library for python
 
 ## Algorithms
-    
-####1. Supervised learning
 
-+ Version Space [Not yet]
 + Decision Tree(ID3)
 + Gaussian NaiveBayes
 + NaiveBayes
@@ -14,26 +11,14 @@ Machine Learning library for python
 + Neural Network(FNN)
 + Logistic Regression
 + Linear Regression
-+ SVM
-+ HMM [Not yet]
-+ CRF [Not yet]
-
-
-####2. Unsupervised learning
-
 + DBSCAN
 + Apriori
 + Kmeans
 + HierarchicalClustering
-
-## Test dataset
-
-+ IRIS
-+ MNIST
-+ Lense
-+ Spam email
-+ Mushroom
-+ WRM
++ BinarySVM
++ SVM [Not yet]
++ HMM [Not yet]
++ CRF [Not yet]
 
 ## Requirements
 
@@ -42,13 +27,16 @@ Machine Learning library for python
 
 ## Installation
 
-    sudo pip install --upgrade pytrain
+    $ sudo pip install --upgrade pytrain
     
 ## Basic Usage
 
-    [Not yet]
+[See examples here](https://github.com/becxer/pytrain/tree/master/examples)
 
-## You can test code with below
+## How to contribute
 
-    sudo pip install --upgrade pydemon
-    pydemon test.py
+    Fork this repository, and write your algorithm, pull request.
+    Don't forgot proper test code in test_pytrain.
+    Test code should be work successfully in below command.
+    
+    $ python test.py
