@@ -6,11 +6,10 @@
 # @ e-mail becxer87@gmail.com
 #
 
-from numpy import *
+import numpy as np
 from pytrain.lib import convert
 from pytrain.lib import ptmath
 import operator
-
 
 class KNN:
     def __init__(self, mat_data, label_data, k, dist_func):
@@ -30,7 +29,7 @@ class KNN:
         distances = []
         for trg in self.mat_data:
             distances.append(self.dist_func(array_input, trg))
-        distances = array(distances)
+        distances = np.array(distances)
         
         sorted_distances = distances.argsort()
         class_count = {}
