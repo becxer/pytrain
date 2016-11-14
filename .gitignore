@@ -1,4 +1,6 @@
 "#*"
+#notebook checkpoint
+examples/.ipynb_checkpoints/
 
 #ctags
 tags
