@@ -35,11 +35,8 @@ Machine Learning library for python
     from pytrain.NeuralNetwork import FNN
 
     # Simple dataset
-    train_mat = [[0.12, 0.25], [3.24, 4.33],\
-             [0.14, 0.45],[7.30, 4.23],]
-
-    train_label = [[0,1],[1,0],\
-               [0,1],[1,0]]
+    train_mat = [[0.12,0.25],[3.24,4.33],[0.14,0.45],[7.30,4.23]]
+    train_label = [[0,1],[1,0],[0,1],[1,0]]
 
     test_a = [0.10,0.33]
     test_b = [4.0,4.5]
