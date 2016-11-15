@@ -2,7 +2,7 @@
 
 Machine Learning library for python
 
-![alt text](https://github.com/becxer/pytrain/raw/master/tmp/logo_python.png "pytrain")
+![alt text](https://github.com/becxer/pytrain/raw/master/tmp/logo_pytrain.png "pytrain")
 
 ## Algorithms
 
