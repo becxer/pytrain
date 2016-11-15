@@ -42,7 +42,7 @@ Machine Learning library for python
     test_b = [4.0,4.5]
 
     # Train model (FNN)
-    hidden_layer = [3]
+    hidden_layer = [3,2]
     fnn = FNN(train_mat, train_label, hidden_layer)
     fnn.fit(lr = 0.01, epoch = 2000, err_th = 0.001, batch_size = 4)
 
