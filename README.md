@@ -2,6 +2,9 @@
 
 Machine Learning library for python
 
+![alt text](https://github.com/becxer/pytrain/raw/master/tmp/pytrain.png "pytrain")
+
+
 ## Algorithms
 
 + Decision Tree(ID3)
