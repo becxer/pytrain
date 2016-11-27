@@ -38,8 +38,8 @@ class test_LogisticRegression_iris(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot=True)
-        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot=True)
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data", "training", one_hot=True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data", "testing", one_hot=True)
 
         logistic_reg = LogisticRegression(iris_mat_train, iris_label_train)
         logistic_reg.fit(lr = 0.001, epoch = 2000, batch_size = 30)

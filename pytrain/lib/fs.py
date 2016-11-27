@@ -10,15 +10,27 @@ import math
 import sys
 from pytrain.lib import nlp
 
+def csv_loader(filename, ho_ratio):
+    return seperate_loader(filename, ho_ratio, ',')
+
+def tsv_loader(filename, ho_ratio):
+    return seperate_loader(filename, ho_ratio, '\t')
+
+def csv_loader_with_nlp(filename, ho_ratio, nlp_lib):
+    return seperate_loader_with_nlp(filename, ho_ratio, nlp_lib, ',')
+
+def tsv_loader_with_nlp(filename, ho_ratio, nlp_lib):
+    return seperate_loader_with_nlp(filename, ho_ratio, nlp_lib, '\t')
 
 # convert file which format is
 # [label, feature1, feature2 ... , featureN]
 # to matrix_train, label_train, matrix_test, label_test
 # according to ho_ratio
 # ho_ratio is test_set ratio how you want
-def csv_loader(filename, ho_ratio):
+def seperate_loader(filename, ho_ratio, delimeter):
     fr = open(filename)
     lines = fr.readlines()
+    lines.pop(0)
     mat_train = []
     mat_test = [] 
     label_train = []
@@ -30,7 +42,7 @@ def csv_loader(filename, ho_ratio):
         split_index = math.floor(1.0 / ho_ratio)
     for line in lines:
         line = line.strip()
-        list_from_line = line.split('\t')
+        list_from_line = line.split(delimeter)
         if ho_ratio == 0 or (train_index + test_index) % split_index != 0 :
             mat_train.append(list_from_line[1:])
             label_train.append(list_from_line[0])
@@ -44,9 +56,8 @@ def csv_loader(filename, ho_ratio):
     else :
         return mat_train, label_train, mat_test, label_test
 
-
-def csv_loader_with_nlp(filename, ho_ratio, nlp_lib):
-    wmat = csv_loader(filename, ho_ratio)
+def seperate_loader_with_nlp(filename, ho_ratio, nlp_lib, delimeter):
+    wmat = seperate_loader(filename, ho_ratio, delimeter)
     wmat_train, label_train  = wmat[:2]
 
     mat_train = []

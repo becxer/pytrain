@@ -38,8 +38,8 @@ class test_FNN_iris(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot=True)
-        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot=True)
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data", "training", one_hot=True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data", "testing", one_hot=True)
 
         fnn = FNN(iris_mat_train, iris_label_train, [2])
         fnn.fit(lr = 0.001, epoch = 4000, err_th = 0.00001, batch_size = 30)

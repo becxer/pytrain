@@ -60,7 +60,7 @@ class test_DecisionTreeID3_lense(test_Suite):
 
     def test_process(self):
         lense_mat_train, lense_label_train, lense_mat_test, lense_label_test=\
-          fs.csv_loader("sample_data/lense/lense.csv", 0.3)
+          fs.tsv_loader("sample_data/lense/lense.csv", 0.3)
         dtree_lense = DecisionTreeID3(lense_mat_train,lense_label_train)
         tree_structure = dtree_lense.build()
         self.tlog("Tree structure : " + str(tree_structure))

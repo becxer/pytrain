@@ -16,8 +16,8 @@ class test_KNN_iris(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training")
-        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing")
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data", "training")
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data", "testing")
         
         knn = KNN(iris_mat_train, iris_label_train, 3, 'manhattan')
         error_rate = autotest.eval_predict(knn, iris_mat_test, iris_label_test, self.logging)

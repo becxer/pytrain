@@ -13,14 +13,14 @@ class test_dataset(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_load_iris(self):
-        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training")
-        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing")
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data", "training")
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data", "testing")
         self.tlog("iris train data size : " + str(len(iris_mat_train)))
         self.tlog("iris test data size : " + str(len(iris_mat_test)))
 
     def test_load_iris_one_hot(self):
-        iris_mat_train, iris_label_train = dataset.load_iris("sample_data/iris", "training", one_hot = True)
-        iris_mat_test, iris_label_test = dataset.load_iris("sample_data/iris", "testing", one_hot = True)
+        iris_mat_train, iris_label_train = dataset.load_iris("sample_data", "training", one_hot = True)
+        iris_mat_test, iris_label_test = dataset.load_iris("sample_data", "testing", one_hot = True)
         self.tlog("iris train data size : " + str(len(iris_mat_train)))
         self.tlog("iris test data size : " + str(len(iris_mat_test)))
         

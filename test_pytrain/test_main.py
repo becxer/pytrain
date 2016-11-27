@@ -22,13 +22,13 @@ from test_HierarchicalClustering import *
 from test_SVM import *
 
 # test lib modules
+if FULL_TEST:
+    test_dataset(logging = False).process()
+
 test_fs(logging = False).process()
 test_normalize(logging = False).process()
 test_autotest(logging = False).process()
 test_nlp(logging = False).process()
-
-if FULL_TEST:
-    test_dataset(logging = False).process()
 
 # test KNN
 test_KNN_iris(logging = False).process()
