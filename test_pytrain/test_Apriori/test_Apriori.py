@@ -36,7 +36,7 @@ class test_Apriori_mushroom(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        mushroom_file = open("sample_data/mushroom/mushroom.csv")
+        mushroom_file = open("sample_data/mushroom/mushroom.tsv")
         data = map(lambda x : x.strip().split(), mushroom_file.read().split("\n"))[:-1]
         ap = Apriori(data)
         ap.fit(min_support = 0.9, min_confidence = 0.8)

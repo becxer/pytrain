@@ -7,6 +7,7 @@ import urllib2 as ul2
 import os
 
 def load_mnist(path=".", dataset="training", one_hot = False, digits=np.arange(10)):
+    path = path + "/" + "mnist"
     if dataset == "training":
         fname_img = os.path.join(path, 'train-images-idx3-ubyte')
         fname_lbl = os.path.join(path, 'train-labels-idx1-ubyte')

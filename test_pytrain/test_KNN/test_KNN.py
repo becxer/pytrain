@@ -30,8 +30,8 @@ class test_KNN_mnist(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        dg_mat_train, dg_label_train = dataset.load_mnist("sample_data/mnist", "training") 
-        dg_mat_test, dg_label_test = dataset.load_mnist("sample_data/mnist", "testing")
+        dg_mat_train, dg_label_train = dataset.load_mnist("sample_data", "training") 
+        dg_mat_test, dg_label_test = dataset.load_mnist("sample_data", "testing")
 
         dg_mat_train = np.reshape(dg_mat_train,[-1, 28 * 28])
         dg_mat_test = np.reshape(dg_mat_test,[-1, 28 * 28])

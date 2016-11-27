@@ -26,9 +26,9 @@ class test_dataset(test_Suite):
         
     def test_load_mnist(self):
         mnist_mat_train, mnist_label_train \
-          = dataset.load_mnist("sample_data/mnist", "training", [0,1,2,3,4])
+          = dataset.load_mnist("sample_data", "training", [0,1,2,3,4])
         mnist_mat_test, mnist_label_test \
-          = dataset.load_mnist("sample_data/mnist", "testing", [0,1,2,3,4])
+          = dataset.load_mnist("sample_data", "testing", [0,1,2,3,4])
         self.tlog("mnist train data size : " + str(len(mnist_mat_train)))
         self.tlog("mnist test data size : " + str(len(mnist_mat_test)))
         

@@ -5,7 +5,7 @@
 # @ email becxer87@gmail.com#
 # --------------------------------------------
 
-FULL_TEST = False # Toggle for long test job
+FULL_TEST = True # Toggle for long test job
 
 from test_lib import *
 from test_KNN import *
@@ -22,9 +22,7 @@ from test_HierarchicalClustering import *
 from test_SVM import *
 
 # test lib modules
-if FULL_TEST:
-    test_dataset(logging = False).process()
-
+test_dataset(logging = False).process()
 test_fs(logging = False).process()
 test_normalize(logging = False).process()
 test_autotest(logging = False).process()
@@ -32,7 +30,6 @@ test_nlp(logging = False).process()
 
 # test KNN
 test_KNN_iris(logging = False).process()
-
 if FULL_TEST:
     test_KNN_mnist(logging = False).process()
 
@@ -51,9 +48,7 @@ test_GaussianNaiveBayes_rssi(logging = False).process()
 
 # Test Apriori
 test_Apriori(logging = False).process()
-
-if FULL_TEST:
-    test_Apriori_mushroom(logging = False).process()
+test_Apriori_mushroom(logging = False).process()
 
 # Test LinearRegression
 test_LinearRegression(logging = False).process()
@@ -62,18 +57,12 @@ test_LinearRegression_mnist(logging = True).process()
 
 # Test LogicticRegression
 test_LogisticRegression(logging = False).process()
-
-if FULL_TEST:
-    test_LogisticRegression_iris(logging = False).process()
-
+test_LogisticRegression_iris(logging = False).process()
 test_LogisticRegression_mnist(logging = True).process()
 
 # Test FNN
 test_FNN(logging = False).process()
-
-if FULL_TEST:
-    test_FNN_iris(logging = False).process()
-
+test_FNN_iris(logging = False).process()
 test_FNN_mnist(logging = True).process()
 
 # Test Kmeans
