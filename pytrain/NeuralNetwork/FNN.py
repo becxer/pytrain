@@ -23,8 +23,8 @@ class FNN:
         self.hl_list.append(self.ol_size)
         last_layer_num = self.il_size
         for idx, hl_num in enumerate(hl_list):
-            self.W['WD_' + str(idx)] = 0.0001 * np.random.randn(hl_num, last_layer_num)
-            self.B['BD_' + str(idx)] = 0.0001 * np.random.randn(hl_num)
+            self.W['WD_' + str(idx)] = 0.00001 * np.random.randn(hl_num, last_layer_num)
+            self.B['BD_' + str(idx)] = 0.00001 * np.random.randn(hl_num)
             last_layer_num = hl_num
             
     def feedforward(self, x):
