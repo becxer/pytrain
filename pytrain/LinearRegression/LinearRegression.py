@@ -5,8 +5,7 @@
 # @ e-mail becxer87@gmail.com
 #
 
-from numpy import *
-seterr(all='raise')
+import numpy as np
 from pytrain.lib import convert
 import math
 import time
@@ -18,13 +17,14 @@ class LinearRegression:
     def __init__(self, mat_data, label_data):
         self.mat_data = convert.list2npfloat(mat_data)
         self.label_data = convert.list2npfloat(label_data)
-
+        
         self.out_bit = len(label_data[0])
-        self.mat_w =  [ [ (random.random() * 0.0001 + sys.float_info.epsilon)\
+        self.mat_w =  np.array([ [ (random.random() * 0.00001 + sys.float_info.epsilon)\
                             for i in range(len(mat_data[0]))] \
-                                for j in range(self.out_bit) ]
-        self.mat_w0 = [ random.random() * 0.0001 + sys.float_info.epsilon\
-                            for i in range(self.out_bit) ]
+                                for j in range(self.out_bit) ], dtype = np.float64)
+
+        self.mat_w0 = np.array([ random.random() * 0.00001 + sys.float_info.epsilon\
+                            for i in range(self.out_bit) ], dtype = np.float64)
 
     #
     # Description of differential equation
@@ -52,12 +52,12 @@ class LinearRegression:
     def batch_update_w(self, out_bit_index, data, label):
         w = self.mat_w[out_bit_index]
         w0 = self.mat_w0[out_bit_index]
-        tiled_w0 = tile(w0,(len(data)))
+        tiled_w0 = np.tile(w0,(len(data)))
         k = (w * data).sum(axis=1) + tiled_w0
-        gd = (label.T[out_bit_index] - k)
+        gd = (k - label.T[out_bit_index])
         # dJ_dw is gradient of J(w) function
-        dJ_dw = (gd * data.T).sum(axis=1)/len(data) * -1
-        dJ_dw0  = gd.sum(axis=0)/len(data) * -1
+        dJ_dw = (gd * data.T).sum(axis=1)/len(data)
+        dJ_dw0  = gd.sum(axis=0)/len(data)
         w = w - (dJ_dw * self.lr)
         w0 = w0 - (dJ_dw0 * self.lr)
         self.mat_w[out_bit_index] = w
@@ -69,13 +69,15 @@ class LinearRegression:
         start = 0
         end = batch_size
         datalen = len(self.mat_data)
-        while start < datalen :
-            for ep in range(epoch):
+        for ep in range(epoch):
+            start = 0
+            end = batch_size
+            while start < datalen :
                 for i in range(self.out_bit):
                     self.batch_update_w(i, self.mat_data[start:end],\
                         self.label_data[start:end])
-            start = end
-            end += batch_size
+                start = end
+                end += batch_size
 
     def predict(self, array_input):
         array_input = convert.list2npfloat(array_input)

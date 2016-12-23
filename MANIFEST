@@ -35,5 +35,6 @@ pytrain/lib/convert.py
 pytrain/lib/dataset.py
 pytrain/lib/fs.py
 pytrain/lib/nlp.py
+pytrain/lib/nlp_stopwords.eng
 pytrain/lib/normalize.py
 pytrain/lib/ptmath.py

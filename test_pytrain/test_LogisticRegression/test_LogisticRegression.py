@@ -52,6 +52,10 @@ class test_LogisticRegression_mnist(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        print "__TODO__ : MNIST test to be implement"
-        pass
-    
+        dg_mat_train, dg_label_train = dataset.load_mnist("sample_data", "training", one_hot=True) 
+        dg_mat_test, dg_label_test = dataset.load_mnist("sample_data", "testing", one_hot=True)
+
+        logistic_reg = LogisticRegression(dg_mat_train, dg_label_train)
+        logistic_reg.fit(lr = 0.0001, epoch = 1000, batch_size = 100)
+        error_rate = autotest.eval_predict(logistic_reg, dg_mat_test, dg_label_test, self.logging, one_hot=True)
+        self.tlog("digit predict (with logistic regression) error rate :" + str(error_rate))

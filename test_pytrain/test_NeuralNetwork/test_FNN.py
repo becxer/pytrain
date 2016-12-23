@@ -47,10 +47,15 @@ class test_FNN_iris(test_Suite):
         self.tlog("iris predict (with fnn) error rate :" + str(error_rate))
 
 class test_FNN_mnist(test_Suite):
-
+    
     def __init__(self, logging = True):
         test_Suite.__init__(self, logging)
-    
+
     def test_process(self):
-        print "__TODO__ : MNIST test to be implement"
-        pass
+        dg_mat_train, dg_label_train = dataset.load_mnist("sample_data", "training", one_hot=True) 
+        dg_mat_test, dg_label_test = dataset.load_mnist("sample_data", "testing", one_hot=True)
+
+        fnn = FNN(dg_mat_train, dg_label_train, [400, 100])
+        fnn.fit(lr = 0.00001, epoch = 100, err_th = 0.00001, batch_size = 100)
+        error_rate = autotest.eval_predict(fnn, dg_mat_test, dg_label_test, self.logging, one_hot=True)
+        self.tlog("digit predict (with logistic regression) error rate :" + str(error_rate))

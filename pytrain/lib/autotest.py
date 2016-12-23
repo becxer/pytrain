@@ -28,6 +28,9 @@ def eval_predict_one(p_module, input_array_test, label_one_test, log_on = True, 
         one_hot_res = [0 for i in range(len(res))]
         one_hot_res[np.argmax(res)] = 1
         res = one_hot_res
+        one_hot_label_one_test = [0 for i in range(len(label_one_test))]
+        one_hot_label_one_test[np.argmax(label_one_test)] = 1
+        label_one_test = one_hot_label_one_test
         
     if log_on : print "input : '" + str(input_array_test[:3]) + \
             "' --> predicted : '" + str(res) + "' --? origin : '" \

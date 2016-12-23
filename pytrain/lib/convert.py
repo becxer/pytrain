@@ -5,7 +5,7 @@
 # @ e-mail becxer87@gmail.com
 #
 
-from numpy import *
+import numpy as np
 
 def list2npfloat(list_data):
     ldtype = type(list_data).__name__
@@ -13,6 +13,6 @@ def list2npfloat(list_data):
       ldtype == 'int64' or ldtype == 'float' or ldtype == 'float32' or ldtype == 'float64':
         return float(list_data)
     elif ldtype == 'list':
-        return array(map(list2npfloat, list_data))
+        return np.array(map(list2npfloat, list_data), dtype=np.float64)
     else :
         return list_data

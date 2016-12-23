@@ -26,14 +26,22 @@ class test_dataset(test_Suite):
         
     def test_load_mnist(self):
         mnist_mat_train, mnist_label_train \
-          = dataset.load_mnist("sample_data", "training", [0,1,2,3,4])
+          = dataset.load_mnist("sample_data", "training")
         mnist_mat_test, mnist_label_test \
-          = dataset.load_mnist("sample_data", "testing", [0,1,2,3,4])
+          = dataset.load_mnist("sample_data", "testing")
         self.tlog("mnist train data size : " + str(len(mnist_mat_train)))
         self.tlog("mnist test data size : " + str(len(mnist_mat_test)))
+
+    def test_load_mnist_one_hot(self):
+        mnist_mat_train, mnist_label_train \
+          = dataset.load_mnist("sample_data", "training", one_hot = True)
+        mnist_mat_test, mnist_label_test \
+          = dataset.load_mnist("sample_data", "testing", one_hot = True)
+        self.tlog("mnist train data size : " + str(len(mnist_mat_train)))
+        self.tlog("mnist test data size : " + str(len(mnist_mat_test)))        
         
     def test_process(self):
         self.test_load_iris()
         self.test_load_iris_one_hot()
         self.test_load_mnist()
-
+        self.test_load_mnist_one_hot()

@@ -5,7 +5,7 @@
 # @ e-mail becxer87@gmail.com
 #
 
-from numpy import *
+import numpy as np
 from pytrain.lib import convert
 from pytrain.lib import ptmath
 import sys
@@ -23,8 +23,8 @@ class FNN:
         self.hl_list.append(self.ol_size)
         last_layer_num = self.il_size
         for idx, hl_num in enumerate(hl_list):
-            self.W['WD_' + str(idx)] = 0.1 * random.randn(hl_num, last_layer_num)
-            self.B['BD_' + str(idx)] = 0.1 * random.randn(hl_num)
+            self.W['WD_' + str(idx)] = 0.0001 * np.random.randn(hl_num, last_layer_num)
+            self.B['BD_' + str(idx)] = 0.0001 * np.random.randn(hl_num)
             last_layer_num = hl_num
             
     def feedforward(self, x):
@@ -42,7 +42,7 @@ class FNN:
         if top_W is not None:
             err_toss = err_toss.dot(top_W)
         now_delta = ptmath.sigmoid_delta(now_out) * err_toss
-        now_dW = array([now_delta]).transpose().dot(array([now_x]))
+        now_dW = np.array([now_delta]).transpose().dot(np.array([now_x]))
         return now_delta, now_dW
         
     def fit(self, lr, epoch, err_th, batch_size):

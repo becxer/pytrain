@@ -8,7 +8,7 @@ from distutils.core import setup
 
 setup(
         name='pytrain',
-        version='0.0.7',
+        version='0.0.11',
         packages = [
             'pytrain',
             'pytrain.lib',
@@ -26,6 +26,8 @@ setup(
             'pytrain.NeuralNetwork',
             'pytrain.SVM'
             ],
+        include_package_data=True,
+        data_files=[('pytrain/lib',['pytrain/lib/nlp_stopwords.eng'])],
         author ='becxer',
         author_email='becxer87@gmail.com',
         url = 'https://github.com/becxer/pytrain',

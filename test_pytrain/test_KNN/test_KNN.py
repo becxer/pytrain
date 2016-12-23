@@ -33,9 +33,6 @@ class test_KNN_mnist(test_Suite):
         dg_mat_train, dg_label_train = dataset.load_mnist("sample_data", "training") 
         dg_mat_test, dg_label_test = dataset.load_mnist("sample_data", "testing")
 
-        dg_mat_train = np.reshape(dg_mat_train,[-1, 28 * 28])
-        dg_mat_test = np.reshape(dg_mat_test,[-1, 28 * 28])
-
         knn_digit = KNN(dg_mat_train, dg_label_train, 10, 'euclidean')
         error_rate = autotest.eval_predict(knn_digit, dg_mat_test, dg_label_test, self.logging)
         self.tlog("digit predict (with basic knn) error rate :" + str(error_rate))

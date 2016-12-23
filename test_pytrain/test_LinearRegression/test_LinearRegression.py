@@ -51,6 +51,10 @@ class test_LinearRegression_mnist(test_Suite):
         test_Suite.__init__(self, logging)
 
     def test_process(self):
-        print "__TODO__ : MNIST test to be implement"
-        pass
-    
+        dg_mat_train, dg_label_train = dataset.load_mnist("sample_data", "training", one_hot=True) 
+        dg_mat_test, dg_label_test = dataset.load_mnist("sample_data", "testing", one_hot=True)
+
+        linear_reg = LinearRegression(dg_mat_train, dg_label_train)
+        linear_reg.fit(lr = 0.0000001, epoch = 1000, batch_size = 100)
+        error_rate = autotest.eval_predict(linear_reg, dg_mat_test, dg_label_test, self.logging, one_hot=True)
+        self.tlog("digit predict (with linear regression) error rate :" + str(error_rate))
