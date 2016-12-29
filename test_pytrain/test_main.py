@@ -4,11 +4,6 @@
 # @ author becxer
 # @ email becxer87@gmail.com#
 # --------------------------------------------
-
-# Toggle dataset
-IRIS = True # Toggle for IRIS dataset testing
-MNIST = False # Toggle for MNIST dataset testing
-
 from test_lib import *
 from test_KNN import *
 from test_DecisionTreeID3 import *
@@ -44,12 +39,11 @@ test_NaiveBayes_email(logging = False).process()
 # - Test GaussianNaiveBayes
 test_GaussianNaiveBayes(logging = False).process()
 test_GaussianNaiveBayes_rssi(logging = False).process()
-if IRIS :
-    # TODO
-    pass
-if MNIST :
-    # TODO
-    pass
+
+# Toggle dataset
+IRIS = False # Toggle for IRIS dataset testing
+MNIST = False # Toggle for MNIST dataset testing
+
 # - Test KNN
 if IRIS :
     test_KNN_iris(logging = False).process()
@@ -74,14 +68,12 @@ if IRIS :
 if MNIST:
     test_FNN_mnist(logging = False).process()
 # - Test SVM
-test_BinarySVM(logging = True).process()
-test_SVM(logging = True).process()
+test_SVM(logging = False).process()
+test_SVC(logging = False).process()
 if IRIS:
-    # TODO
-    pass
+    test_SVC_iris(logging = False).process()
 if MNIST:
-    # TODO
-    pass
+    test_SVC_mnist(logging = True).process()
 
 # 1-3. Sequential variables
 # - Test HMM

@@ -58,4 +58,4 @@ class test_FNN_mnist(test_Suite):
         fnn = FNN(dg_mat_train, dg_label_train, [400, 100])
         fnn.fit(lr = 0.01, epoch = 1000, err_th = 0.00001, batch_size = 100)
         error_rate = autotest.eval_predict(fnn, dg_mat_test, dg_label_test, self.logging, one_hot=True)
-        self.tlog("digit predict (with logistic regression) error rate :" + str(error_rate))
+        self.tlog("digit predict (with fnn) error rate :" + str(error_rate))
