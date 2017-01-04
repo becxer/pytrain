@@ -58,7 +58,23 @@ class test_nlp(test_Suite):
         bag_vector = nlp_eng.bag_of_word2vector(self.voca, input_txt2)
         self.tlog(bag_vector)
 
+    def test_wordseq2matrix(self):
+        word_list_array = [\
+            ['I','a','m','a','b','o','y'],\
+            ['Y','o','u','a','r','e','a','g','i','r','l'],\
+            ['I','a','m','a','g','o','o','d','b','o','y'],\
+            ['Y','o','u','a','r','e','a','g','o','o','d','g','i','r','l'],\
+        ]
+        nlp_common = nlp()
+        voca = nlp_common.extract_vocabulary(word_list_array)
+        word_mat_array = []
+        for word_list in word_list_array :
+            word_mat = nlp_common.set_of_wordseq2matrix(voca, word_list)
+            word_mat_array.append(word_mat)
+        self.tlog(word_mat_array)
+
     def test_process(self):
         self.test_nlp_split()
         self.test_nlp_extract_vocabulary()
         self.test_word2vector()
+        self.test_wordseq2matrix()

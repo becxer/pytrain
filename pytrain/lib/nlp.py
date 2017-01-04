@@ -61,9 +61,8 @@ class nlp:
         for doc in documents:
             if str(type(doc).__name__) == 'str':
                 doc = self.split2words(doc)
-            lowerdoc = [ x.lower() for x in doc ]
             ndoc = []
-            for w in lowerdoc:
+            for w in doc:
                 if w not in self.stopwords:
                     ndoc.append(w)
             vocabulary = vocabulary | set(ndoc)
@@ -86,3 +85,13 @@ class nlp:
             if word in vocabulary:
                 voca_vector[vocabulary.index(word)] += 1
         return voca_vector
+
+    def set_of_wordseq2matrix(self, vocabulary, wordlist):
+        word_mat = []
+        for word in wordlist:
+            word_vector = [0] * len(vocabulary)
+            if word in vocabulary:
+                word_vector[vocabulary.index(word)] = 1
+            word_mat.append(word_vector)
+        return word_mat
+

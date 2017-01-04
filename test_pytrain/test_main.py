@@ -4,6 +4,7 @@
 # @ author becxer
 # @ email becxer87@gmail.com#
 # --------------------------------------------
+import sys
 from test_lib import *
 from test_KNN import *
 from test_DecisionTreeID3 import *
@@ -17,7 +18,9 @@ from test_Kmeans import *
 from test_DBSCAN import *
 from test_HierarchicalClustering import *
 from test_SVM import *
+from test_HMM import *
 
+'''
 # 0. Test lib modules
 test_dataset(logging = False).process()
 test_fs(logging = False).process()
@@ -73,16 +76,24 @@ test_SVC(logging = False).process()
 if IRIS:
     test_SVC_iris(logging = False).process()
 if MNIST:
-    test_SVC_mnist(logging = True).process()
+    test_SVC_mnist(logging = False).process()
+'''
 
 # 1-3. Sequential variables
+# Toggle dataset
+WORD_SPACE = False # Toggle for WORD_SPACE dataset testing
+
 # - Test HMM
-# TODO
-pass
+test_HMM(logging = True).process()
+test_HMM_BaumWelch(logging = True).process()
+if WORD_SPACE:
+    pass
+
 # - Test CRF
 # TODO
 pass
 
+'''
 # 2. Unsupervised learning
 
 # 2-1. Association
@@ -96,4 +107,4 @@ test_Kmeans(logging = False).process()
 test_DBSCAN(logging = False).process()
 # - Test HierarchicalClustering
 test_HierarchicalClustering(logging = False).process()
-
+'''
