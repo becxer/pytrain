@@ -17,10 +17,10 @@ Machine Learning library for python
 + Apriori
 + Kmeans
 + HierarchicalClustering
-+ BinarySVM
-+ SVM [Not yet]
-+ HMM [Not yet]
-+ CRF [Not yet]
++ SVM
++ SVC (SVM classifier)
++ HMM 
++ CRF 
 
 ## Requirements
 
