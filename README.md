@@ -69,3 +69,11 @@ Machine Learning library for python
     Test code should be work successfully in below command.
     
     $ python test.py
+
+## Reference
+
+ - Machine Learning in Action by Peter Harrington (2013)
+ - Pattern Recognition by Ohilseok (2008)
+ - Machine Learning to Deep Learning by Deepcumen (2015)
+ - Pattern Recognition and Machine Learning by Christopher M. Bishop (2006)
+ - Sequential Minimal Optimization for SVM by John C.Platt (1998)
