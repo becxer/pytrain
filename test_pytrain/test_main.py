@@ -2,7 +2,7 @@
 # Dev test for pytrain library
 #
 # @ author becxer
-# @ email becxer87@gmail.com#
+# @ email becxer87@gmail.com
 # --------------------------------------------
 import sys
 from test_lib import *
@@ -20,7 +20,11 @@ from test_HierarchicalClustering import *
 from test_SVM import *
 from test_HMM import *
 
-'''
+# Toggle dataset
+IRIS = False # Toggle for IRIS dataset testing
+MNIST = False # Toggle for MNIST dataset testing
+WORD_SPACE = False # Toggle for WORD_SPACE dataset testing
+
 # 0. Test lib modules
 test_dataset(logging = False).process()
 test_fs(logging = False).process()
@@ -29,9 +33,8 @@ test_autotest(logging = False).process()
 test_nlp(logging = False).process()
 
 # 1. Supervised learning
-
 # 1-1. Categorical variables
-# - Test DecisionTree
+# - Test Decision Tree
 test_DecisionTreeID3(logging = False).process()
 test_DecisionTreeID3_lense(logging = False).process()
 # - Test NaiveBayes
@@ -42,10 +45,6 @@ test_NaiveBayes_email(logging = False).process()
 # - Test GaussianNaiveBayes
 test_GaussianNaiveBayes(logging = False).process()
 test_GaussianNaiveBayes_rssi(logging = False).process()
-
-# Toggle dataset
-IRIS = False # Toggle for IRIS dataset testing
-MNIST = False # Toggle for MNIST dataset testing
 
 # - Test KNN
 if IRIS :
@@ -58,7 +57,7 @@ if IRIS :
     test_LinearRegression_iris(logging = False).process()
 if MNIST :
     test_LinearRegression_mnist(logging = False).process()
-# - Test LogicticRegression
+# - Test LogisticRegression
 test_LogisticRegression(logging = False).process()
 if IRIS :
     test_LogisticRegression_iris(logging = False).process()
@@ -77,25 +76,21 @@ if IRIS:
     test_SVC_iris(logging = False).process()
 if MNIST:
     test_SVC_mnist(logging = False).process()
-'''
 
 # 1-3. Sequential variables
-# Toggle dataset
-WORD_SPACE = False # Toggle for WORD_SPACE dataset testing
-
 # - Test HMM
-test_HMM(logging = True).process()
-test_HMM_BaumWelch(logging = True).process()
+test_HMM(logging = False).process()
+test_HMM_BaumWelch(logging = False).process()
 if WORD_SPACE:
+    # TODO : add word spacing test
     pass
 
 # - Test CRF
-# TODO
-pass
+if WORD_SPACE:
+    # TODO : implement CRF 
+    pass
 
-'''
 # 2. Unsupervised learning
-
 # 2-1. Association
 # - Test Apriori
 test_Apriori(logging = False).process()
@@ -107,4 +102,4 @@ test_Kmeans(logging = False).process()
 test_DBSCAN(logging = False).process()
 # - Test HierarchicalClustering
 test_HierarchicalClustering(logging = False).process()
-'''
+

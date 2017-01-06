@@ -43,7 +43,7 @@ class test_HMM(test_Suite):
             train_wordseq_mat.append(wordseq_mat)
 
         hmm = HMM(train_wordseq_mat, train_label, hidden_state_labeled = True, hidden_state = 2)
-        hmm.fit(epoch= 15)
+        hmm.fit(toler = 0.001, epoch= 30)
         
         ti1 = nlp_common.set_of_wordseq2matrix(voca,['<s>','I','a','m','g','o','o','d'])
         r1 = autotest.eval_predict_one(hmm, ti1, [0,1,0,1,0,0,0,1], self.logging)
@@ -56,7 +56,6 @@ class test_HMM(test_Suite):
 
         ti4 = nlp_common.set_of_wordseq2matrix(voca,['<s>','I','a','m','g','i','r','l'])
         r4 = autotest.eval_predict_one(hmm, ti4, [0,1,0,1,0,0,0,1], self.logging)
-
 
 class test_HMM_BaumWelch(test_Suite):
 
@@ -72,7 +71,7 @@ class test_HMM_BaumWelch(test_Suite):
                      ['<s>','I','a','m','a','g','o','o','d','b','o','y'],\
                      ['<s>','Y','o','u','a','r','e','a','g','o','o','d','g','i','r','l'],\
                      ]
-        return
+                     
         nlp_common = nlp()
         voca = nlp_common.extract_vocabulary(train_mat)
         train_wordseq_mat = []
@@ -81,7 +80,7 @@ class test_HMM_BaumWelch(test_Suite):
             train_wordseq_mat.append(wordseq_mat)
 
         hmm = HMM(train_wordseq_mat, label_data =  None, hidden_state_labeled = False, hidden_state = 2)
-        hmm.fit(epoch = 10)
+        hmm.fit(toler = 0.001, epoch = 30)
         
         ti1 = nlp_common.set_of_wordseq2matrix(voca,['<s>','I','a','m','g','o','o','d'])
         r1 = autotest.eval_predict_one(hmm, ti1, [0,1,0,1,0,0,0,1], self.logging)
@@ -91,3 +90,6 @@ class test_HMM_BaumWelch(test_Suite):
 
         ti3 = nlp_common.set_of_wordseq2matrix(voca,['<s>','Y','o','u','a','r','e','g','i','r','l'])
         r3 = autotest.eval_predict_one(hmm, ti3, [0,0,0,1,0,0,1,0,0,0,1], self.logging)
+
+        ti4 = nlp_common.set_of_wordseq2matrix(voca,['<s>','I','a','m','g','i','r','l'])
+        r4 = autotest.eval_predict_one(hmm, ti4, [0,1,0,1,0,0,0,1], self.logging)

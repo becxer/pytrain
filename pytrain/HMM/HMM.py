@@ -40,12 +40,13 @@ class HMM:
         self.a = np.zeros([self.m, self.m]) + self.eps
         self.b = np.zeros([self.m, self.n]) + self.eps
         for seq_idx, seq_label in enumerate(self.label_data):
-            for i in range(1, len(seq_label)):
+            for i in range(len(seq_label)):
                 now = seq_label[i]
-                prev = seq_label[i-1]
                 now_ob = self.mat_data[seq_idx][i]
                 self.b[self.label_idx[now]] += now_ob
-                self.a[self.label_idx[prev]][self.label_idx[now]] += 1
+                if i >= 1:
+                    prev = seq_label[i-1]
+                    self.a[self.label_idx[prev]][self.label_idx[now]] += 1
         self.b = np.log(self.b / (self.b.sum(axis=1).reshape((self.m,1))))
         self.a = np.log(self.a / (self.a.sum(axis=1).reshape((self.m,1))))
         
@@ -143,20 +144,29 @@ class HMM:
           / gamma.sum(axis=0))
         return Epi, Ea, Eb
         
-    def fit(self, epoch):
+    def fit(self, toler, epoch):
         for i in range(epoch):
-            Epi = []
-            Ea = []
-            Eb = []
+            Epi = [];  Ea = []; Eb = []
             for idx in range(len(self.mat_data)):
                 x_input = self.mat_data[idx]
                 epi, ea, eb = self.baum_welch(x_input)
                 Epi.append(epi)
                 Ea.append(ea)
                 Eb.append(eb)
-            self.pi = np.log(np.array(Epi).sum(axis=0) + self.eps) - np.log(len(Epi)) 
-            self.a = np.log(np.array(Ea).sum(axis=0) + self.eps) - np.log(len(Ea))
-            self.b = np.log(np.array(Eb).sum(axis=0) + self.eps) - np.log(len(Eb))
+            npi = np.log(np.array(Epi).sum(axis=0) + self.eps) - np.log(len(Epi)) 
+            na = np.log(np.array(Ea).sum(axis=0) + self.eps) - np.log(len(Ea))
+            nb = np.log(np.array(Eb).sum(axis=0) + self.eps) - np.log(len(Eb))
+
+            tolpi = np.average(np.abs(np.exp(self.pi) - np.exp(npi)))
+            tola = np.average(np.abs(np.exp(self.a) - np.exp(na)))
+            tolb = np.average(np.abs(np.exp(self.b) - np.exp(nb)))
+
+            if tolpi < toler and tola < toler and tolb < toler:
+                break
+            else:
+                self.pi = npi
+                self.a = na
+                self.b = nb
             
     def predict(self, array_input, with_prob = False):
         prob, seq_of_label = self.viterbi(array_input)

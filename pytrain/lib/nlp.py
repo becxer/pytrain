@@ -13,9 +13,11 @@ class nlp:
 
     lang = "NOLANG"
     stopwords = []
+    lower = False
 
-    def set_with_eng(self):
+    def set_with_eng(self, lower = False):
         global path
+        self.lower = lower
         sw_f = open(path+"/nlp_stopwords.eng")
         self.stopwords = map(lambda x : x.strip(), sw_f.readlines())
 
@@ -26,6 +28,8 @@ class nlp:
         self.lang = lang_
         if self.lang == "eng":
             self.set_with_eng()
+        if self.lang == "eng_lower":
+            self.set_with_eng(lower = True)
         elif self.lang == "kor":
             self.set_with_kor()
 
@@ -64,6 +68,7 @@ class nlp:
             ndoc = []
             for w in doc:
                 if w not in self.stopwords:
+                    if self.lower : w = w.lower()
                     ndoc.append(w)
             vocabulary = vocabulary | set(ndoc)
         return list(vocabulary)
@@ -73,6 +78,7 @@ class nlp:
         if str(type(sentence).__name__) == 'str':
             sentence = self.split2words(sentence)
         for word in sentence:
+            if self.lower : word = word.lower()
             if word in vocabulary:
                 voca_vector[vocabulary.index(word)] = 1
         return voca_vector
@@ -82,6 +88,7 @@ class nlp:
         if str(type(sentence).__name__) == 'str':
             sentence = self.split2words(sentence)
         for word in sentence:
+            if self.lower : word = word.lower()
             if word in vocabulary:
                 voca_vector[vocabulary.index(word)] += 1
         return voca_vector
@@ -90,6 +97,7 @@ class nlp:
         word_mat = []
         for word in wordlist:
             word_vector = [0] * len(vocabulary)
+            if self.lower : word = word.lower()
             if word in vocabulary:
                 word_vector[vocabulary.index(word)] = 1
             word_mat.append(word_vector)

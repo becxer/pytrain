@@ -73,11 +73,11 @@ class test_NaiveBayes_email(test_Suite):
 
     def test_process(self):
 
-        nlp_eng = nlp("eng")
+        nlp_eng = nlp("eng_lower")
 
         email_data_file = "sample_data/email/email.tsv"
         emailmat_train, emaillabel_train, voca, emailmat_test, emaillabel_test \
-                = fs.tsv_loader_with_nlp(email_data_file, 0.3, nlp_eng)
+                = fs.tsv_loader_with_nlp(email_data_file, 0.4, nlp_eng)
         self.tlog(voca)
         
         email_nbayes = NaiveBayes(emailmat_train, emaillabel_train)
