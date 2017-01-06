@@ -82,9 +82,15 @@ class HMM:
         
     def fit(self, toler, epoch):
         # TODO : Baum-welch EM algorithm implementation
-        
-        pass
-    
+        for idx in range(len(self.mat_data)):
+            x_input = self.mat_data[idx]
+            x_label = self.label_data[idx]
+            t = len(x_input)
+            alpha = np.zeros([t, self.m])
+            beta = np.zeros([t, self.m])
+            
+            
+            
     def predict(self, array_input):
         seq_of_label = self.viterbi(array_input)
         ret = [self.label_set[x] for x in seq_of_label]
