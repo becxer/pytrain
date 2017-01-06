@@ -19,6 +19,7 @@ from test_DBSCAN import *
 from test_HierarchicalClustering import *
 from test_SVM import *
 from test_HMM import *
+from test_CRF import *
 
 # Toggle dataset
 IRIS = False # Toggle for IRIS dataset testing
@@ -86,8 +87,9 @@ if WORD_SPACE:
     pass
 
 # - Test CRF
+test_CRF(logging = True).process()
 if WORD_SPACE:
-    # TODO : implement CRF 
+    # TODO : add word spacing test
     pass
 
 # 2. Unsupervised learning
