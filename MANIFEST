@@ -4,6 +4,8 @@ setup.py
 pytrain/__init__.py
 pytrain/Apriori/Apriori.py
 pytrain/Apriori/__init__.py
+pytrain/CRF/CRF.py
+pytrain/CRF/__init__.py
 pytrain/DBSCAN/DBSCAN.py
 pytrain/DBSCAN/__init__.py
 pytrain/DecisionTreeID3/DecisionTreeID3.py
@@ -26,7 +28,7 @@ pytrain/NaiveBayes/NaiveBayes.py
 pytrain/NaiveBayes/__init__.py
 pytrain/NeuralNetwork/FNN.py
 pytrain/NeuralNetwork/__init__.py
-pytrain/SVM/BinarySVM.py
+pytrain/SVM/SVC.py
 pytrain/SVM/SVM.py
 pytrain/SVM/__init__.py
 pytrain/lib/__init__.py
