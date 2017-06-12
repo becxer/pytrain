@@ -1,6 +1,8 @@
 # pytrain
 
-Machine Learning library for python
+Machine Learning library for python 
+
+This library implemented only with python and numpy
 
 ![alt text](https://github.com/becxer/pytrain/raw/master/tmp/logo_pytrain.png "pytrain")
 
