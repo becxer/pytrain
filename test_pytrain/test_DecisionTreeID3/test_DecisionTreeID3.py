@@ -45,3 +45,5 @@ class test_DecisionTreeID3_lense(test_Suite):
         error_rate = autotest.eval_predict(dtree_lense, lense_mat_test, lense_label_test, self.logging)
         self.tlog("lense predict (with decision tree) error rate : " +str(error_rate))
         
+
+#Test
